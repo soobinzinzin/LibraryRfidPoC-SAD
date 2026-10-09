@@ -1,0 +1,350 @@
+@{
+    ViewData["Title"] = "Mượn sách - Kiosk RFID";
+}
+
+<!-- Giao diện Kiosk mượn sách tích hợp RFID (UC01) -->
+<div class="card shadow-sm mt-3">
+    <div class="card-header bg-primary text-white d-flex justify-content-between align-items-center">
+        <h4 class="mb-0">Màn hình Kiosk - Mượn sách</h4>
+        <span class="badge bg-light text-primary">Thời hạn mượn: @ViewBag.LoanDays ngày</span>
+    </div>
+    <div class="card-body">
+        <!-- Thông báo cảnh báo / lỗi hệ thống -->
+        <div id="alertArea"></div>
+
+        <!-- Thông tin độc giả sau khi quét -->
+        <div id="readerInfoCard" class="card bg-light border-primary mb-3 d-none">
+            <div class="card-body py-2">
+                <div class="d-flex justify-content-between align-items-center flex-wrap">
+                    <div>
+                        <strong>Độc giả:</strong> <span id="readerNameDisplay" class="text-primary fw-bold"></span>
+                        <span id="readerIdDisplay" class="text-muted ms-1"></span>
+                    </div>
+                    <div>
+                        <strong>Tình trạng mượn:</strong> 
+                        <span id="borrowStatusDisplay" class="badge bg-info text-dark fs-6"></span>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="row">
+            <!-- Ô nhập Mã thẻ độc giả -->
+            <div class="col-md-4 mb-3">
+                <label for="readerInput" class="form-label fw-bold">Mã thẻ độc giả:</label>
+                <div class="input-group">
+                    <span class="input-group-text"><i class="bi bi-person-badge"></i></span>
+                    <input id="readerInput" type="text" class="form-control" value="R001" placeholder="Nhập mã thẻ độc giả (VD: R001)..." />
+                </div>
+                <div class="form-text text-muted">Mã thẻ mẫu trong CSDL: <code>R001</code> (hợp lệ), <code>R002</code> (nợ phạt), <code>R003</code> (bị khóa).</div>
+            </div>
+
+            <!-- Ô nhập danh sách mã RFID -->
+            <div class="col-md-8 mb-3">
+                <label for="rfidInput" class="form-label fw-bold">Nhập danh sách mã RFID (mỗi dòng một mã):</label>
+                <textarea id="rfidInput" class="form-control font-monospace" rows="4" placeholder="RFID-001&#10;RFID-002"></textarea>
+                <div class="form-text text-muted">Gợi ý mã RFID trên kệ: <code>RFID-001</code>, <code>RFID-002</code>, <code>RFID-007</code> (khả dụng); <code>RFID-003</code> (đặt trước); <code>RFID-004</code> (đang mượn).</div>
+            </div>
+        </div>
+
+        <!-- Nút Quét nhận diện -->
+        <div class="mb-3">
+            <button id="btnScan" type="button" class="btn btn-primary px-4">
+                <i class="bi bi-upc-scan"></i> Quét
+            </button>
+        </div>
+
+        <!-- Bảng danh sách tài liệu đã nhận diện -->
+        <h5 class="mt-4 fw-bold">Danh sách tài liệu đã nhận diện</h5>
+        <div class="table-responsive">
+            <table class="table table-bordered table-hover align-middle">
+                <thead class="table-light">
+                    <tr>
+                        <th style="width: 60px;" class="text-center">STT</th>
+                        <th style="width: 160px;">Mã RFID</th>
+                        <th>Tên tài liệu</th>
+                        <th>Tác giả</th>
+                        <th style="width: 280px;">Trạng thái</th>
+                    </tr>
+                </thead>
+                <tbody id="documentTableBody">
+                    <tr>
+                        <td colspan="5" class="text-center text-muted py-4">Chưa có dữ liệu quét. Vui lòng nhập mã RFID và nhấn nút "Quét".</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+
+        <!-- Nút Xác nhận mượn -->
+        <div class="mt-3 d-flex gap-2">
+            <button id="btnConfirmBorrow" type="button" class="btn btn-success px-4" disabled>
+                <i class="bi bi-check-circle"></i> Xác nhận mượn
+            </button>
+            <button id="btnReset" type="button" class="btn btn-outline-secondary px-3" style="display:none;">
+                Làm mới
+            </button>
+        </div>
+
+        <!-- Vùng hiển thị biên nhận sau khi mượn thành công -->
+        <div id="receiptArea" class="mt-4" style="display:none;"></div>
+    </div>
+</div>
+
+@section Scripts {
+    <script>
+        const readerInput = document.getElementById("readerInput");
+        const rfidInput = document.getElementById("rfidInput");
+        const btnScan = document.getElementById("btnScan");
+        const btnConfirmBorrow = document.getElementById("btnConfirmBorrow");
+        const btnReset = document.getElementById("btnReset");
+        const alertArea = document.getElementById("alertArea");
+        const documentTableBody = document.getElementById("documentTableBody");
+        const readerInfoCard = document.getElementById("readerInfoCard");
+        const readerNameDisplay = document.getElementById("readerNameDisplay");
+        const readerIdDisplay = document.getElementById("readerIdDisplay");
+        const borrowStatusDisplay = document.getElementById("borrowStatusDisplay");
+        const receiptArea = document.getElementById("receiptArea");
+
+        let latestScanData = null;
+
+        // Xử lý sự kiện nhấn nút Quét
+        btnScan.addEventListener("click", async function () {
+            // Xóa thông báo cũ và biên nhận cũ
+            alertArea.innerHTML = "";
+            receiptArea.style.display = "none";
+            receiptArea.innerHTML = "";
+            btnConfirmBorrow.disabled = true;
+
+            const readerId = readerInput.value.trim();
+            const rfidText = rfidInput.value.trim();
+
+            if (!readerId) {
+                alertArea.innerHTML = '<div class="alert alert-warning">Vui lòng nhập mã thẻ độc giả trước khi quét!</div>';
+                readerInput.focus();
+                return;
+            }
+
+            if (!rfidText) {
+                alertArea.innerHTML = '<div class="alert alert-warning">Vui lòng nhập ít nhất một mã RFID để quét!</div>';
+                rfidInput.focus();
+                return;
+            }
+
+            const rawRfids = rfidText.split(/\r?\n/).map(s => s.trim()).filter(s => s.length > 0);
+            if (rawRfids.length === 0) {
+                alertArea.innerHTML = '<div class="alert alert-warning">Danh sách mã RFID không hợp lệ!</div>';
+                return;
+            }
+
+            btnScan.disabled = true;
+            btnScan.innerHTML = '<span class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span> Đang quét...';
+
+            try {
+                const response = await fetch('/Kiosk/Scan', {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({
+                        readerId: readerId,
+                        rfids: rawRfids
+                    })
+                });
+
+                if (!response.ok) {
+                    throw new Error("Lỗi máy chủ (" + response.status + ")");
+                }
+
+                const data = await response.json();
+                latestScanData = data;
+
+                // Hiển thị thông tin độc giả nếu tìm thấy
+                if (data.readerName) {
+                    readerNameDisplay.textContent = data.readerName;
+                    readerIdDisplay.textContent = "(" + readerId + ")";
+                    borrowStatusDisplay.textContent = "Đang mượn " + data.currentBorrowing + " / hạn mức " + data.borrowLimit;
+                    readerInfoCard.classList.remove("d-none");
+                } else {
+                    readerInfoCard.classList.add("d-none");
+                }
+
+                // Nếu readerOk = false hoặc limitExceeded = true thì hiện alert đỏ với readerMessage
+                if (!data.readerOk || data.limitExceeded) {
+                    alertArea.innerHTML = '<div class="alert alert-danger shadow-sm"><strong>Thông báo:</strong> ' + (data.readerMessage || "Không đủ điều kiện mượn sách.") + '</div>';
+                }
+
+                // Đổ bảng động từ kết quả
+                documentTableBody.innerHTML = "";
+                if (!data.items || data.items.length === 0) {
+                    documentTableBody.innerHTML = '<tr><td colspan="5" class="text-center text-muted py-3">Không nhận diện được tài liệu nào.</td></tr>';
+                } else {
+                    data.items.forEach((item, index) => {
+                        const tr = document.createElement("tr");
+
+                        // Cột STT
+                        const tdIndex = document.createElement("td");
+                        tdIndex.className = "text-center";
+                        tdIndex.textContent = index + 1;
+                        tr.appendChild(tdIndex);
+
+                        // Cột Mã RFID
+                        const tdRfid = document.createElement("td");
+                        tdRfid.innerHTML = '<span class="badge bg-secondary font-monospace">' + item.rfid + '</span>';
+                        tr.appendChild(tdRfid);
+
+                        // Cột Tên tài liệu
+                        const tdTitle = document.createElement("td");
+                        tdTitle.textContent = item.title || "—";
+                        tr.appendChild(tdTitle);
+
+                        // Cột Tác giả
+                        const tdAuthor = document.createElement("td");
+                        tdAuthor.textContent = item.author || "—";
+                        tr.appendChild(tdAuthor);
+
+                        // Cột Trạng thái (badge xám Chưa thể mượn khi readerOk = false, badge xanh Hợp lệ, badge đỏ kèm lý do)
+                        const tdStatus = document.createElement("td");
+                        if (!data.readerOk) {
+                            tdStatus.innerHTML = '<span class="badge bg-secondary">Chưa thể mượn</span>';
+                        } else if (item.valid) {
+                            tdStatus.innerHTML = '<span class="badge bg-success">Hợp lệ</span>';
+                        } else {
+                            tdStatus.innerHTML = '<span class="badge bg-danger">' + (item.reason || "Không hợp lệ") + '</span>';
+                        }
+                        tr.appendChild(tdStatus);
+
+                        documentTableBody.appendChild(tr);
+                    });
+                }
+
+                // Nút "Xác nhận mượn": chỉ bật khi lần quét gần nhất có canConfirm = true
+                btnConfirmBorrow.disabled = !data.canConfirm;
+
+            } catch (err) {
+                alertArea.innerHTML = '<div class="alert alert-danger">Lỗi kết nối khi quét tài liệu: ' + err.message + '</div>';
+            } finally {
+                btnScan.disabled = false;
+                btnScan.innerHTML = '<i class="bi bi-upc-scan"></i> Quét';
+            }
+        });
+
+        // Xử lý sự kiện nhấn nút Xác nhận mượn
+        btnConfirmBorrow.addEventListener("click", async function () {
+            if (!latestScanData || !latestScanData.canConfirm) {
+                return;
+            }
+
+            const readerId = readerInput.value.trim();
+            const rfidText = rfidInput.value.trim();
+            const rawRfids = rfidText.split(/\r?\n/).map(s => s.trim()).filter(s => s.length > 0);
+
+            btnConfirmBorrow.disabled = true;
+            btnConfirmBorrow.innerHTML = '<span class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span> Đang xử lý...';
+
+            try {
+                const response = await fetch('/Kiosk/ConfirmBorrow', {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({
+                        readerId: readerId,
+                        rfids: rawRfids
+                    })
+                });
+
+                if (!response.ok) {
+                    throw new Error("Lỗi máy chủ (" + response.status + ")");
+                }
+
+                const data = await response.json();
+
+                if (data.success) {
+                    alertArea.innerHTML = '<div class="alert alert-success shadow-sm"><strong>Mượn sách thành công!</strong> ' + data.message + '</div>';
+
+                    // Cập nhật ô "Đang mượn X / hạn mức Y" thành X = số cũ + số sách vừa mượn
+                    if (latestScanData && data.loans) {
+                        latestScanData.currentBorrowing = (latestScanData.currentBorrowing || 0) + data.loans.length;
+                        borrowStatusDisplay.textContent = "Đang mượn " + latestScanData.currentBorrowing + " / hạn mức " + latestScanData.borrowLimit;
+                    }
+
+                    // Hiển thị biên nhận chi tiết
+                    let receiptHtml = `
+                        <div class="card border-success shadow-sm">
+                            <div class="card-header bg-success text-white d-flex justify-content-between align-items-center">
+                                <h5 class="mb-0"><i class="bi bi-receipt"></i> BIÊN NHẬN MƯỢN SÁCH TẠI KIOSK</h5>
+                                <span class="badge bg-light text-success">Thời hạn: @ViewBag.LoanDays ngày</span>
+                            </div>
+                            <div class="card-body">
+                                <p class="mb-2"><strong>Độc giả:</strong> ${latestScanData.readerName} (${readerId})</p>
+                                <p class="mb-3 text-muted">Còi bảo mật RFID đã được tắt tự động cho các tài liệu dưới đây:</p>
+                                <div class="table-responsive">
+                                    <table class="table table-bordered align-middle">
+                                        <thead class="table-light">
+                                            <tr>
+                                                <th style="width: 140px;">Mã phiếu</th>
+                                                <th style="width: 140px;">Mã RFID</th>
+                                                <th>Tên tài liệu</th>
+                                                <th style="width: 150px;" class="text-center">Hạn trả</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>`;
+
+                    data.loans.forEach(loan => {
+                        receiptHtml += `
+                            <tr>
+                                <td><span class="badge bg-primary font-monospace">${loan.loanID}</span></td>
+                                <td><span class="badge bg-secondary font-monospace">${loan.rfid}</span></td>
+                                <td class="fw-bold">${loan.title}</td>
+                                <td class="text-center text-danger fw-bold">${loan.dueDate}</td>
+                            </tr>`;
+                    });
+
+                    receiptHtml += `
+                                        </tbody>
+                                    </table>
+                                </div>
+                                <div class="mt-3 d-flex gap-2">
+                                    <button class="btn btn-outline-primary" onclick="window.print()">
+                                        <i class="bi bi-printer"></i> In biên nhận
+                                    </button>
+                                    <button class="btn btn-secondary" onclick="resetKiosk()">
+                                        Lượt mượn mới
+                                    </button>
+                                </div>
+                            </div>
+                        </div>`;
+
+                    receiptArea.innerHTML = receiptHtml;
+                    receiptArea.style.display = "block";
+                    btnReset.style.display = "inline-block";
+
+                    // Vô hiệu hóa nút mượn sau khi đã mượn thành công
+                    btnConfirmBorrow.disabled = true;
+
+                } else {
+                    alertArea.innerHTML = '<div class="alert alert-danger shadow-sm"><strong>Giao dịch không thành công:</strong> ' + data.message + '</div>';
+                    btnConfirmBorrow.disabled = false;
+                }
+
+            } catch (err) {
+                alertArea.innerHTML = '<div class="alert alert-danger">Lỗi khi xác nhận mượn: ' + err.message + '</div>';
+                btnConfirmBorrow.disabled = false;
+            } finally {
+                btnConfirmBorrow.innerHTML = '<i class="bi bi-check-circle"></i> Xác nhận mượn';
+            }
+        });
+
+        // Hàm làm mới trạng thái Kiosk cho lượt mượn tiếp theo
+        function resetKiosk() {
+            rfidInput.value = "";
+            alertArea.innerHTML = "";
+            receiptArea.innerHTML = "";
+            receiptArea.style.display = "none";
+            readerInfoCard.classList.add("d-none");
+            documentTableBody.innerHTML = '<tr><td colspan="5" class="text-center text-muted py-4">Chưa có dữ liệu quét. Vui lòng nhập mã RFID và nhấn nút "Quét".</td></tr>';
+            btnConfirmBorrow.disabled = true;
+            btnReset.style.display = "none";
+            latestScanData = null;
+            readerInput.focus();
+        }
+
+        btnReset.addEventListener("click", resetKiosk);
+    </script>
+}

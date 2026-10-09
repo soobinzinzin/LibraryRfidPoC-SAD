@@ -1,0 +1,5568 @@
+{
+  "_type": "Project",
+  "_id": "PRJ_WEEK2_LMS",
+  "name": "Week2_ActivityDiagrams_LMS",
+  "ownedElements": [
+    {
+      "_type": "UMLModel",
+      "_id": "MODEL_WEEK2",
+      "_parent": {
+        "$ref": "PRJ_WEEK2_LMS"
+      },
+      "name": "LibraryManagementModel",
+      "ownedElements": [
+        {
+          "_type": "UMLActivity",
+          "_id": "ACT_UC01_CHECKOUT",
+          "_parent": {
+            "$ref": "MODEL_WEEK2"
+          },
+          "name": "UC01_CheckOutBook_Activity",
+          "nodes": [
+            {
+              "_type": "UMLInitialNode",
+              "_id": "NODE_UMLI_01001",
+              "_parent": {
+                "$ref": "ACT_UC01_CHECKOUT"
+              },
+              "name": "InitialNode"
+            },
+            {
+              "_type": "UMLAction",
+              "_id": "NODE_UMLA_01002",
+              "_parent": {
+                "$ref": "ACT_UC01_CHECKOUT"
+              },
+              "name": "Nhập mã số sinh viên"
+            },
+            {
+              "_type": "UMLAction",
+              "_id": "NODE_UMLA_01003",
+              "_parent": {
+                "$ref": "ACT_UC01_CHECKOUT"
+              },
+              "name": "Gửi yêu cầu xác thực thẻ"
+            },
+            {
+              "_type": "UMLAction",
+              "_id": "NODE_UMLA_01004",
+              "_parent": {
+                "$ref": "ACT_UC01_CHECKOUT"
+              },
+              "name": "Kiểm tra tính hợp lệ của thẻ"
+            },
+            {
+              "_type": "UMLDecisionNode",
+              "_id": "NODE_UMLD_01005",
+              "_parent": {
+                "$ref": "ACT_UC01_CHECKOUT"
+              },
+              "name": "Thẻ hợp lệ?"
+            },
+            {
+              "_type": "UMLAction",
+              "_id": "NODE_UMLA_01006",
+              "_parent": {
+                "$ref": "ACT_UC01_CHECKOUT"
+              },
+              "name": "Hiển thị cảnh báo thẻ không hợp lệ"
+            },
+            {
+              "_type": "UMLAction",
+              "_id": "NODE_UMLA_01007",
+              "_parent": {
+                "$ref": "ACT_UC01_CHECKOUT"
+              },
+              "name": "Từ chối mượn & trả thẻ cho SV"
+            },
+            {
+              "_type": "UMLActivityFinalNode",
+              "_id": "NODE_UMLA_01008",
+              "_parent": {
+                "$ref": "ACT_UC01_CHECKOUT"
+              },
+              "name": "Final_InvalidCard"
+            },
+            {
+              "_type": "UMLAction",
+              "_id": "NODE_UMLA_01009",
+              "_parent": {
+                "$ref": "ACT_UC01_CHECKOUT"
+              },
+              "name": "Truy vấn mức phí phạt tồn đọng"
+            },
+            {
+              "_type": "UMLAction",
+              "_id": "NODE_UMLA_01010",
+              "_parent": {
+                "$ref": "ACT_UC01_CHECKOUT"
+              },
+              "name": "Kiểm tra công nợ tài khoản"
+            },
+            {
+              "_type": "UMLDecisionNode",
+              "_id": "NODE_UMLD_01011",
+              "_parent": {
+                "$ref": "ACT_UC01_CHECKOUT"
+              },
+              "name": "Nợ phạt > $10?"
+            },
+            {
+              "_type": "UMLAction",
+              "_id": "NODE_UMLA_01012",
+              "_parent": {
+                "$ref": "ACT_UC01_CHECKOUT"
+              },
+              "name": "Cảnh báo nợ phạt quá hạn mức"
+            },
+            {
+              "_type": "UMLAction",
+              "_id": "NODE_UMLA_01013",
+              "_parent": {
+                "$ref": "ACT_UC01_CHECKOUT"
+              },
+              "name": "Yêu cầu SV thanh toán tiền phạt"
+            },
+            {
+              "_type": "UMLDecisionNode",
+              "_id": "NODE_UMLD_01014",
+              "_parent": {
+                "$ref": "ACT_UC01_CHECKOUT"
+              },
+              "name": "SV thanh toán?"
+            },
+            {
+              "_type": "UMLActivityFinalNode",
+              "_id": "NODE_UMLA_01015",
+              "_parent": {
+                "$ref": "ACT_UC01_CHECKOUT"
+              },
+              "name": "Final_UnpaidFine"
+            },
+            {
+              "_type": "UMLAction",
+              "_id": "NODE_UMLA_01016",
+              "_parent": {
+                "$ref": "ACT_UC01_CHECKOUT"
+              },
+              "name": "Ghi nhận thanh toán & xóa nợ"
+            },
+            {
+              "_type": "UMLAction",
+              "_id": "NODE_UMLA_01018",
+              "_parent": {
+                "$ref": "ACT_UC01_CHECKOUT"
+              },
+              "name": "Quét mã vạch tài liệu"
+            },
+            {
+              "_type": "UMLAction",
+              "_id": "NODE_UMLA_01019",
+              "_parent": {
+                "$ref": "ACT_UC01_CHECKOUT"
+              },
+              "name": "Truy vấn tình trạng cuốn sách"
+            },
+            {
+              "_type": "UMLAction",
+              "_id": "NODE_UMLA_01020",
+              "_parent": {
+                "$ref": "ACT_UC01_CHECKOUT"
+              },
+              "name": "Kiểm tra tính khả dụng của sách"
+            },
+            {
+              "_type": "UMLDecisionNode",
+              "_id": "NODE_UMLD_01021",
+              "_parent": {
+                "$ref": "ACT_UC01_CHECKOUT"
+              },
+              "name": "Sách khả dụng?"
+            },
+            {
+              "_type": "UMLAction",
+              "_id": "NODE_UMLA_01022",
+              "_parent": {
+                "$ref": "ACT_UC01_CHECKOUT"
+              },
+              "name": "Cảnh báo sách đang được đặt trước"
+            },
+            {
+              "_type": "UMLAction",
+              "_id": "NODE_UMLA_01023",
+              "_parent": {
+                "$ref": "ACT_UC01_CHECKOUT"
+              },
+              "name": "Đề nghị SV đổi cuốn sách khác"
+            },
+            {
+              "_type": "UMLDecisionNode",
+              "_id": "NODE_UMLD_01024",
+              "_parent": {
+                "$ref": "ACT_UC01_CHECKOUT"
+              },
+              "name": "SV đổi sách?"
+            },
+            {
+              "_type": "UMLActivityFinalNode",
+              "_id": "NODE_UMLA_01025",
+              "_parent": {
+                "$ref": "ACT_UC01_CHECKOUT"
+              },
+              "name": "Final_NoChangeBook"
+            },
+            {
+              "_type": "UMLForkNode",
+              "_id": "NODE_UMLF_01026",
+              "_parent": {
+                "$ref": "ACT_UC01_CHECKOUT"
+              },
+              "name": "ForkParallelSave"
+            },
+            {
+              "_type": "UMLAction",
+              "_id": "NODE_UMLA_01027",
+              "_parent": {
+                "$ref": "ACT_UC01_CHECKOUT"
+              },
+              "name": "Tạo bản ghi lưu thông mượn sách"
+            },
+            {
+              "_type": "UMLAction",
+              "_id": "NODE_UMLA_01028",
+              "_parent": {
+                "$ref": "ACT_UC01_CHECKOUT"
+              },
+              "name": "Cập nhật trạng thái sách thành Đang mượn"
+            },
+            {
+              "_type": "UMLJoinNode",
+              "_id": "NODE_UMLJ_01029",
+              "_parent": {
+                "$ref": "ACT_UC01_CHECKOUT"
+              },
+              "name": "JoinParallelSave"
+            },
+            {
+              "_type": "UMLAction",
+              "_id": "NODE_UMLA_01030",
+              "_parent": {
+                "$ref": "ACT_UC01_CHECKOUT"
+              },
+              "name": "Tạo và in biên nhận mượn sách"
+            },
+            {
+              "_type": "UMLAction",
+              "_id": "NODE_UMLA_01031",
+              "_parent": {
+                "$ref": "ACT_UC01_CHECKOUT"
+              },
+              "name": "Bàn giao sách và biên nhận cho SV"
+            },
+            {
+              "_type": "UMLActivityFinalNode",
+              "_id": "NODE_UMLA_01032",
+              "_parent": {
+                "$ref": "ACT_UC01_CHECKOUT"
+              },
+              "name": "ActivityFinalNode_Success"
+            },
+            {
+              "_type": "UMLMergeNode",
+              "_id": "NODE_UMLM_MERGE_SCAN",
+              "_parent": {
+                "$ref": "ACT_UC01_CHECKOUT"
+              },
+              "name": "MergeBeforeScan"
+            }
+          ],
+          "edges": [
+            {
+              "_type": "UMLControlFlow",
+              "_id": "FLOW_01033",
+              "_parent": {
+                "$ref": "ACT_UC01_CHECKOUT"
+              },
+              "source": {
+                "$ref": "NODE_UMLI_01001"
+              },
+              "target": {
+                "$ref": "NODE_UMLA_01002"
+              }
+            },
+            {
+              "_type": "UMLControlFlow",
+              "_id": "FLOW_01034",
+              "_parent": {
+                "$ref": "ACT_UC01_CHECKOUT"
+              },
+              "source": {
+                "$ref": "NODE_UMLA_01002"
+              },
+              "target": {
+                "$ref": "NODE_UMLA_01003"
+              }
+            },
+            {
+              "_type": "UMLControlFlow",
+              "_id": "FLOW_01035",
+              "_parent": {
+                "$ref": "ACT_UC01_CHECKOUT"
+              },
+              "source": {
+                "$ref": "NODE_UMLA_01003"
+              },
+              "target": {
+                "$ref": "NODE_UMLA_01004"
+              }
+            },
+            {
+              "_type": "UMLControlFlow",
+              "_id": "FLOW_01036",
+              "_parent": {
+                "$ref": "ACT_UC01_CHECKOUT"
+              },
+              "source": {
+                "$ref": "NODE_UMLA_01004"
+              },
+              "target": {
+                "$ref": "NODE_UMLD_01005"
+              }
+            },
+            {
+              "_type": "UMLControlFlow",
+              "_id": "FLOW_01037",
+              "_parent": {
+                "$ref": "ACT_UC01_CHECKOUT"
+              },
+              "source": {
+                "$ref": "NODE_UMLD_01005"
+              },
+              "target": {
+                "$ref": "NODE_UMLA_01006"
+              },
+              "guard": "Thẻ không hợp lệ",
+              "name": "[Thẻ không hợp lệ]"
+            },
+            {
+              "_type": "UMLControlFlow",
+              "_id": "FLOW_01038",
+              "_parent": {
+                "$ref": "ACT_UC01_CHECKOUT"
+              },
+              "source": {
+                "$ref": "NODE_UMLA_01006"
+              },
+              "target": {
+                "$ref": "NODE_UMLA_01007"
+              }
+            },
+            {
+              "_type": "UMLControlFlow",
+              "_id": "FLOW_01039",
+              "_parent": {
+                "$ref": "ACT_UC01_CHECKOUT"
+              },
+              "source": {
+                "$ref": "NODE_UMLA_01007"
+              },
+              "target": {
+                "$ref": "NODE_UMLA_01008"
+              }
+            },
+            {
+              "_type": "UMLControlFlow",
+              "_id": "FLOW_01040",
+              "_parent": {
+                "$ref": "ACT_UC01_CHECKOUT"
+              },
+              "source": {
+                "$ref": "NODE_UMLD_01005"
+              },
+              "target": {
+                "$ref": "NODE_UMLA_01009"
+              },
+              "guard": "Thẻ hợp lệ",
+              "name": "[Thẻ hợp lệ]"
+            },
+            {
+              "_type": "UMLControlFlow",
+              "_id": "FLOW_01041",
+              "_parent": {
+                "$ref": "ACT_UC01_CHECKOUT"
+              },
+              "source": {
+                "$ref": "NODE_UMLA_01009"
+              },
+              "target": {
+                "$ref": "NODE_UMLA_01010"
+              }
+            },
+            {
+              "_type": "UMLControlFlow",
+              "_id": "FLOW_01042",
+              "_parent": {
+                "$ref": "ACT_UC01_CHECKOUT"
+              },
+              "source": {
+                "$ref": "NODE_UMLA_01010"
+              },
+              "target": {
+                "$ref": "NODE_UMLD_01011"
+              }
+            },
+            {
+              "_type": "UMLControlFlow",
+              "_id": "FLOW_01043",
+              "_parent": {
+                "$ref": "ACT_UC01_CHECKOUT"
+              },
+              "source": {
+                "$ref": "NODE_UMLD_01011"
+              },
+              "target": {
+                "$ref": "NODE_UMLA_01012"
+              },
+              "guard": "Nợ phạt > $10",
+              "name": "[Nợ phạt > $10]"
+            },
+            {
+              "_type": "UMLControlFlow",
+              "_id": "FLOW_01044",
+              "_parent": {
+                "$ref": "ACT_UC01_CHECKOUT"
+              },
+              "source": {
+                "$ref": "NODE_UMLA_01012"
+              },
+              "target": {
+                "$ref": "NODE_UMLA_01013"
+              }
+            },
+            {
+              "_type": "UMLControlFlow",
+              "_id": "FLOW_01045",
+              "_parent": {
+                "$ref": "ACT_UC01_CHECKOUT"
+              },
+              "source": {
+                "$ref": "NODE_UMLA_01013"
+              },
+              "target": {
+                "$ref": "NODE_UMLD_01014"
+              }
+            },
+            {
+              "_type": "UMLControlFlow",
+              "_id": "FLOW_01046",
+              "_parent": {
+                "$ref": "ACT_UC01_CHECKOUT"
+              },
+              "source": {
+                "$ref": "NODE_UMLD_01014"
+              },
+              "target": {
+                "$ref": "NODE_UMLA_01015"
+              },
+              "guard": "Từ chối nộp phạt",
+              "name": "[Từ chối nộp phạt]"
+            },
+            {
+              "_type": "UMLControlFlow",
+              "_id": "FLOW_01047",
+              "_parent": {
+                "$ref": "ACT_UC01_CHECKOUT"
+              },
+              "source": {
+                "$ref": "NODE_UMLD_01014"
+              },
+              "target": {
+                "$ref": "NODE_UMLA_01016"
+              },
+              "guard": "Đã nộp phạt",
+              "name": "[Đã nộp phạt]"
+            },
+            {
+              "_type": "UMLControlFlow",
+              "_id": "FLOW_01048",
+              "_parent": {
+                "$ref": "ACT_UC01_CHECKOUT"
+              },
+              "source": {
+                "$ref": "NODE_UMLA_01016"
+              },
+              "target": {
+                "$ref": "NODE_UMLM_MERGE_SCAN"
+              }
+            },
+            {
+              "_type": "UMLControlFlow",
+              "_id": "FLOW_01049",
+              "_parent": {
+                "$ref": "ACT_UC01_CHECKOUT"
+              },
+              "source": {
+                "$ref": "NODE_UMLD_01011"
+              },
+              "target": {
+                "$ref": "NODE_UMLM_MERGE_SCAN"
+              },
+              "guard": "Nợ phạt <= $10",
+              "name": "[Nợ phạt <= $10]"
+            },
+            {
+              "_type": "UMLControlFlow",
+              "_id": "FLOW_01051",
+              "_parent": {
+                "$ref": "ACT_UC01_CHECKOUT"
+              },
+              "source": {
+                "$ref": "NODE_UMLA_01018"
+              },
+              "target": {
+                "$ref": "NODE_UMLA_01019"
+              }
+            },
+            {
+              "_type": "UMLControlFlow",
+              "_id": "FLOW_01052",
+              "_parent": {
+                "$ref": "ACT_UC01_CHECKOUT"
+              },
+              "source": {
+                "$ref": "NODE_UMLA_01019"
+              },
+              "target": {
+                "$ref": "NODE_UMLA_01020"
+              }
+            },
+            {
+              "_type": "UMLControlFlow",
+              "_id": "FLOW_01053",
+              "_parent": {
+                "$ref": "ACT_UC01_CHECKOUT"
+              },
+              "source": {
+                "$ref": "NODE_UMLA_01020"
+              },
+              "target": {
+                "$ref": "NODE_UMLD_01021"
+              }
+            },
+            {
+              "_type": "UMLControlFlow",
+              "_id": "FLOW_01054",
+              "_parent": {
+                "$ref": "ACT_UC01_CHECKOUT"
+              },
+              "source": {
+                "$ref": "NODE_UMLD_01021"
+              },
+              "target": {
+                "$ref": "NODE_UMLA_01022"
+              },
+              "guard": "Sách đã đặt trước / Hư",
+              "name": "[Sách đã đặt trước / Hư]"
+            },
+            {
+              "_type": "UMLControlFlow",
+              "_id": "FLOW_01055",
+              "_parent": {
+                "$ref": "ACT_UC01_CHECKOUT"
+              },
+              "source": {
+                "$ref": "NODE_UMLA_01022"
+              },
+              "target": {
+                "$ref": "NODE_UMLA_01023"
+              }
+            },
+            {
+              "_type": "UMLControlFlow",
+              "_id": "FLOW_01056",
+              "_parent": {
+                "$ref": "ACT_UC01_CHECKOUT"
+              },
+              "source": {
+                "$ref": "NODE_UMLA_01023"
+              },
+              "target": {
+                "$ref": "NODE_UMLD_01024"
+              }
+            },
+            {
+              "_type": "UMLControlFlow",
+              "_id": "FLOW_01057",
+              "_parent": {
+                "$ref": "ACT_UC01_CHECKOUT"
+              },
+              "source": {
+                "$ref": "NODE_UMLD_01024"
+              },
+              "target": {
+                "$ref": "NODE_UMLA_01025"
+              },
+              "guard": "Không đổi sách",
+              "name": "[Không đổi sách]"
+            },
+            {
+              "_type": "UMLControlFlow",
+              "_id": "FLOW_01058",
+              "_parent": {
+                "$ref": "ACT_UC01_CHECKOUT"
+              },
+              "source": {
+                "$ref": "NODE_UMLD_01024"
+              },
+              "target": {
+                "$ref": "NODE_UMLM_MERGE_SCAN"
+              },
+              "guard": "Đổi sách khác",
+              "name": "[Đổi sách khác]"
+            },
+            {
+              "_type": "UMLControlFlow",
+              "_id": "FLOW_01059",
+              "_parent": {
+                "$ref": "ACT_UC01_CHECKOUT"
+              },
+              "source": {
+                "$ref": "NODE_UMLD_01021"
+              },
+              "target": {
+                "$ref": "NODE_UMLF_01026"
+              },
+              "guard": "Sách khả dụng",
+              "name": "[Sách khả dụng]"
+            },
+            {
+              "_type": "UMLControlFlow",
+              "_id": "FLOW_01060",
+              "_parent": {
+                "$ref": "ACT_UC01_CHECKOUT"
+              },
+              "source": {
+                "$ref": "NODE_UMLF_01026"
+              },
+              "target": {
+                "$ref": "NODE_UMLA_01027"
+              }
+            },
+            {
+              "_type": "UMLControlFlow",
+              "_id": "FLOW_01061",
+              "_parent": {
+                "$ref": "ACT_UC01_CHECKOUT"
+              },
+              "source": {
+                "$ref": "NODE_UMLF_01026"
+              },
+              "target": {
+                "$ref": "NODE_UMLA_01028"
+              }
+            },
+            {
+              "_type": "UMLControlFlow",
+              "_id": "FLOW_01062",
+              "_parent": {
+                "$ref": "ACT_UC01_CHECKOUT"
+              },
+              "source": {
+                "$ref": "NODE_UMLA_01027"
+              },
+              "target": {
+                "$ref": "NODE_UMLJ_01029"
+              }
+            },
+            {
+              "_type": "UMLControlFlow",
+              "_id": "FLOW_01063",
+              "_parent": {
+                "$ref": "ACT_UC01_CHECKOUT"
+              },
+              "source": {
+                "$ref": "NODE_UMLA_01028"
+              },
+              "target": {
+                "$ref": "NODE_UMLJ_01029"
+              }
+            },
+            {
+              "_type": "UMLControlFlow",
+              "_id": "FLOW_01064",
+              "_parent": {
+                "$ref": "ACT_UC01_CHECKOUT"
+              },
+              "source": {
+                "$ref": "NODE_UMLJ_01029"
+              },
+              "target": {
+                "$ref": "NODE_UMLA_01030"
+              }
+            },
+            {
+              "_type": "UMLControlFlow",
+              "_id": "FLOW_01065",
+              "_parent": {
+                "$ref": "ACT_UC01_CHECKOUT"
+              },
+              "source": {
+                "$ref": "NODE_UMLA_01030"
+              },
+              "target": {
+                "$ref": "NODE_UMLA_01031"
+              }
+            },
+            {
+              "_type": "UMLControlFlow",
+              "_id": "FLOW_01066",
+              "_parent": {
+                "$ref": "ACT_UC01_CHECKOUT"
+              },
+              "source": {
+                "$ref": "NODE_UMLA_01031"
+              },
+              "target": {
+                "$ref": "NODE_UMLA_01032"
+              }
+            },
+            {
+              "_type": "UMLControlFlow",
+              "_id": "FLOW_MERGESCAN_TO_ACTION",
+              "_parent": {
+                "$ref": "ACT_UC01_CHECKOUT"
+              },
+              "source": {
+                "$ref": "NODE_UMLM_MERGE_SCAN"
+              },
+              "target": {
+                "$ref": "NODE_UMLA_01018"
+              }
+            }
+          ],
+          "groups": [
+            {
+              "_type": "UMLActivityPartition",
+              "_id": "PART_UC01_LIBRARIAN",
+              "_parent": {
+                "$ref": "ACT_UC01_CHECKOUT"
+              },
+              "name": "Thủ thư (Primary Actor)",
+              "nodes": [
+                {
+                  "$ref": "NODE_UMLI_01001"
+                },
+                {
+                  "$ref": "NODE_UMLA_01002"
+                },
+                {
+                  "$ref": "NODE_UMLA_01007"
+                },
+                {
+                  "$ref": "NODE_UMLA_01008"
+                },
+                {
+                  "$ref": "NODE_UMLA_01013"
+                },
+                {
+                  "$ref": "NODE_UMLD_01014"
+                },
+                {
+                  "$ref": "NODE_UMLA_01015"
+                },
+                {
+                  "$ref": "NODE_UMLA_01018"
+                },
+                {
+                  "$ref": "NODE_UMLA_01023"
+                },
+                {
+                  "$ref": "NODE_UMLD_01024"
+                },
+                {
+                  "$ref": "NODE_UMLA_01025"
+                },
+                {
+                  "$ref": "NODE_UMLA_01031"
+                },
+                {
+                  "$ref": "NODE_UMLA_01032"
+                },
+                {
+                  "$ref": "NODE_UMLM_MERGE_SCAN"
+                }
+              ]
+            },
+            {
+              "_type": "UMLActivityPartition",
+              "_id": "PART_UC01_SYSTEM",
+              "_parent": {
+                "$ref": "ACT_UC01_CHECKOUT"
+              },
+              "name": "Hệ thống LMS (System Controller)",
+              "nodes": [
+                {
+                  "$ref": "NODE_UMLA_01003"
+                },
+                {
+                  "$ref": "NODE_UMLD_01005"
+                },
+                {
+                  "$ref": "NODE_UMLA_01006"
+                },
+                {
+                  "$ref": "NODE_UMLA_01009"
+                },
+                {
+                  "$ref": "NODE_UMLD_01011"
+                },
+                {
+                  "$ref": "NODE_UMLA_01012"
+                },
+                {
+                  "$ref": "NODE_UMLA_01019"
+                },
+                {
+                  "$ref": "NODE_UMLD_01021"
+                },
+                {
+                  "$ref": "NODE_UMLA_01022"
+                },
+                {
+                  "$ref": "NODE_UMLF_01026"
+                },
+                {
+                  "$ref": "NODE_UMLJ_01029"
+                },
+                {
+                  "$ref": "NODE_UMLA_01030"
+                }
+              ]
+            },
+            {
+              "_type": "UMLActivityPartition",
+              "_id": "PART_UC01_EXTERNAL",
+              "_parent": {
+                "$ref": "ACT_UC01_CHECKOUT"
+              },
+              "name": "Hệ thống ngoài & CSDL (External DB/System)",
+              "nodes": [
+                {
+                  "$ref": "NODE_UMLA_01004"
+                },
+                {
+                  "$ref": "NODE_UMLA_01010"
+                },
+                {
+                  "$ref": "NODE_UMLA_01016"
+                },
+                {
+                  "$ref": "NODE_UMLA_01020"
+                },
+                {
+                  "$ref": "NODE_UMLA_01027"
+                },
+                {
+                  "$ref": "NODE_UMLA_01028"
+                }
+              ]
+            }
+          ],
+          "ownedElements": [
+            {
+              "_type": "UMLActivityDiagram",
+              "_id": "DIAG_UC01_CHECKOUT",
+              "_parent": {
+                "$ref": "ACT_UC01_CHECKOUT"
+              },
+              "name": "UC01_CheckOutBook_ActivityDiagram",
+              "ownedViews": [
+                {
+                  "_type": "UMLSwimlaneView",
+                  "_id": "VIEW_PART_UC01_LIBRARIAN",
+                  "_parent": {
+                    "$ref": "DIAG_UC01_CHECKOUT"
+                  },
+                  "model": {
+                    "$ref": "PART_UC01_LIBRARIAN"
+                  },
+                  "left": 40,
+                  "top": 20,
+                  "width": 340,
+                  "height": 1450,
+                  "isVertical": true,
+                  "nameLabel": {
+                    "_type": "LabelView",
+                    "_id": "LBL_PART_UC01_LIBRARIAN",
+                    "_parent": {
+                      "$ref": "VIEW_PART_UC01_LIBRARIAN"
+                    },
+                    "left": 40,
+                    "top": 25,
+                    "width": 340,
+                    "height": 25,
+                    "text": "Thủ thư (Primary Actor)"
+                  }
+                },
+                {
+                  "_type": "UMLSwimlaneView",
+                  "_id": "VIEW_PART_UC01_SYSTEM",
+                  "_parent": {
+                    "$ref": "DIAG_UC01_CHECKOUT"
+                  },
+                  "model": {
+                    "$ref": "PART_UC01_SYSTEM"
+                  },
+                  "left": 380,
+                  "top": 20,
+                  "width": 380,
+                  "height": 1450,
+                  "isVertical": true,
+                  "nameLabel": {
+                    "_type": "LabelView",
+                    "_id": "LBL_PART_UC01_SYSTEM",
+                    "_parent": {
+                      "$ref": "VIEW_PART_UC01_SYSTEM"
+                    },
+                    "left": 380,
+                    "top": 25,
+                    "width": 380,
+                    "height": 25,
+                    "text": "Hệ thống LMS (System Controller)"
+                  }
+                },
+                {
+                  "_type": "UMLSwimlaneView",
+                  "_id": "VIEW_PART_UC01_EXTERNAL",
+                  "_parent": {
+                    "$ref": "DIAG_UC01_CHECKOUT"
+                  },
+                  "model": {
+                    "$ref": "PART_UC01_EXTERNAL"
+                  },
+                  "left": 760,
+                  "top": 20,
+                  "width": 380,
+                  "height": 1450,
+                  "isVertical": true,
+                  "nameLabel": {
+                    "_type": "LabelView",
+                    "_id": "LBL_PART_UC01_EXTERNAL",
+                    "_parent": {
+                      "$ref": "VIEW_PART_UC01_EXTERNAL"
+                    },
+                    "left": 760,
+                    "top": 25,
+                    "width": 380,
+                    "height": 25,
+                    "text": "Hệ thống ngoài & CSDL (External DB/System)"
+                  }
+                },
+                {
+                  "_type": "UMLControlNodeView",
+                  "_id": "VIEW_NODE_UMLI_01001",
+                  "_parent": {
+                    "$ref": "DIAG_UC01_CHECKOUT"
+                  },
+                  "model": {
+                    "$ref": "NODE_UMLI_01001"
+                  },
+                  "left": 198,
+                  "top": 60,
+                  "width": 25,
+                  "height": 25
+                },
+                {
+                  "_type": "UMLActionView",
+                  "_id": "VIEW_NODE_UMLA_01002",
+                  "_parent": {
+                    "$ref": "DIAG_UC01_CHECKOUT"
+                  },
+                  "model": {
+                    "$ref": "NODE_UMLA_01002"
+                  },
+                  "left": 120,
+                  "top": 110,
+                  "width": 180,
+                  "height": 45,
+                  "nameCompartment": {
+                    "_type": "UMLNameCompartmentView",
+                    "_id": "NC_NODE_UMLA_01002",
+                    "_parent": {
+                      "$ref": "VIEW_NODE_UMLA_01002"
+                    },
+                    "model": {
+                      "$ref": "NODE_UMLA_01002"
+                    },
+                    "left": 120,
+                    "top": 110,
+                    "width": 180,
+                    "height": 45,
+                    "nameLabel": {
+                      "_type": "LabelView",
+                      "_id": "NL_NODE_UMLA_01002",
+                      "_parent": {
+                        "$ref": "NC_NODE_UMLA_01002"
+                      },
+                      "left": 120,
+                      "top": 120,
+                      "width": 180,
+                      "height": 20,
+                      "text": "Nhập mã số sinh viên"
+                    }
+                  }
+                },
+                {
+                  "_type": "UMLActionView",
+                  "_id": "VIEW_NODE_UMLA_01003",
+                  "_parent": {
+                    "$ref": "DIAG_UC01_CHECKOUT"
+                  },
+                  "model": {
+                    "$ref": "NODE_UMLA_01003"
+                  },
+                  "left": 480,
+                  "top": 110,
+                  "width": 180,
+                  "height": 45,
+                  "nameCompartment": {
+                    "_type": "UMLNameCompartmentView",
+                    "_id": "NC_NODE_UMLA_01003",
+                    "_parent": {
+                      "$ref": "VIEW_NODE_UMLA_01003"
+                    },
+                    "model": {
+                      "$ref": "NODE_UMLA_01003"
+                    },
+                    "left": 480,
+                    "top": 110,
+                    "width": 180,
+                    "height": 45,
+                    "nameLabel": {
+                      "_type": "LabelView",
+                      "_id": "NL_NODE_UMLA_01003",
+                      "_parent": {
+                        "$ref": "NC_NODE_UMLA_01003"
+                      },
+                      "left": 480,
+                      "top": 120,
+                      "width": 180,
+                      "height": 20,
+                      "text": "Gửi yêu cầu xác thực thẻ"
+                    }
+                  }
+                },
+                {
+                  "_type": "UMLActionView",
+                  "_id": "VIEW_NODE_UMLA_01004",
+                  "_parent": {
+                    "$ref": "DIAG_UC01_CHECKOUT"
+                  },
+                  "model": {
+                    "$ref": "NODE_UMLA_01004"
+                  },
+                  "left": 850,
+                  "top": 110,
+                  "width": 200,
+                  "height": 45,
+                  "nameCompartment": {
+                    "_type": "UMLNameCompartmentView",
+                    "_id": "NC_NODE_UMLA_01004",
+                    "_parent": {
+                      "$ref": "VIEW_NODE_UMLA_01004"
+                    },
+                    "model": {
+                      "$ref": "NODE_UMLA_01004"
+                    },
+                    "left": 850,
+                    "top": 110,
+                    "width": 200,
+                    "height": 45,
+                    "nameLabel": {
+                      "_type": "LabelView",
+                      "_id": "NL_NODE_UMLA_01004",
+                      "_parent": {
+                        "$ref": "NC_NODE_UMLA_01004"
+                      },
+                      "left": 850,
+                      "top": 120,
+                      "width": 200,
+                      "height": 20,
+                      "text": "Kiểm tra tính hợp lệ của thẻ"
+                    }
+                  }
+                },
+                {
+                  "_type": "UMLControlNodeView",
+                  "_id": "VIEW_NODE_UMLD_01005",
+                  "_parent": {
+                    "$ref": "DIAG_UC01_CHECKOUT"
+                  },
+                  "model": {
+                    "$ref": "NODE_UMLD_01005"
+                  },
+                  "left": 550,
+                  "top": 190,
+                  "width": 40,
+                  "height": 40
+                },
+                {
+                  "_type": "UMLActionView",
+                  "_id": "VIEW_NODE_UMLA_01006",
+                  "_parent": {
+                    "$ref": "DIAG_UC01_CHECKOUT"
+                  },
+                  "model": {
+                    "$ref": "NODE_UMLA_01006"
+                  },
+                  "left": 465,
+                  "top": 260,
+                  "width": 210,
+                  "height": 45,
+                  "nameCompartment": {
+                    "_type": "UMLNameCompartmentView",
+                    "_id": "NC_NODE_UMLA_01006",
+                    "_parent": {
+                      "$ref": "VIEW_NODE_UMLA_01006"
+                    },
+                    "model": {
+                      "$ref": "NODE_UMLA_01006"
+                    },
+                    "left": 465,
+                    "top": 260,
+                    "width": 210,
+                    "height": 45,
+                    "nameLabel": {
+                      "_type": "LabelView",
+                      "_id": "NL_NODE_UMLA_01006",
+                      "_parent": {
+                        "$ref": "NC_NODE_UMLA_01006"
+                      },
+                      "left": 465,
+                      "top": 270,
+                      "width": 210,
+                      "height": 20,
+                      "text": "Hiển thị cảnh báo thẻ không hợp lệ"
+                    }
+                  }
+                },
+                {
+                  "_type": "UMLActionView",
+                  "_id": "VIEW_NODE_UMLA_01007",
+                  "_parent": {
+                    "$ref": "DIAG_UC01_CHECKOUT"
+                  },
+                  "model": {
+                    "$ref": "NODE_UMLA_01007"
+                  },
+                  "left": 110,
+                  "top": 260,
+                  "width": 200,
+                  "height": 45,
+                  "nameCompartment": {
+                    "_type": "UMLNameCompartmentView",
+                    "_id": "NC_NODE_UMLA_01007",
+                    "_parent": {
+                      "$ref": "VIEW_NODE_UMLA_01007"
+                    },
+                    "model": {
+                      "$ref": "NODE_UMLA_01007"
+                    },
+                    "left": 110,
+                    "top": 260,
+                    "width": 200,
+                    "height": 45,
+                    "nameLabel": {
+                      "_type": "LabelView",
+                      "_id": "NL_NODE_UMLA_01007",
+                      "_parent": {
+                        "$ref": "NC_NODE_UMLA_01007"
+                      },
+                      "left": 110,
+                      "top": 270,
+                      "width": 200,
+                      "height": 20,
+                      "text": "Từ chối mượn & trả thẻ cho SV"
+                    }
+                  }
+                },
+                {
+                  "_type": "UMLControlNodeView",
+                  "_id": "VIEW_NODE_UMLA_01008",
+                  "_parent": {
+                    "$ref": "DIAG_UC01_CHECKOUT"
+                  },
+                  "model": {
+                    "$ref": "NODE_UMLA_01008"
+                  },
+                  "left": 197,
+                  "top": 335,
+                  "width": 26,
+                  "height": 26
+                },
+                {
+                  "_type": "UMLActionView",
+                  "_id": "VIEW_NODE_UMLA_01009",
+                  "_parent": {
+                    "$ref": "DIAG_UC01_CHECKOUT"
+                  },
+                  "model": {
+                    "$ref": "NODE_UMLA_01009"
+                  },
+                  "left": 465,
+                  "top": 380,
+                  "width": 210,
+                  "height": 45,
+                  "nameCompartment": {
+                    "_type": "UMLNameCompartmentView",
+                    "_id": "NC_NODE_UMLA_01009",
+                    "_parent": {
+                      "$ref": "VIEW_NODE_UMLA_01009"
+                    },
+                    "model": {
+                      "$ref": "NODE_UMLA_01009"
+                    },
+                    "left": 465,
+                    "top": 380,
+                    "width": 210,
+                    "height": 45,
+                    "nameLabel": {
+                      "_type": "LabelView",
+                      "_id": "NL_NODE_UMLA_01009",
+                      "_parent": {
+                        "$ref": "NC_NODE_UMLA_01009"
+                      },
+                      "left": 465,
+                      "top": 390,
+                      "width": 210,
+                      "height": 20,
+                      "text": "Truy vấn mức phí phạt tồn đọng"
+                    }
+                  }
+                },
+                {
+                  "_type": "UMLActionView",
+                  "_id": "VIEW_NODE_UMLA_01010",
+                  "_parent": {
+                    "$ref": "DIAG_UC01_CHECKOUT"
+                  },
+                  "model": {
+                    "$ref": "NODE_UMLA_01010"
+                  },
+                  "left": 855,
+                  "top": 380,
+                  "width": 190,
+                  "height": 45,
+                  "nameCompartment": {
+                    "_type": "UMLNameCompartmentView",
+                    "_id": "NC_NODE_UMLA_01010",
+                    "_parent": {
+                      "$ref": "VIEW_NODE_UMLA_01010"
+                    },
+                    "model": {
+                      "$ref": "NODE_UMLA_01010"
+                    },
+                    "left": 855,
+                    "top": 380,
+                    "width": 190,
+                    "height": 45,
+                    "nameLabel": {
+                      "_type": "LabelView",
+                      "_id": "NL_NODE_UMLA_01010",
+                      "_parent": {
+                        "$ref": "NC_NODE_UMLA_01010"
+                      },
+                      "left": 855,
+                      "top": 390,
+                      "width": 190,
+                      "height": 20,
+                      "text": "Kiểm tra công nợ tài khoản"
+                    }
+                  }
+                },
+                {
+                  "_type": "UMLControlNodeView",
+                  "_id": "VIEW_NODE_UMLD_01011",
+                  "_parent": {
+                    "$ref": "DIAG_UC01_CHECKOUT"
+                  },
+                  "model": {
+                    "$ref": "NODE_UMLD_01011"
+                  },
+                  "left": 550,
+                  "top": 455,
+                  "width": 40,
+                  "height": 40
+                },
+                {
+                  "_type": "UMLActionView",
+                  "_id": "VIEW_NODE_UMLA_01012",
+                  "_parent": {
+                    "$ref": "DIAG_UC01_CHECKOUT"
+                  },
+                  "model": {
+                    "$ref": "NODE_UMLA_01012"
+                  },
+                  "left": 470,
+                  "top": 525,
+                  "width": 200,
+                  "height": 45,
+                  "nameCompartment": {
+                    "_type": "UMLNameCompartmentView",
+                    "_id": "NC_NODE_UMLA_01012",
+                    "_parent": {
+                      "$ref": "VIEW_NODE_UMLA_01012"
+                    },
+                    "model": {
+                      "$ref": "NODE_UMLA_01012"
+                    },
+                    "left": 470,
+                    "top": 525,
+                    "width": 200,
+                    "height": 45,
+                    "nameLabel": {
+                      "_type": "LabelView",
+                      "_id": "NL_NODE_UMLA_01012",
+                      "_parent": {
+                        "$ref": "NC_NODE_UMLA_01012"
+                      },
+                      "left": 470,
+                      "top": 535,
+                      "width": 200,
+                      "height": 20,
+                      "text": "Cảnh báo nợ phạt quá hạn mức"
+                    }
+                  }
+                },
+                {
+                  "_type": "UMLActionView",
+                  "_id": "VIEW_NODE_UMLA_01013",
+                  "_parent": {
+                    "$ref": "DIAG_UC01_CHECKOUT"
+                  },
+                  "model": {
+                    "$ref": "NODE_UMLA_01013"
+                  },
+                  "left": 110,
+                  "top": 525,
+                  "width": 200,
+                  "height": 45,
+                  "nameCompartment": {
+                    "_type": "UMLNameCompartmentView",
+                    "_id": "NC_NODE_UMLA_01013",
+                    "_parent": {
+                      "$ref": "VIEW_NODE_UMLA_01013"
+                    },
+                    "model": {
+                      "$ref": "NODE_UMLA_01013"
+                    },
+                    "left": 110,
+                    "top": 525,
+                    "width": 200,
+                    "height": 45,
+                    "nameLabel": {
+                      "_type": "LabelView",
+                      "_id": "NL_NODE_UMLA_01013",
+                      "_parent": {
+                        "$ref": "NC_NODE_UMLA_01013"
+                      },
+                      "left": 110,
+                      "top": 535,
+                      "width": 200,
+                      "height": 20,
+                      "text": "Yêu cầu SV thanh toán tiền phạt"
+                    }
+                  }
+                },
+                {
+                  "_type": "UMLControlNodeView",
+                  "_id": "VIEW_NODE_UMLD_01014",
+                  "_parent": {
+                    "$ref": "DIAG_UC01_CHECKOUT"
+                  },
+                  "model": {
+                    "$ref": "NODE_UMLD_01014"
+                  },
+                  "left": 190,
+                  "top": 600,
+                  "width": 40,
+                  "height": 40
+                },
+                {
+                  "_type": "UMLControlNodeView",
+                  "_id": "VIEW_NODE_UMLA_01015",
+                  "_parent": {
+                    "$ref": "DIAG_UC01_CHECKOUT"
+                  },
+                  "model": {
+                    "$ref": "NODE_UMLA_01015"
+                  },
+                  "left": 70,
+                  "top": 607,
+                  "width": 26,
+                  "height": 26
+                },
+                {
+                  "_type": "UMLActionView",
+                  "_id": "VIEW_NODE_UMLA_01016",
+                  "_parent": {
+                    "$ref": "DIAG_UC01_CHECKOUT"
+                  },
+                  "model": {
+                    "$ref": "NODE_UMLA_01016"
+                  },
+                  "left": 850,
+                  "top": 600,
+                  "width": 200,
+                  "height": 45,
+                  "nameCompartment": {
+                    "_type": "UMLNameCompartmentView",
+                    "_id": "NC_NODE_UMLA_01016",
+                    "_parent": {
+                      "$ref": "VIEW_NODE_UMLA_01016"
+                    },
+                    "model": {
+                      "$ref": "NODE_UMLA_01016"
+                    },
+                    "left": 850,
+                    "top": 600,
+                    "width": 200,
+                    "height": 45,
+                    "nameLabel": {
+                      "_type": "LabelView",
+                      "_id": "NL_NODE_UMLA_01016",
+                      "_parent": {
+                        "$ref": "NC_NODE_UMLA_01016"
+                      },
+                      "left": 850,
+                      "top": 610,
+                      "width": 200,
+                      "height": 20,
+                      "text": "Ghi nhận thanh toán & xóa nợ"
+                    }
+                  }
+                },
+                {
+                  "_type": "UMLActionView",
+                  "_id": "VIEW_NODE_UMLA_01018",
+                  "_parent": {
+                    "$ref": "DIAG_UC01_CHECKOUT"
+                  },
+                  "model": {
+                    "$ref": "NODE_UMLA_01018"
+                  },
+                  "left": 120,
+                  "top": 755,
+                  "width": 180,
+                  "height": 45,
+                  "nameCompartment": {
+                    "_type": "UMLNameCompartmentView",
+                    "_id": "NC_NODE_UMLA_01018",
+                    "_parent": {
+                      "$ref": "VIEW_NODE_UMLA_01018"
+                    },
+                    "model": {
+                      "$ref": "NODE_UMLA_01018"
+                    },
+                    "left": 120,
+                    "top": 755,
+                    "width": 180,
+                    "height": 45,
+                    "nameLabel": {
+                      "_type": "LabelView",
+                      "_id": "NL_NODE_UMLA_01018",
+                      "_parent": {
+                        "$ref": "NC_NODE_UMLA_01018"
+                      },
+                      "left": 120,
+                      "top": 765,
+                      "width": 180,
+                      "height": 20,
+                      "text": "Quét mã vạch tài liệu"
+                    }
+                  }
+                },
+                {
+                  "_type": "UMLActionView",
+                  "_id": "VIEW_NODE_UMLA_01019",
+                  "_parent": {
+                    "$ref": "DIAG_UC01_CHECKOUT"
+                  },
+                  "model": {
+                    "$ref": "NODE_UMLA_01019"
+                  },
+                  "left": 475,
+                  "top": 755,
+                  "width": 190,
+                  "height": 45,
+                  "nameCompartment": {
+                    "_type": "UMLNameCompartmentView",
+                    "_id": "NC_NODE_UMLA_01019",
+                    "_parent": {
+                      "$ref": "VIEW_NODE_UMLA_01019"
+                    },
+                    "model": {
+                      "$ref": "NODE_UMLA_01019"
+                    },
+                    "left": 475,
+                    "top": 755,
+                    "width": 190,
+                    "height": 45,
+                    "nameLabel": {
+                      "_type": "LabelView",
+                      "_id": "NL_NODE_UMLA_01019",
+                      "_parent": {
+                        "$ref": "NC_NODE_UMLA_01019"
+                      },
+                      "left": 475,
+                      "top": 765,
+                      "width": 190,
+                      "height": 20,
+                      "text": "Truy vấn tình trạng cuốn sách"
+                    }
+                  }
+                },
+                {
+                  "_type": "UMLActionView",
+                  "_id": "VIEW_NODE_UMLA_01020",
+                  "_parent": {
+                    "$ref": "DIAG_UC01_CHECKOUT"
+                  },
+                  "model": {
+                    "$ref": "NODE_UMLA_01020"
+                  },
+                  "left": 845,
+                  "top": 755,
+                  "width": 210,
+                  "height": 45,
+                  "nameCompartment": {
+                    "_type": "UMLNameCompartmentView",
+                    "_id": "NC_NODE_UMLA_01020",
+                    "_parent": {
+                      "$ref": "VIEW_NODE_UMLA_01020"
+                    },
+                    "model": {
+                      "$ref": "NODE_UMLA_01020"
+                    },
+                    "left": 845,
+                    "top": 755,
+                    "width": 210,
+                    "height": 45,
+                    "nameLabel": {
+                      "_type": "LabelView",
+                      "_id": "NL_NODE_UMLA_01020",
+                      "_parent": {
+                        "$ref": "NC_NODE_UMLA_01020"
+                      },
+                      "left": 845,
+                      "top": 765,
+                      "width": 210,
+                      "height": 20,
+                      "text": "Kiểm tra tính khả dụng của sách"
+                    }
+                  }
+                },
+                {
+                  "_type": "UMLControlNodeView",
+                  "_id": "VIEW_NODE_UMLD_01021",
+                  "_parent": {
+                    "$ref": "DIAG_UC01_CHECKOUT"
+                  },
+                  "model": {
+                    "$ref": "NODE_UMLD_01021"
+                  },
+                  "left": 550,
+                  "top": 830,
+                  "width": 40,
+                  "height": 40
+                },
+                {
+                  "_type": "UMLActionView",
+                  "_id": "VIEW_NODE_UMLA_01022",
+                  "_parent": {
+                    "$ref": "DIAG_UC01_CHECKOUT"
+                  },
+                  "model": {
+                    "$ref": "NODE_UMLA_01022"
+                  },
+                  "left": 465,
+                  "top": 900,
+                  "width": 210,
+                  "height": 45,
+                  "nameCompartment": {
+                    "_type": "UMLNameCompartmentView",
+                    "_id": "NC_NODE_UMLA_01022",
+                    "_parent": {
+                      "$ref": "VIEW_NODE_UMLA_01022"
+                    },
+                    "model": {
+                      "$ref": "NODE_UMLA_01022"
+                    },
+                    "left": 465,
+                    "top": 900,
+                    "width": 210,
+                    "height": 45,
+                    "nameLabel": {
+                      "_type": "LabelView",
+                      "_id": "NL_NODE_UMLA_01022",
+                      "_parent": {
+                        "$ref": "NC_NODE_UMLA_01022"
+                      },
+                      "left": 465,
+                      "top": 910,
+                      "width": 210,
+                      "height": 20,
+                      "text": "Cảnh báo sách đang được đặt trước"
+                    }
+                  }
+                },
+                {
+                  "_type": "UMLActionView",
+                  "_id": "VIEW_NODE_UMLA_01023",
+                  "_parent": {
+                    "$ref": "DIAG_UC01_CHECKOUT"
+                  },
+                  "model": {
+                    "$ref": "NODE_UMLA_01023"
+                  },
+                  "left": 115,
+                  "top": 900,
+                  "width": 190,
+                  "height": 45,
+                  "nameCompartment": {
+                    "_type": "UMLNameCompartmentView",
+                    "_id": "NC_NODE_UMLA_01023",
+                    "_parent": {
+                      "$ref": "VIEW_NODE_UMLA_01023"
+                    },
+                    "model": {
+                      "$ref": "NODE_UMLA_01023"
+                    },
+                    "left": 115,
+                    "top": 900,
+                    "width": 190,
+                    "height": 45,
+                    "nameLabel": {
+                      "_type": "LabelView",
+                      "_id": "NL_NODE_UMLA_01023",
+                      "_parent": {
+                        "$ref": "NC_NODE_UMLA_01023"
+                      },
+                      "left": 115,
+                      "top": 910,
+                      "width": 190,
+                      "height": 20,
+                      "text": "Đề nghị SV đổi cuốn sách khác"
+                    }
+                  }
+                },
+                {
+                  "_type": "UMLControlNodeView",
+                  "_id": "VIEW_NODE_UMLD_01024",
+                  "_parent": {
+                    "$ref": "DIAG_UC01_CHECKOUT"
+                  },
+                  "model": {
+                    "$ref": "NODE_UMLD_01024"
+                  },
+                  "left": 190,
+                  "top": 975,
+                  "width": 40,
+                  "height": 40
+                },
+                {
+                  "_type": "UMLControlNodeView",
+                  "_id": "VIEW_NODE_UMLA_01025",
+                  "_parent": {
+                    "$ref": "DIAG_UC01_CHECKOUT"
+                  },
+                  "model": {
+                    "$ref": "NODE_UMLA_01025"
+                  },
+                  "left": 197,
+                  "top": 1045,
+                  "width": 26,
+                  "height": 26
+                },
+                {
+                  "_type": "UMLControlNodeView",
+                  "_id": "VIEW_NODE_UMLF_01026",
+                  "_parent": {
+                    "$ref": "DIAG_UC01_CHECKOUT"
+                  },
+                  "model": {
+                    "$ref": "NODE_UMLF_01026"
+                  },
+                  "left": 765,
+                  "top": 1060,
+                  "width": 370,
+                  "height": 8
+                },
+                {
+                  "_type": "UMLActionView",
+                  "_id": "VIEW_NODE_UMLA_01027",
+                  "_parent": {
+                    "$ref": "DIAG_UC01_CHECKOUT"
+                  },
+                  "model": {
+                    "$ref": "NODE_UMLA_01027"
+                  },
+                  "left": 775,
+                  "top": 1100,
+                  "width": 165,
+                  "height": 45,
+                  "nameCompartment": {
+                    "_type": "UMLNameCompartmentView",
+                    "_id": "NC_NODE_UMLA_01027",
+                    "_parent": {
+                      "$ref": "VIEW_NODE_UMLA_01027"
+                    },
+                    "model": {
+                      "$ref": "NODE_UMLA_01027"
+                    },
+                    "left": 775,
+                    "top": 1100,
+                    "width": 165,
+                    "height": 45,
+                    "nameLabel": {
+                      "_type": "LabelView",
+                      "_id": "NL_NODE_UMLA_01027",
+                      "_parent": {
+                        "$ref": "NC_NODE_UMLA_01027"
+                      },
+                      "left": 775,
+                      "top": 1110,
+                      "width": 165,
+                      "height": 20,
+                      "text": "Tạo bản ghi lưu thông mượn sách"
+                    }
+                  }
+                },
+                {
+                  "_type": "UMLActionView",
+                  "_id": "VIEW_NODE_UMLA_01028",
+                  "_parent": {
+                    "$ref": "DIAG_UC01_CHECKOUT"
+                  },
+                  "model": {
+                    "$ref": "NODE_UMLA_01028"
+                  },
+                  "left": 955,
+                  "top": 1100,
+                  "width": 165,
+                  "height": 45,
+                  "nameCompartment": {
+                    "_type": "UMLNameCompartmentView",
+                    "_id": "NC_NODE_UMLA_01028",
+                    "_parent": {
+                      "$ref": "VIEW_NODE_UMLA_01028"
+                    },
+                    "model": {
+                      "$ref": "NODE_UMLA_01028"
+                    },
+                    "left": 955,
+                    "top": 1100,
+                    "width": 165,
+                    "height": 45,
+                    "nameLabel": {
+                      "_type": "LabelView",
+                      "_id": "NL_NODE_UMLA_01028",
+                      "_parent": {
+                        "$ref": "NC_NODE_UMLA_01028"
+                      },
+                      "left": 955,
+                      "top": 1110,
+                      "width": 165,
+                      "height": 20,
+                      "text": "Cập nhật trạng thái sách thành Đang mượn"
+                    }
+                  }
+                },
+                {
+                  "_type": "UMLControlNodeView",
+                  "_id": "VIEW_NODE_UMLJ_01029",
+                  "_parent": {
+                    "$ref": "DIAG_UC01_CHECKOUT"
+                  },
+                  "model": {
+                    "$ref": "NODE_UMLJ_01029"
+                  },
+                  "left": 765,
+                  "top": 1175,
+                  "width": 370,
+                  "height": 8
+                },
+                {
+                  "_type": "UMLActionView",
+                  "_id": "VIEW_NODE_UMLA_01030",
+                  "_parent": {
+                    "$ref": "DIAG_UC01_CHECKOUT"
+                  },
+                  "model": {
+                    "$ref": "NODE_UMLA_01030"
+                  },
+                  "left": 475,
+                  "top": 1215,
+                  "width": 190,
+                  "height": 45,
+                  "nameCompartment": {
+                    "_type": "UMLNameCompartmentView",
+                    "_id": "NC_NODE_UMLA_01030",
+                    "_parent": {
+                      "$ref": "VIEW_NODE_UMLA_01030"
+                    },
+                    "model": {
+                      "$ref": "NODE_UMLA_01030"
+                    },
+                    "left": 475,
+                    "top": 1215,
+                    "width": 190,
+                    "height": 45,
+                    "nameLabel": {
+                      "_type": "LabelView",
+                      "_id": "NL_NODE_UMLA_01030",
+                      "_parent": {
+                        "$ref": "NC_NODE_UMLA_01030"
+                      },
+                      "left": 475,
+                      "top": 1225,
+                      "width": 190,
+                      "height": 20,
+                      "text": "Tạo và in biên nhận mượn sách"
+                    }
+                  }
+                },
+                {
+                  "_type": "UMLActionView",
+                  "_id": "VIEW_NODE_UMLA_01031",
+                  "_parent": {
+                    "$ref": "DIAG_UC01_CHECKOUT"
+                  },
+                  "model": {
+                    "$ref": "NODE_UMLA_01031"
+                  },
+                  "left": 105,
+                  "top": 1215,
+                  "width": 210,
+                  "height": 45,
+                  "nameCompartment": {
+                    "_type": "UMLNameCompartmentView",
+                    "_id": "NC_NODE_UMLA_01031",
+                    "_parent": {
+                      "$ref": "VIEW_NODE_UMLA_01031"
+                    },
+                    "model": {
+                      "$ref": "NODE_UMLA_01031"
+                    },
+                    "left": 105,
+                    "top": 1215,
+                    "width": 210,
+                    "height": 45,
+                    "nameLabel": {
+                      "_type": "LabelView",
+                      "_id": "NL_NODE_UMLA_01031",
+                      "_parent": {
+                        "$ref": "NC_NODE_UMLA_01031"
+                      },
+                      "left": 105,
+                      "top": 1225,
+                      "width": 210,
+                      "height": 20,
+                      "text": "Bàn giao sách và biên nhận cho SV"
+                    }
+                  }
+                },
+                {
+                  "_type": "UMLControlNodeView",
+                  "_id": "VIEW_NODE_UMLA_01032",
+                  "_parent": {
+                    "$ref": "DIAG_UC01_CHECKOUT"
+                  },
+                  "model": {
+                    "$ref": "NODE_UMLA_01032"
+                  },
+                  "left": 197,
+                  "top": 1290,
+                  "width": 26,
+                  "height": 26
+                },
+                {
+                  "_type": "UMLControlFlowView",
+                  "_id": "VIEW_FLOW_01033",
+                  "_parent": {
+                    "$ref": "DIAG_UC01_CHECKOUT"
+                  },
+                  "model": {
+                    "$ref": "FLOW_01033"
+                  },
+                  "source": {
+                    "$ref": "VIEW_NODE_UMLI_01001"
+                  },
+                  "target": {
+                    "$ref": "VIEW_NODE_UMLA_01002"
+                  },
+                  "tail": {
+                    "$ref": "VIEW_NODE_UMLI_01001"
+                  },
+                  "head": {
+                    "$ref": "VIEW_NODE_UMLA_01002"
+                  },
+                  "lineStyle": 1,
+                  "nameLabel": {
+                    "_type": "EdgeLabelView",
+                    "_id": "LBL_FLOW_01033",
+                    "_parent": {
+                      "$ref": "VIEW_FLOW_01033"
+                    },
+                    "model": {
+                      "$ref": "FLOW_01033"
+                    },
+                    "visible": false,
+                    "text": ""
+                  }
+                },
+                {
+                  "_type": "UMLControlFlowView",
+                  "_id": "VIEW_FLOW_01034",
+                  "_parent": {
+                    "$ref": "DIAG_UC01_CHECKOUT"
+                  },
+                  "model": {
+                    "$ref": "FLOW_01034"
+                  },
+                  "source": {
+                    "$ref": "VIEW_NODE_UMLA_01002"
+                  },
+                  "target": {
+                    "$ref": "VIEW_NODE_UMLA_01003"
+                  },
+                  "tail": {
+                    "$ref": "VIEW_NODE_UMLA_01002"
+                  },
+                  "head": {
+                    "$ref": "VIEW_NODE_UMLA_01003"
+                  },
+                  "lineStyle": 1,
+                  "nameLabel": {
+                    "_type": "EdgeLabelView",
+                    "_id": "LBL_FLOW_01034",
+                    "_parent": {
+                      "$ref": "VIEW_FLOW_01034"
+                    },
+                    "model": {
+                      "$ref": "FLOW_01034"
+                    },
+                    "visible": false,
+                    "text": ""
+                  }
+                },
+                {
+                  "_type": "UMLControlFlowView",
+                  "_id": "VIEW_FLOW_01035",
+                  "_parent": {
+                    "$ref": "DIAG_UC01_CHECKOUT"
+                  },
+                  "model": {
+                    "$ref": "FLOW_01035"
+                  },
+                  "source": {
+                    "$ref": "VIEW_NODE_UMLA_01003"
+                  },
+                  "target": {
+                    "$ref": "VIEW_NODE_UMLA_01004"
+                  },
+                  "tail": {
+                    "$ref": "VIEW_NODE_UMLA_01003"
+                  },
+                  "head": {
+                    "$ref": "VIEW_NODE_UMLA_01004"
+                  },
+                  "lineStyle": 1,
+                  "nameLabel": {
+                    "_type": "EdgeLabelView",
+                    "_id": "LBL_FLOW_01035",
+                    "_parent": {
+                      "$ref": "VIEW_FLOW_01035"
+                    },
+                    "model": {
+                      "$ref": "FLOW_01035"
+                    },
+                    "visible": false,
+                    "text": ""
+                  }
+                },
+                {
+                  "_type": "UMLControlFlowView",
+                  "_id": "VIEW_FLOW_01036",
+                  "_parent": {
+                    "$ref": "DIAG_UC01_CHECKOUT"
+                  },
+                  "model": {
+                    "$ref": "FLOW_01036"
+                  },
+                  "source": {
+                    "$ref": "VIEW_NODE_UMLA_01004"
+                  },
+                  "target": {
+                    "$ref": "VIEW_NODE_UMLD_01005"
+                  },
+                  "tail": {
+                    "$ref": "VIEW_NODE_UMLA_01004"
+                  },
+                  "head": {
+                    "$ref": "VIEW_NODE_UMLD_01005"
+                  },
+                  "lineStyle": 1,
+                  "nameLabel": {
+                    "_type": "EdgeLabelView",
+                    "_id": "LBL_FLOW_01036",
+                    "_parent": {
+                      "$ref": "VIEW_FLOW_01036"
+                    },
+                    "model": {
+                      "$ref": "FLOW_01036"
+                    },
+                    "visible": false,
+                    "text": ""
+                  }
+                },
+                {
+                  "_type": "UMLControlFlowView",
+                  "_id": "VIEW_FLOW_01037",
+                  "_parent": {
+                    "$ref": "DIAG_UC01_CHECKOUT"
+                  },
+                  "model": {
+                    "$ref": "FLOW_01037"
+                  },
+                  "source": {
+                    "$ref": "VIEW_NODE_UMLD_01005"
+                  },
+                  "target": {
+                    "$ref": "VIEW_NODE_UMLA_01006"
+                  },
+                  "tail": {
+                    "$ref": "VIEW_NODE_UMLD_01005"
+                  },
+                  "head": {
+                    "$ref": "VIEW_NODE_UMLA_01006"
+                  },
+                  "lineStyle": 1,
+                  "nameLabel": {
+                    "_type": "EdgeLabelView",
+                    "_id": "LBL_FLOW_01037",
+                    "_parent": {
+                      "$ref": "VIEW_FLOW_01037"
+                    },
+                    "model": {
+                      "$ref": "FLOW_01037"
+                    },
+                    "visible": true,
+                    "text": "[Thẻ không hợp lệ]"
+                  }
+                },
+                {
+                  "_type": "UMLControlFlowView",
+                  "_id": "VIEW_FLOW_01038",
+                  "_parent": {
+                    "$ref": "DIAG_UC01_CHECKOUT"
+                  },
+                  "model": {
+                    "$ref": "FLOW_01038"
+                  },
+                  "source": {
+                    "$ref": "VIEW_NODE_UMLA_01006"
+                  },
+                  "target": {
+                    "$ref": "VIEW_NODE_UMLA_01007"
+                  },
+                  "tail": {
+                    "$ref": "VIEW_NODE_UMLA_01006"
+                  },
+                  "head": {
+                    "$ref": "VIEW_NODE_UMLA_01007"
+                  },
+                  "lineStyle": 1,
+                  "nameLabel": {
+                    "_type": "EdgeLabelView",
+                    "_id": "LBL_FLOW_01038",
+                    "_parent": {
+                      "$ref": "VIEW_FLOW_01038"
+                    },
+                    "model": {
+                      "$ref": "FLOW_01038"
+                    },
+                    "visible": false,
+                    "text": ""
+                  }
+                },
+                {
+                  "_type": "UMLControlFlowView",
+                  "_id": "VIEW_FLOW_01039",
+                  "_parent": {
+                    "$ref": "DIAG_UC01_CHECKOUT"
+                  },
+                  "model": {
+                    "$ref": "FLOW_01039"
+                  },
+                  "source": {
+                    "$ref": "VIEW_NODE_UMLA_01007"
+                  },
+                  "target": {
+                    "$ref": "VIEW_NODE_UMLA_01008"
+                  },
+                  "tail": {
+                    "$ref": "VIEW_NODE_UMLA_01007"
+                  },
+                  "head": {
+                    "$ref": "VIEW_NODE_UMLA_01008"
+                  },
+                  "lineStyle": 1,
+                  "nameLabel": {
+                    "_type": "EdgeLabelView",
+                    "_id": "LBL_FLOW_01039",
+                    "_parent": {
+                      "$ref": "VIEW_FLOW_01039"
+                    },
+                    "model": {
+                      "$ref": "FLOW_01039"
+                    },
+                    "visible": false,
+                    "text": ""
+                  }
+                },
+                {
+                  "_type": "UMLControlFlowView",
+                  "_id": "VIEW_FLOW_01040",
+                  "_parent": {
+                    "$ref": "DIAG_UC01_CHECKOUT"
+                  },
+                  "model": {
+                    "$ref": "FLOW_01040"
+                  },
+                  "source": {
+                    "$ref": "VIEW_NODE_UMLD_01005"
+                  },
+                  "target": {
+                    "$ref": "VIEW_NODE_UMLA_01009"
+                  },
+                  "tail": {
+                    "$ref": "VIEW_NODE_UMLD_01005"
+                  },
+                  "head": {
+                    "$ref": "VIEW_NODE_UMLA_01009"
+                  },
+                  "lineStyle": 1,
+                  "nameLabel": {
+                    "_type": "EdgeLabelView",
+                    "_id": "LBL_FLOW_01040",
+                    "_parent": {
+                      "$ref": "VIEW_FLOW_01040"
+                    },
+                    "model": {
+                      "$ref": "FLOW_01040"
+                    },
+                    "visible": true,
+                    "text": "[Thẻ hợp lệ]"
+                  }
+                },
+                {
+                  "_type": "UMLControlFlowView",
+                  "_id": "VIEW_FLOW_01041",
+                  "_parent": {
+                    "$ref": "DIAG_UC01_CHECKOUT"
+                  },
+                  "model": {
+                    "$ref": "FLOW_01041"
+                  },
+                  "source": {
+                    "$ref": "VIEW_NODE_UMLA_01009"
+                  },
+                  "target": {
+                    "$ref": "VIEW_NODE_UMLA_01010"
+                  },
+                  "tail": {
+                    "$ref": "VIEW_NODE_UMLA_01009"
+                  },
+                  "head": {
+                    "$ref": "VIEW_NODE_UMLA_01010"
+                  },
+                  "lineStyle": 1,
+                  "nameLabel": {
+                    "_type": "EdgeLabelView",
+                    "_id": "LBL_FLOW_01041",
+                    "_parent": {
+                      "$ref": "VIEW_FLOW_01041"
+                    },
+                    "model": {
+                      "$ref": "FLOW_01041"
+                    },
+                    "visible": false,
+                    "text": ""
+                  }
+                },
+                {
+                  "_type": "UMLControlFlowView",
+                  "_id": "VIEW_FLOW_01042",
+                  "_parent": {
+                    "$ref": "DIAG_UC01_CHECKOUT"
+                  },
+                  "model": {
+                    "$ref": "FLOW_01042"
+                  },
+                  "source": {
+                    "$ref": "VIEW_NODE_UMLA_01010"
+                  },
+                  "target": {
+                    "$ref": "VIEW_NODE_UMLD_01011"
+                  },
+                  "tail": {
+                    "$ref": "VIEW_NODE_UMLA_01010"
+                  },
+                  "head": {
+                    "$ref": "VIEW_NODE_UMLD_01011"
+                  },
+                  "lineStyle": 1,
+                  "nameLabel": {
+                    "_type": "EdgeLabelView",
+                    "_id": "LBL_FLOW_01042",
+                    "_parent": {
+                      "$ref": "VIEW_FLOW_01042"
+                    },
+                    "model": {
+                      "$ref": "FLOW_01042"
+                    },
+                    "visible": false,
+                    "text": ""
+                  }
+                },
+                {
+                  "_type": "UMLControlFlowView",
+                  "_id": "VIEW_FLOW_01043",
+                  "_parent": {
+                    "$ref": "DIAG_UC01_CHECKOUT"
+                  },
+                  "model": {
+                    "$ref": "FLOW_01043"
+                  },
+                  "source": {
+                    "$ref": "VIEW_NODE_UMLD_01011"
+                  },
+                  "target": {
+                    "$ref": "VIEW_NODE_UMLA_01012"
+                  },
+                  "tail": {
+                    "$ref": "VIEW_NODE_UMLD_01011"
+                  },
+                  "head": {
+                    "$ref": "VIEW_NODE_UMLA_01012"
+                  },
+                  "lineStyle": 1,
+                  "nameLabel": {
+                    "_type": "EdgeLabelView",
+                    "_id": "LBL_FLOW_01043",
+                    "_parent": {
+                      "$ref": "VIEW_FLOW_01043"
+                    },
+                    "model": {
+                      "$ref": "FLOW_01043"
+                    },
+                    "visible": true,
+                    "text": "[Nợ phạt > $10]"
+                  }
+                },
+                {
+                  "_type": "UMLControlFlowView",
+                  "_id": "VIEW_FLOW_01044",
+                  "_parent": {
+                    "$ref": "DIAG_UC01_CHECKOUT"
+                  },
+                  "model": {
+                    "$ref": "FLOW_01044"
+                  },
+                  "source": {
+                    "$ref": "VIEW_NODE_UMLA_01012"
+                  },
+                  "target": {
+                    "$ref": "VIEW_NODE_UMLA_01013"
+                  },
+                  "tail": {
+                    "$ref": "VIEW_NODE_UMLA_01012"
+                  },
+                  "head": {
+                    "$ref": "VIEW_NODE_UMLA_01013"
+                  },
+                  "lineStyle": 1,
+                  "nameLabel": {
+                    "_type": "EdgeLabelView",
+                    "_id": "LBL_FLOW_01044",
+                    "_parent": {
+                      "$ref": "VIEW_FLOW_01044"
+                    },
+                    "model": {
+                      "$ref": "FLOW_01044"
+                    },
+                    "visible": false,
+                    "text": ""
+                  }
+                },
+                {
+                  "_type": "UMLControlFlowView",
+                  "_id": "VIEW_FLOW_01045",
+                  "_parent": {
+                    "$ref": "DIAG_UC01_CHECKOUT"
+                  },
+                  "model": {
+                    "$ref": "FLOW_01045"
+                  },
+                  "source": {
+                    "$ref": "VIEW_NODE_UMLA_01013"
+                  },
+                  "target": {
+                    "$ref": "VIEW_NODE_UMLD_01014"
+                  },
+                  "tail": {
+                    "$ref": "VIEW_NODE_UMLA_01013"
+                  },
+                  "head": {
+                    "$ref": "VIEW_NODE_UMLD_01014"
+                  },
+                  "lineStyle": 1,
+                  "nameLabel": {
+                    "_type": "EdgeLabelView",
+                    "_id": "LBL_FLOW_01045",
+                    "_parent": {
+                      "$ref": "VIEW_FLOW_01045"
+                    },
+                    "model": {
+                      "$ref": "FLOW_01045"
+                    },
+                    "visible": false,
+                    "text": ""
+                  }
+                },
+                {
+                  "_type": "UMLControlFlowView",
+                  "_id": "VIEW_FLOW_01046",
+                  "_parent": {
+                    "$ref": "DIAG_UC01_CHECKOUT"
+                  },
+                  "model": {
+                    "$ref": "FLOW_01046"
+                  },
+                  "source": {
+                    "$ref": "VIEW_NODE_UMLD_01014"
+                  },
+                  "target": {
+                    "$ref": "VIEW_NODE_UMLA_01015"
+                  },
+                  "tail": {
+                    "$ref": "VIEW_NODE_UMLD_01014"
+                  },
+                  "head": {
+                    "$ref": "VIEW_NODE_UMLA_01015"
+                  },
+                  "lineStyle": 1,
+                  "nameLabel": {
+                    "_type": "EdgeLabelView",
+                    "_id": "LBL_FLOW_01046",
+                    "_parent": {
+                      "$ref": "VIEW_FLOW_01046"
+                    },
+                    "model": {
+                      "$ref": "FLOW_01046"
+                    },
+                    "visible": true,
+                    "text": "[Từ chối nộp phạt]"
+                  }
+                },
+                {
+                  "_type": "UMLControlFlowView",
+                  "_id": "VIEW_FLOW_01047",
+                  "_parent": {
+                    "$ref": "DIAG_UC01_CHECKOUT"
+                  },
+                  "model": {
+                    "$ref": "FLOW_01047"
+                  },
+                  "source": {
+                    "$ref": "VIEW_NODE_UMLD_01014"
+                  },
+                  "target": {
+                    "$ref": "VIEW_NODE_UMLA_01016"
+                  },
+                  "tail": {
+                    "$ref": "VIEW_NODE_UMLD_01014"
+                  },
+                  "head": {
+                    "$ref": "VIEW_NODE_UMLA_01016"
+                  },
+                  "lineStyle": 1,
+                  "nameLabel": {
+                    "_type": "EdgeLabelView",
+                    "_id": "LBL_FLOW_01047",
+                    "_parent": {
+                      "$ref": "VIEW_FLOW_01047"
+                    },
+                    "model": {
+                      "$ref": "FLOW_01047"
+                    },
+                    "visible": true,
+                    "text": "[Đã nộp phạt]"
+                  }
+                },
+                {
+                  "_type": "UMLControlFlowView",
+                  "_id": "VIEW_FLOW_01048",
+                  "_parent": {
+                    "$ref": "DIAG_UC01_CHECKOUT"
+                  },
+                  "model": {
+                    "$ref": "FLOW_01048"
+                  },
+                  "source": {
+                    "$ref": "VIEW_NODE_UMLA_01016"
+                  },
+                  "target": {
+                    "$ref": "VIEW_NODE_UMLM_MERGE_SCAN"
+                  },
+                  "tail": {
+                    "$ref": "VIEW_NODE_UMLA_01016"
+                  },
+                  "head": {
+                    "$ref": "VIEW_NODE_UMLM_MERGE_SCAN"
+                  },
+                  "lineStyle": 1,
+                  "nameLabel": {
+                    "_type": "EdgeLabelView",
+                    "_id": "LBL_FLOW_01048",
+                    "_parent": {
+                      "$ref": "VIEW_FLOW_01048"
+                    },
+                    "model": {
+                      "$ref": "FLOW_01048"
+                    },
+                    "visible": false,
+                    "text": ""
+                  }
+                },
+                {
+                  "_type": "UMLControlFlowView",
+                  "_id": "VIEW_FLOW_01049",
+                  "_parent": {
+                    "$ref": "DIAG_UC01_CHECKOUT"
+                  },
+                  "model": {
+                    "$ref": "FLOW_01049"
+                  },
+                  "source": {
+                    "$ref": "VIEW_NODE_UMLD_01011"
+                  },
+                  "target": {
+                    "$ref": "VIEW_NODE_UMLM_MERGE_SCAN"
+                  },
+                  "tail": {
+                    "$ref": "VIEW_NODE_UMLD_01011"
+                  },
+                  "head": {
+                    "$ref": "VIEW_NODE_UMLM_MERGE_SCAN"
+                  },
+                  "lineStyle": 1,
+                  "nameLabel": {
+                    "_type": "EdgeLabelView",
+                    "_id": "LBL_FLOW_01049",
+                    "_parent": {
+                      "$ref": "VIEW_FLOW_01049"
+                    },
+                    "model": {
+                      "$ref": "FLOW_01049"
+                    },
+                    "visible": true,
+                    "text": "[Nợ phạt <= $10]"
+                  }
+                },
+                {
+                  "_type": "UMLControlFlowView",
+                  "_id": "VIEW_FLOW_01051",
+                  "_parent": {
+                    "$ref": "DIAG_UC01_CHECKOUT"
+                  },
+                  "model": {
+                    "$ref": "FLOW_01051"
+                  },
+                  "source": {
+                    "$ref": "VIEW_NODE_UMLA_01018"
+                  },
+                  "target": {
+                    "$ref": "VIEW_NODE_UMLA_01019"
+                  },
+                  "tail": {
+                    "$ref": "VIEW_NODE_UMLA_01018"
+                  },
+                  "head": {
+                    "$ref": "VIEW_NODE_UMLA_01019"
+                  },
+                  "lineStyle": 1,
+                  "nameLabel": {
+                    "_type": "EdgeLabelView",
+                    "_id": "LBL_FLOW_01051",
+                    "_parent": {
+                      "$ref": "VIEW_FLOW_01051"
+                    },
+                    "model": {
+                      "$ref": "FLOW_01051"
+                    },
+                    "visible": false,
+                    "text": ""
+                  }
+                },
+                {
+                  "_type": "UMLControlFlowView",
+                  "_id": "VIEW_FLOW_01052",
+                  "_parent": {
+                    "$ref": "DIAG_UC01_CHECKOUT"
+                  },
+                  "model": {
+                    "$ref": "FLOW_01052"
+                  },
+                  "source": {
+                    "$ref": "VIEW_NODE_UMLA_01019"
+                  },
+                  "target": {
+                    "$ref": "VIEW_NODE_UMLA_01020"
+                  },
+                  "tail": {
+                    "$ref": "VIEW_NODE_UMLA_01019"
+                  },
+                  "head": {
+                    "$ref": "VIEW_NODE_UMLA_01020"
+                  },
+                  "lineStyle": 1,
+                  "nameLabel": {
+                    "_type": "EdgeLabelView",
+                    "_id": "LBL_FLOW_01052",
+                    "_parent": {
+                      "$ref": "VIEW_FLOW_01052"
+                    },
+                    "model": {
+                      "$ref": "FLOW_01052"
+                    },
+                    "visible": false,
+                    "text": ""
+                  }
+                },
+                {
+                  "_type": "UMLControlFlowView",
+                  "_id": "VIEW_FLOW_01053",
+                  "_parent": {
+                    "$ref": "DIAG_UC01_CHECKOUT"
+                  },
+                  "model": {
+                    "$ref": "FLOW_01053"
+                  },
+                  "source": {
+                    "$ref": "VIEW_NODE_UMLA_01020"
+                  },
+                  "target": {
+                    "$ref": "VIEW_NODE_UMLD_01021"
+                  },
+                  "tail": {
+                    "$ref": "VIEW_NODE_UMLA_01020"
+                  },
+                  "head": {
+                    "$ref": "VIEW_NODE_UMLD_01021"
+                  },
+                  "lineStyle": 1,
+                  "nameLabel": {
+                    "_type": "EdgeLabelView",
+                    "_id": "LBL_FLOW_01053",
+                    "_parent": {
+                      "$ref": "VIEW_FLOW_01053"
+                    },
+                    "model": {
+                      "$ref": "FLOW_01053"
+                    },
+                    "visible": false,
+                    "text": ""
+                  }
+                },
+                {
+                  "_type": "UMLControlFlowView",
+                  "_id": "VIEW_FLOW_01054",
+                  "_parent": {
+                    "$ref": "DIAG_UC01_CHECKOUT"
+                  },
+                  "model": {
+                    "$ref": "FLOW_01054"
+                  },
+                  "source": {
+                    "$ref": "VIEW_NODE_UMLD_01021"
+                  },
+                  "target": {
+                    "$ref": "VIEW_NODE_UMLA_01022"
+                  },
+                  "tail": {
+                    "$ref": "VIEW_NODE_UMLD_01021"
+                  },
+                  "head": {
+                    "$ref": "VIEW_NODE_UMLA_01022"
+                  },
+                  "lineStyle": 1,
+                  "nameLabel": {
+                    "_type": "EdgeLabelView",
+                    "_id": "LBL_FLOW_01054",
+                    "_parent": {
+                      "$ref": "VIEW_FLOW_01054"
+                    },
+                    "model": {
+                      "$ref": "FLOW_01054"
+                    },
+                    "visible": true,
+                    "text": "[Sách đã đặt trước / Hư]"
+                  }
+                },
+                {
+                  "_type": "UMLControlFlowView",
+                  "_id": "VIEW_FLOW_01055",
+                  "_parent": {
+                    "$ref": "DIAG_UC01_CHECKOUT"
+                  },
+                  "model": {
+                    "$ref": "FLOW_01055"
+                  },
+                  "source": {
+                    "$ref": "VIEW_NODE_UMLA_01022"
+                  },
+                  "target": {
+                    "$ref": "VIEW_NODE_UMLA_01023"
+                  },
+                  "tail": {
+                    "$ref": "VIEW_NODE_UMLA_01022"
+                  },
+                  "head": {
+                    "$ref": "VIEW_NODE_UMLA_01023"
+                  },
+                  "lineStyle": 1,
+                  "nameLabel": {
+                    "_type": "EdgeLabelView",
+                    "_id": "LBL_FLOW_01055",
+                    "_parent": {
+                      "$ref": "VIEW_FLOW_01055"
+                    },
+                    "model": {
+                      "$ref": "FLOW_01055"
+                    },
+                    "visible": false,
+                    "text": ""
+                  }
+                },
+                {
+                  "_type": "UMLControlFlowView",
+                  "_id": "VIEW_FLOW_01056",
+                  "_parent": {
+                    "$ref": "DIAG_UC01_CHECKOUT"
+                  },
+                  "model": {
+                    "$ref": "FLOW_01056"
+                  },
+                  "source": {
+                    "$ref": "VIEW_NODE_UMLA_01023"
+                  },
+                  "target": {
+                    "$ref": "VIEW_NODE_UMLD_01024"
+                  },
+                  "tail": {
+                    "$ref": "VIEW_NODE_UMLA_01023"
+                  },
+                  "head": {
+                    "$ref": "VIEW_NODE_UMLD_01024"
+                  },
+                  "lineStyle": 1,
+                  "nameLabel": {
+                    "_type": "EdgeLabelView",
+                    "_id": "LBL_FLOW_01056",
+                    "_parent": {
+                      "$ref": "VIEW_FLOW_01056"
+                    },
+                    "model": {
+                      "$ref": "FLOW_01056"
+                    },
+                    "visible": false,
+                    "text": ""
+                  }
+                },
+                {
+                  "_type": "UMLControlFlowView",
+                  "_id": "VIEW_FLOW_01057",
+                  "_parent": {
+                    "$ref": "DIAG_UC01_CHECKOUT"
+                  },
+                  "model": {
+                    "$ref": "FLOW_01057"
+                  },
+                  "source": {
+                    "$ref": "VIEW_NODE_UMLD_01024"
+                  },
+                  "target": {
+                    "$ref": "VIEW_NODE_UMLA_01025"
+                  },
+                  "tail": {
+                    "$ref": "VIEW_NODE_UMLD_01024"
+                  },
+                  "head": {
+                    "$ref": "VIEW_NODE_UMLA_01025"
+                  },
+                  "lineStyle": 1,
+                  "nameLabel": {
+                    "_type": "EdgeLabelView",
+                    "_id": "LBL_FLOW_01057",
+                    "_parent": {
+                      "$ref": "VIEW_FLOW_01057"
+                    },
+                    "model": {
+                      "$ref": "FLOW_01057"
+                    },
+                    "visible": true,
+                    "text": "[Không đổi sách]"
+                  }
+                },
+                {
+                  "_type": "UMLControlFlowView",
+                  "_id": "VIEW_FLOW_01058",
+                  "_parent": {
+                    "$ref": "DIAG_UC01_CHECKOUT"
+                  },
+                  "model": {
+                    "$ref": "FLOW_01058"
+                  },
+                  "source": {
+                    "$ref": "VIEW_NODE_UMLD_01024"
+                  },
+                  "target": {
+                    "$ref": "VIEW_NODE_UMLM_MERGE_SCAN"
+                  },
+                  "tail": {
+                    "$ref": "VIEW_NODE_UMLD_01024"
+                  },
+                  "head": {
+                    "$ref": "VIEW_NODE_UMLM_MERGE_SCAN"
+                  },
+                  "lineStyle": 1,
+                  "nameLabel": {
+                    "_type": "EdgeLabelView",
+                    "_id": "LBL_FLOW_01058",
+                    "_parent": {
+                      "$ref": "VIEW_FLOW_01058"
+                    },
+                    "model": {
+                      "$ref": "FLOW_01058"
+                    },
+                    "visible": true,
+                    "text": "[Đổi sách khác]",
+                    "left": 45,
+                    "top": 840,
+                    "width": 85,
+                    "height": 20
+                  },
+                  "points": "190:995;65:995;65:705;190:705"
+                },
+                {
+                  "_type": "UMLControlFlowView",
+                  "_id": "VIEW_FLOW_01059",
+                  "_parent": {
+                    "$ref": "DIAG_UC01_CHECKOUT"
+                  },
+                  "model": {
+                    "$ref": "FLOW_01059"
+                  },
+                  "source": {
+                    "$ref": "VIEW_NODE_UMLD_01021"
+                  },
+                  "target": {
+                    "$ref": "VIEW_NODE_UMLF_01026"
+                  },
+                  "tail": {
+                    "$ref": "VIEW_NODE_UMLD_01021"
+                  },
+                  "head": {
+                    "$ref": "VIEW_NODE_UMLF_01026"
+                  },
+                  "lineStyle": 1,
+                  "nameLabel": {
+                    "_type": "EdgeLabelView",
+                    "_id": "LBL_FLOW_01059",
+                    "_parent": {
+                      "$ref": "VIEW_FLOW_01059"
+                    },
+                    "model": {
+                      "$ref": "FLOW_01059"
+                    },
+                    "visible": true,
+                    "text": "[Sách khả dụng]"
+                  }
+                },
+                {
+                  "_type": "UMLControlFlowView",
+                  "_id": "VIEW_FLOW_01060",
+                  "_parent": {
+                    "$ref": "DIAG_UC01_CHECKOUT"
+                  },
+                  "model": {
+                    "$ref": "FLOW_01060"
+                  },
+                  "source": {
+                    "$ref": "VIEW_NODE_UMLF_01026"
+                  },
+                  "target": {
+                    "$ref": "VIEW_NODE_UMLA_01027"
+                  },
+                  "tail": {
+                    "$ref": "VIEW_NODE_UMLF_01026"
+                  },
+                  "head": {
+                    "$ref": "VIEW_NODE_UMLA_01027"
+                  },
+                  "lineStyle": 1,
+                  "nameLabel": {
+                    "_type": "EdgeLabelView",
+                    "_id": "LBL_FLOW_01060",
+                    "_parent": {
+                      "$ref": "VIEW_FLOW_01060"
+                    },
+                    "model": {
+                      "$ref": "FLOW_01060"
+                    },
+                    "visible": false,
+                    "text": ""
+                  }
+                },
+                {
+                  "_type": "UMLControlFlowView",
+                  "_id": "VIEW_FLOW_01061",
+                  "_parent": {
+                    "$ref": "DIAG_UC01_CHECKOUT"
+                  },
+                  "model": {
+                    "$ref": "FLOW_01061"
+                  },
+                  "source": {
+                    "$ref": "VIEW_NODE_UMLF_01026"
+                  },
+                  "target": {
+                    "$ref": "VIEW_NODE_UMLA_01028"
+                  },
+                  "tail": {
+                    "$ref": "VIEW_NODE_UMLF_01026"
+                  },
+                  "head": {
+                    "$ref": "VIEW_NODE_UMLA_01028"
+                  },
+                  "lineStyle": 1,
+                  "nameLabel": {
+                    "_type": "EdgeLabelView",
+                    "_id": "LBL_FLOW_01061",
+                    "_parent": {
+                      "$ref": "VIEW_FLOW_01061"
+                    },
+                    "model": {
+                      "$ref": "FLOW_01061"
+                    },
+                    "visible": false,
+                    "text": ""
+                  }
+                },
+                {
+                  "_type": "UMLControlFlowView",
+                  "_id": "VIEW_FLOW_01062",
+                  "_parent": {
+                    "$ref": "DIAG_UC01_CHECKOUT"
+                  },
+                  "model": {
+                    "$ref": "FLOW_01062"
+                  },
+                  "source": {
+                    "$ref": "VIEW_NODE_UMLA_01027"
+                  },
+                  "target": {
+                    "$ref": "VIEW_NODE_UMLJ_01029"
+                  },
+                  "tail": {
+                    "$ref": "VIEW_NODE_UMLA_01027"
+                  },
+                  "head": {
+                    "$ref": "VIEW_NODE_UMLJ_01029"
+                  },
+                  "lineStyle": 1,
+                  "nameLabel": {
+                    "_type": "EdgeLabelView",
+                    "_id": "LBL_FLOW_01062",
+                    "_parent": {
+                      "$ref": "VIEW_FLOW_01062"
+                    },
+                    "model": {
+                      "$ref": "FLOW_01062"
+                    },
+                    "visible": false,
+                    "text": ""
+                  }
+                },
+                {
+                  "_type": "UMLControlFlowView",
+                  "_id": "VIEW_FLOW_01063",
+                  "_parent": {
+                    "$ref": "DIAG_UC01_CHECKOUT"
+                  },
+                  "model": {
+                    "$ref": "FLOW_01063"
+                  },
+                  "source": {
+                    "$ref": "VIEW_NODE_UMLA_01028"
+                  },
+                  "target": {
+                    "$ref": "VIEW_NODE_UMLJ_01029"
+                  },
+                  "tail": {
+                    "$ref": "VIEW_NODE_UMLA_01028"
+                  },
+                  "head": {
+                    "$ref": "VIEW_NODE_UMLJ_01029"
+                  },
+                  "lineStyle": 1,
+                  "nameLabel": {
+                    "_type": "EdgeLabelView",
+                    "_id": "LBL_FLOW_01063",
+                    "_parent": {
+                      "$ref": "VIEW_FLOW_01063"
+                    },
+                    "model": {
+                      "$ref": "FLOW_01063"
+                    },
+                    "visible": false,
+                    "text": ""
+                  }
+                },
+                {
+                  "_type": "UMLControlFlowView",
+                  "_id": "VIEW_FLOW_01064",
+                  "_parent": {
+                    "$ref": "DIAG_UC01_CHECKOUT"
+                  },
+                  "model": {
+                    "$ref": "FLOW_01064"
+                  },
+                  "source": {
+                    "$ref": "VIEW_NODE_UMLJ_01029"
+                  },
+                  "target": {
+                    "$ref": "VIEW_NODE_UMLA_01030"
+                  },
+                  "tail": {
+                    "$ref": "VIEW_NODE_UMLJ_01029"
+                  },
+                  "head": {
+                    "$ref": "VIEW_NODE_UMLA_01030"
+                  },
+                  "lineStyle": 1,
+                  "nameLabel": {
+                    "_type": "EdgeLabelView",
+                    "_id": "LBL_FLOW_01064",
+                    "_parent": {
+                      "$ref": "VIEW_FLOW_01064"
+                    },
+                    "model": {
+                      "$ref": "FLOW_01064"
+                    },
+                    "visible": false,
+                    "text": ""
+                  }
+                },
+                {
+                  "_type": "UMLControlFlowView",
+                  "_id": "VIEW_FLOW_01065",
+                  "_parent": {
+                    "$ref": "DIAG_UC01_CHECKOUT"
+                  },
+                  "model": {
+                    "$ref": "FLOW_01065"
+                  },
+                  "source": {
+                    "$ref": "VIEW_NODE_UMLA_01030"
+                  },
+                  "target": {
+                    "$ref": "VIEW_NODE_UMLA_01031"
+                  },
+                  "tail": {
+                    "$ref": "VIEW_NODE_UMLA_01030"
+                  },
+                  "head": {
+                    "$ref": "VIEW_NODE_UMLA_01031"
+                  },
+                  "lineStyle": 1,
+                  "nameLabel": {
+                    "_type": "EdgeLabelView",
+                    "_id": "LBL_FLOW_01065",
+                    "_parent": {
+                      "$ref": "VIEW_FLOW_01065"
+                    },
+                    "model": {
+                      "$ref": "FLOW_01065"
+                    },
+                    "visible": false,
+                    "text": ""
+                  }
+                },
+                {
+                  "_type": "UMLControlFlowView",
+                  "_id": "VIEW_FLOW_01066",
+                  "_parent": {
+                    "$ref": "DIAG_UC01_CHECKOUT"
+                  },
+                  "model": {
+                    "$ref": "FLOW_01066"
+                  },
+                  "source": {
+                    "$ref": "VIEW_NODE_UMLA_01031"
+                  },
+                  "target": {
+                    "$ref": "VIEW_NODE_UMLA_01032"
+                  },
+                  "tail": {
+                    "$ref": "VIEW_NODE_UMLA_01031"
+                  },
+                  "head": {
+                    "$ref": "VIEW_NODE_UMLA_01032"
+                  },
+                  "lineStyle": 1,
+                  "nameLabel": {
+                    "_type": "EdgeLabelView",
+                    "_id": "LBL_FLOW_01066",
+                    "_parent": {
+                      "$ref": "VIEW_FLOW_01066"
+                    },
+                    "model": {
+                      "$ref": "FLOW_01066"
+                    },
+                    "visible": false,
+                    "text": ""
+                  }
+                },
+                {
+                  "_type": "UMLControlNodeView",
+                  "_id": "VIEW_NODE_UMLM_MERGE_SCAN",
+                  "_parent": {
+                    "$ref": "DIAG_UC01_CHECKOUT"
+                  },
+                  "model": {
+                    "$ref": "NODE_UMLM_MERGE_SCAN"
+                  },
+                  "left": 190,
+                  "top": 685,
+                  "width": 40,
+                  "height": 40
+                },
+                {
+                  "_type": "UMLControlFlowView",
+                  "_id": "VIEW_FLOW_MERGESCAN_TO_ACTION",
+                  "_parent": {
+                    "$ref": "DIAG_UC01_CHECKOUT"
+                  },
+                  "model": {
+                    "$ref": "FLOW_MERGESCAN_TO_ACTION"
+                  },
+                  "source": {
+                    "$ref": "VIEW_NODE_UMLM_MERGE_SCAN"
+                  },
+                  "target": {
+                    "$ref": "VIEW_NODE_UMLA_01018"
+                  },
+                  "tail": {
+                    "$ref": "VIEW_NODE_UMLM_MERGE_SCAN"
+                  },
+                  "head": {
+                    "$ref": "VIEW_NODE_UMLA_01018"
+                  },
+                  "lineStyle": 1,
+                  "nameLabel": {
+                    "_type": "EdgeLabelView",
+                    "_id": "LBL_FLOW_MERGESCAN_TO_ACTION",
+                    "_parent": {
+                      "$ref": "VIEW_FLOW_MERGESCAN_TO_ACTION"
+                    },
+                    "model": {
+                      "$ref": "FLOW_MERGESCAN_TO_ACTION"
+                    },
+                    "visible": false,
+                    "text": ""
+                  }
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "_type": "UMLActivity",
+          "_id": "ACT_UC02_RESERVE",
+          "_parent": {
+            "$ref": "MODEL_WEEK2"
+          },
+          "name": "UC02_ReserveBook_Activity",
+          "nodes": [
+            {
+              "_type": "UMLInitialNode",
+              "_id": "NODE2_UMLI_01067",
+              "_parent": {
+                "$ref": "ACT_UC02_RESERVE"
+              },
+              "name": "InitialNode"
+            },
+            {
+              "_type": "UMLAction",
+              "_id": "NODE2_UMLA_01068",
+              "_parent": {
+                "$ref": "ACT_UC02_RESERVE"
+              },
+              "name": "Gửi yêu cầu đặt trước tài liệu"
+            },
+            {
+              "_type": "UMLAction",
+              "_id": "NODE2_UMLA_01069",
+              "_parent": {
+                "$ref": "ACT_UC02_RESERVE"
+              },
+              "name": "Gửi yêu cầu kiểm tra số lượng đặt trước"
+            },
+            {
+              "_type": "UMLAction",
+              "_id": "NODE2_UMLA_01070",
+              "_parent": {
+                "$ref": "ACT_UC02_RESERVE"
+              },
+              "name": "Đếm số sách đang đặt trước của độc giả"
+            },
+            {
+              "_type": "UMLDecisionNode",
+              "_id": "NODE2_UMLD_01071",
+              "_parent": {
+                "$ref": "ACT_UC02_RESERVE"
+              },
+              "name": "Đã đặt >= 3 cuốn?"
+            },
+            {
+              "_type": "UMLAction",
+              "_id": "NODE2_UMLA_01072",
+              "_parent": {
+                "$ref": "ACT_UC02_RESERVE"
+              },
+              "name": "Hiển thị cảnh báo vượt hạn mức đặt trước"
+            },
+            {
+              "_type": "UMLAction",
+              "_id": "NODE2_UMLA_01073",
+              "_parent": {
+                "$ref": "ACT_UC02_RESERVE"
+              },
+              "name": "Xem thông báo từ chối đặt trước"
+            },
+            {
+              "_type": "UMLActivityFinalNode",
+              "_id": "NODE2_UMLA_01074",
+              "_parent": {
+                "$ref": "ACT_UC02_RESERVE"
+              },
+              "name": "Final_LimitExceeded"
+            },
+            {
+              "_type": "UMLAction",
+              "_id": "NODE2_UMLA_01075",
+              "_parent": {
+                "$ref": "ACT_UC02_RESERVE"
+              },
+              "name": "Gửi yêu cầu kiểm tra trạng thái các bản sao"
+            },
+            {
+              "_type": "UMLAction",
+              "_id": "NODE2_UMLA_01076",
+              "_parent": {
+                "$ref": "ACT_UC02_RESERVE"
+              },
+              "name": "Tra cứu trạng thái các bản sao trên kệ"
+            },
+            {
+              "_type": "UMLDecisionNode",
+              "_id": "NODE2_UMLD_01077",
+              "_parent": {
+                "$ref": "ACT_UC02_RESERVE"
+              },
+              "name": "Còn sách trên kệ?"
+            },
+            {
+              "_type": "UMLAction",
+              "_id": "NODE2_UMLA_01078",
+              "_parent": {
+                "$ref": "ACT_UC02_RESERVE"
+              },
+              "name": "Hiển thị vị trí kệ & hướng dẫn mượn trực tiếp"
+            },
+            {
+              "_type": "UMLAction",
+              "_id": "NODE2_UMLA_01079",
+              "_parent": {
+                "$ref": "ACT_UC02_RESERVE"
+              },
+              "name": "Ghi nhận vị trí sách và đến quầy mượn"
+            },
+            {
+              "_type": "UMLActivityFinalNode",
+              "_id": "NODE2_UMLA_01080",
+              "_parent": {
+                "$ref": "ACT_UC02_RESERVE"
+              },
+              "name": "Final_AvailableOnShelf"
+            },
+            {
+              "_type": "UMLAction",
+              "_id": "NODE2_UMLA_01081",
+              "_parent": {
+                "$ref": "ACT_UC02_RESERVE"
+              },
+              "name": "Hiển thị hộp thoại xác nhận đặt trước"
+            },
+            {
+              "_type": "UMLAction",
+              "_id": "NODE2_UMLA_01082",
+              "_parent": {
+                "$ref": "ACT_UC02_RESERVE"
+              },
+              "name": "Xem thông tin & xác nhận đặt giữ tài liệu"
+            },
+            {
+              "_type": "UMLDecisionNode",
+              "_id": "NODE2_UMLD_01083",
+              "_parent": {
+                "$ref": "ACT_UC02_RESERVE"
+              },
+              "name": "Xác nhận?"
+            },
+            {
+              "_type": "UMLAction",
+              "_id": "NODE2_UMLA_01084",
+              "_parent": {
+                "$ref": "ACT_UC02_RESERVE"
+              },
+              "name": "Hủy bỏ giao dịch & giải phóng phiên"
+            },
+            {
+              "_type": "UMLActivityFinalNode",
+              "_id": "NODE2_UMLA_01085",
+              "_parent": {
+                "$ref": "ACT_UC02_RESERVE"
+              },
+              "name": "Final_TransactionCancelled"
+            },
+            {
+              "_type": "UMLForkNode",
+              "_id": "NODE2_UMLF_01086",
+              "_parent": {
+                "$ref": "ACT_UC02_RESERVE"
+              },
+              "name": "ForkParallelHold"
+            },
+            {
+              "_type": "UMLAction",
+              "_id": "NODE2_UMLA_01087",
+              "_parent": {
+                "$ref": "ACT_UC02_RESERVE"
+              },
+              "name": "Thêm độc giả vào danh sách chờ của tài liệu"
+            },
+            {
+              "_type": "UMLAction",
+              "_id": "NODE2_UMLA_01088",
+              "_parent": {
+                "$ref": "ACT_UC02_RESERVE"
+              },
+              "name": "Khởi tạo mã đặt trước & hàng đợi thông báo"
+            },
+            {
+              "_type": "UMLJoinNode",
+              "_id": "NODE2_UMLJ_01089",
+              "_parent": {
+                "$ref": "ACT_UC02_RESERVE"
+              },
+              "name": "JoinParallelHold"
+            },
+            {
+              "_type": "UMLAction",
+              "_id": "NODE2_UMLA_01090",
+              "_parent": {
+                "$ref": "ACT_UC02_RESERVE"
+              },
+              "name": "Gửi email xác nhận đặt trước thành công"
+            },
+            {
+              "_type": "UMLAction",
+              "_id": "NODE2_UMLA_01091",
+              "_parent": {
+                "$ref": "ACT_UC02_RESERVE"
+              },
+              "name": "Nhận thông báo xác nhận và số thứ tự chờ"
+            },
+            {
+              "_type": "UMLActivityFinalNode",
+              "_id": "NODE2_UMLA_01092",
+              "_parent": {
+                "$ref": "ACT_UC02_RESERVE"
+              },
+              "name": "ActivityFinalNode_Success"
+            }
+          ],
+          "edges": [
+            {
+              "_type": "UMLControlFlow",
+              "_id": "FLOW2_01093",
+              "_parent": {
+                "$ref": "ACT_UC02_RESERVE"
+              },
+              "source": {
+                "$ref": "NODE2_UMLI_01067"
+              },
+              "target": {
+                "$ref": "NODE2_UMLA_01068"
+              }
+            },
+            {
+              "_type": "UMLControlFlow",
+              "_id": "FLOW2_01094",
+              "_parent": {
+                "$ref": "ACT_UC02_RESERVE"
+              },
+              "source": {
+                "$ref": "NODE2_UMLA_01068"
+              },
+              "target": {
+                "$ref": "NODE2_UMLA_01069"
+              }
+            },
+            {
+              "_type": "UMLControlFlow",
+              "_id": "FLOW2_01095",
+              "_parent": {
+                "$ref": "ACT_UC02_RESERVE"
+              },
+              "source": {
+                "$ref": "NODE2_UMLA_01069"
+              },
+              "target": {
+                "$ref": "NODE2_UMLA_01070"
+              }
+            },
+            {
+              "_type": "UMLControlFlow",
+              "_id": "FLOW2_01096",
+              "_parent": {
+                "$ref": "ACT_UC02_RESERVE"
+              },
+              "source": {
+                "$ref": "NODE2_UMLA_01070"
+              },
+              "target": {
+                "$ref": "NODE2_UMLD_01071"
+              }
+            },
+            {
+              "_type": "UMLControlFlow",
+              "_id": "FLOW2_01097",
+              "_parent": {
+                "$ref": "ACT_UC02_RESERVE"
+              },
+              "source": {
+                "$ref": "NODE2_UMLD_01071"
+              },
+              "target": {
+                "$ref": "NODE2_UMLA_01072"
+              },
+              "guard": "Đã đặt >= 3 cuốn",
+              "name": "[Đã đặt >= 3 cuốn]"
+            },
+            {
+              "_type": "UMLControlFlow",
+              "_id": "FLOW2_01098",
+              "_parent": {
+                "$ref": "ACT_UC02_RESERVE"
+              },
+              "source": {
+                "$ref": "NODE2_UMLA_01072"
+              },
+              "target": {
+                "$ref": "NODE2_UMLA_01073"
+              }
+            },
+            {
+              "_type": "UMLControlFlow",
+              "_id": "FLOW2_01099",
+              "_parent": {
+                "$ref": "ACT_UC02_RESERVE"
+              },
+              "source": {
+                "$ref": "NODE2_UMLA_01073"
+              },
+              "target": {
+                "$ref": "NODE2_UMLA_01074"
+              }
+            },
+            {
+              "_type": "UMLControlFlow",
+              "_id": "FLOW2_01100",
+              "_parent": {
+                "$ref": "ACT_UC02_RESERVE"
+              },
+              "source": {
+                "$ref": "NODE2_UMLD_01071"
+              },
+              "target": {
+                "$ref": "NODE2_UMLA_01075"
+              },
+              "guard": "Đã đặt < 3 cuốn",
+              "name": "[Đã đặt < 3 cuốn]"
+            },
+            {
+              "_type": "UMLControlFlow",
+              "_id": "FLOW2_01101",
+              "_parent": {
+                "$ref": "ACT_UC02_RESERVE"
+              },
+              "source": {
+                "$ref": "NODE2_UMLA_01075"
+              },
+              "target": {
+                "$ref": "NODE2_UMLA_01076"
+              }
+            },
+            {
+              "_type": "UMLControlFlow",
+              "_id": "FLOW2_01102",
+              "_parent": {
+                "$ref": "ACT_UC02_RESERVE"
+              },
+              "source": {
+                "$ref": "NODE2_UMLA_01076"
+              },
+              "target": {
+                "$ref": "NODE2_UMLD_01077"
+              }
+            },
+            {
+              "_type": "UMLControlFlow",
+              "_id": "FLOW2_01103",
+              "_parent": {
+                "$ref": "ACT_UC02_RESERVE"
+              },
+              "source": {
+                "$ref": "NODE2_UMLD_01077"
+              },
+              "target": {
+                "$ref": "NODE2_UMLA_01078"
+              },
+              "guard": "Còn bản sao trên kệ",
+              "name": "[Còn bản sao trên kệ]"
+            },
+            {
+              "_type": "UMLControlFlow",
+              "_id": "FLOW2_01104",
+              "_parent": {
+                "$ref": "ACT_UC02_RESERVE"
+              },
+              "source": {
+                "$ref": "NODE2_UMLA_01078"
+              },
+              "target": {
+                "$ref": "NODE2_UMLA_01079"
+              }
+            },
+            {
+              "_type": "UMLControlFlow",
+              "_id": "FLOW2_01105",
+              "_parent": {
+                "$ref": "ACT_UC02_RESERVE"
+              },
+              "source": {
+                "$ref": "NODE2_UMLA_01079"
+              },
+              "target": {
+                "$ref": "NODE2_UMLA_01080"
+              }
+            },
+            {
+              "_type": "UMLControlFlow",
+              "_id": "FLOW2_01106",
+              "_parent": {
+                "$ref": "ACT_UC02_RESERVE"
+              },
+              "source": {
+                "$ref": "NODE2_UMLD_01077"
+              },
+              "target": {
+                "$ref": "NODE2_UMLA_01081"
+              },
+              "guard": "Tất cả sách đang được mượn",
+              "name": "[Tất cả sách đang được mượn]"
+            },
+            {
+              "_type": "UMLControlFlow",
+              "_id": "FLOW2_01107",
+              "_parent": {
+                "$ref": "ACT_UC02_RESERVE"
+              },
+              "source": {
+                "$ref": "NODE2_UMLA_01081"
+              },
+              "target": {
+                "$ref": "NODE2_UMLA_01082"
+              }
+            },
+            {
+              "_type": "UMLControlFlow",
+              "_id": "FLOW2_01108",
+              "_parent": {
+                "$ref": "ACT_UC02_RESERVE"
+              },
+              "source": {
+                "$ref": "NODE2_UMLA_01082"
+              },
+              "target": {
+                "$ref": "NODE2_UMLD_01083"
+              }
+            },
+            {
+              "_type": "UMLControlFlow",
+              "_id": "FLOW2_01109",
+              "_parent": {
+                "$ref": "ACT_UC02_RESERVE"
+              },
+              "source": {
+                "$ref": "NODE2_UMLD_01083"
+              },
+              "target": {
+                "$ref": "NODE2_UMLA_01084"
+              },
+              "guard": "Hủy bỏ",
+              "name": "[Hủy bỏ]"
+            },
+            {
+              "_type": "UMLControlFlow",
+              "_id": "FLOW2_01110",
+              "_parent": {
+                "$ref": "ACT_UC02_RESERVE"
+              },
+              "source": {
+                "$ref": "NODE2_UMLA_01084"
+              },
+              "target": {
+                "$ref": "NODE2_UMLA_01085"
+              }
+            },
+            {
+              "_type": "UMLControlFlow",
+              "_id": "FLOW2_01111",
+              "_parent": {
+                "$ref": "ACT_UC02_RESERVE"
+              },
+              "source": {
+                "$ref": "NODE2_UMLD_01083"
+              },
+              "target": {
+                "$ref": "NODE2_UMLF_01086"
+              },
+              "guard": "Đồng ý đặt trước",
+              "name": "[Đồng ý đặt trước]"
+            },
+            {
+              "_type": "UMLControlFlow",
+              "_id": "FLOW2_01112",
+              "_parent": {
+                "$ref": "ACT_UC02_RESERVE"
+              },
+              "source": {
+                "$ref": "NODE2_UMLF_01086"
+              },
+              "target": {
+                "$ref": "NODE2_UMLA_01087"
+              }
+            },
+            {
+              "_type": "UMLControlFlow",
+              "_id": "FLOW2_01113",
+              "_parent": {
+                "$ref": "ACT_UC02_RESERVE"
+              },
+              "source": {
+                "$ref": "NODE2_UMLF_01086"
+              },
+              "target": {
+                "$ref": "NODE2_UMLA_01088"
+              }
+            },
+            {
+              "_type": "UMLControlFlow",
+              "_id": "FLOW2_01114",
+              "_parent": {
+                "$ref": "ACT_UC02_RESERVE"
+              },
+              "source": {
+                "$ref": "NODE2_UMLA_01087"
+              },
+              "target": {
+                "$ref": "NODE2_UMLJ_01089"
+              }
+            },
+            {
+              "_type": "UMLControlFlow",
+              "_id": "FLOW2_01115",
+              "_parent": {
+                "$ref": "ACT_UC02_RESERVE"
+              },
+              "source": {
+                "$ref": "NODE2_UMLA_01088"
+              },
+              "target": {
+                "$ref": "NODE2_UMLJ_01089"
+              }
+            },
+            {
+              "_type": "UMLControlFlow",
+              "_id": "FLOW2_01116",
+              "_parent": {
+                "$ref": "ACT_UC02_RESERVE"
+              },
+              "source": {
+                "$ref": "NODE2_UMLJ_01089"
+              },
+              "target": {
+                "$ref": "NODE2_UMLA_01090"
+              }
+            },
+            {
+              "_type": "UMLControlFlow",
+              "_id": "FLOW2_01117",
+              "_parent": {
+                "$ref": "ACT_UC02_RESERVE"
+              },
+              "source": {
+                "$ref": "NODE2_UMLA_01090"
+              },
+              "target": {
+                "$ref": "NODE2_UMLA_01091"
+              }
+            },
+            {
+              "_type": "UMLControlFlow",
+              "_id": "FLOW2_01118",
+              "_parent": {
+                "$ref": "ACT_UC02_RESERVE"
+              },
+              "source": {
+                "$ref": "NODE2_UMLA_01091"
+              },
+              "target": {
+                "$ref": "NODE2_UMLA_01092"
+              }
+            }
+          ],
+          "groups": [
+            {
+              "_type": "UMLActivityPartition",
+              "_id": "PART_UC02_STUDENT",
+              "_parent": {
+                "$ref": "ACT_UC02_RESERVE"
+              },
+              "name": "Độc giả sinh viên (Primary Actor)",
+              "nodes": [
+                {
+                  "$ref": "NODE2_UMLI_01067"
+                },
+                {
+                  "$ref": "NODE2_UMLA_01068"
+                },
+                {
+                  "$ref": "NODE2_UMLA_01073"
+                },
+                {
+                  "$ref": "NODE2_UMLA_01074"
+                },
+                {
+                  "$ref": "NODE2_UMLA_01079"
+                },
+                {
+                  "$ref": "NODE2_UMLA_01080"
+                },
+                {
+                  "$ref": "NODE2_UMLA_01082"
+                },
+                {
+                  "$ref": "NODE2_UMLD_01083"
+                },
+                {
+                  "$ref": "NODE2_UMLA_01091"
+                },
+                {
+                  "$ref": "NODE2_UMLA_01092"
+                }
+              ]
+            },
+            {
+              "_type": "UMLActivityPartition",
+              "_id": "PART_UC02_SYSTEM",
+              "_parent": {
+                "$ref": "ACT_UC02_RESERVE"
+              },
+              "name": "Hệ thống LMS (System Controller)",
+              "nodes": [
+                {
+                  "$ref": "NODE2_UMLA_01069"
+                },
+                {
+                  "$ref": "NODE2_UMLD_01071"
+                },
+                {
+                  "$ref": "NODE2_UMLA_01072"
+                },
+                {
+                  "$ref": "NODE2_UMLA_01075"
+                },
+                {
+                  "$ref": "NODE2_UMLD_01077"
+                },
+                {
+                  "$ref": "NODE2_UMLA_01078"
+                },
+                {
+                  "$ref": "NODE2_UMLA_01081"
+                },
+                {
+                  "$ref": "NODE2_UMLA_01084"
+                },
+                {
+                  "$ref": "NODE2_UMLA_01085"
+                },
+                {
+                  "$ref": "NODE2_UMLF_01086"
+                },
+                {
+                  "$ref": "NODE2_UMLJ_01089"
+                },
+                {
+                  "$ref": "NODE2_UMLA_01090"
+                }
+              ]
+            },
+            {
+              "_type": "UMLActivityPartition",
+              "_id": "PART_UC02_EXTERNAL",
+              "_parent": {
+                "$ref": "ACT_UC02_RESERVE"
+              },
+              "name": "Cơ sở dữ liệu Thư viện (External DB/System)",
+              "nodes": [
+                {
+                  "$ref": "NODE2_UMLA_01070"
+                },
+                {
+                  "$ref": "NODE2_UMLA_01076"
+                },
+                {
+                  "$ref": "NODE2_UMLA_01087"
+                },
+                {
+                  "$ref": "NODE2_UMLA_01088"
+                }
+              ]
+            }
+          ],
+          "ownedElements": [
+            {
+              "_type": "UMLActivityDiagram",
+              "_id": "DIAG_UC02_RESERVE",
+              "_parent": {
+                "$ref": "ACT_UC02_RESERVE"
+              },
+              "name": "UC02_ReserveBook_ActivityDiagram",
+              "ownedViews": [
+                {
+                  "_type": "UMLSwimlaneView",
+                  "_id": "VIEW_PART_UC02_STUDENT",
+                  "_parent": {
+                    "$ref": "DIAG_UC02_RESERVE"
+                  },
+                  "model": {
+                    "$ref": "PART_UC02_STUDENT"
+                  },
+                  "left": 40,
+                  "top": 20,
+                  "width": 340,
+                  "height": 1350,
+                  "isVertical": true,
+                  "nameLabel": {
+                    "_type": "LabelView",
+                    "_id": "LBL_PART_UC02_STUDENT",
+                    "_parent": {
+                      "$ref": "VIEW_PART_UC02_STUDENT"
+                    },
+                    "left": 40,
+                    "top": 25,
+                    "width": 340,
+                    "height": 25,
+                    "text": "Độc giả sinh viên (Primary Actor)"
+                  }
+                },
+                {
+                  "_type": "UMLSwimlaneView",
+                  "_id": "VIEW_PART_UC02_SYSTEM",
+                  "_parent": {
+                    "$ref": "DIAG_UC02_RESERVE"
+                  },
+                  "model": {
+                    "$ref": "PART_UC02_SYSTEM"
+                  },
+                  "left": 380,
+                  "top": 20,
+                  "width": 380,
+                  "height": 1350,
+                  "isVertical": true,
+                  "nameLabel": {
+                    "_type": "LabelView",
+                    "_id": "LBL_PART_UC02_SYSTEM",
+                    "_parent": {
+                      "$ref": "VIEW_PART_UC02_SYSTEM"
+                    },
+                    "left": 380,
+                    "top": 25,
+                    "width": 380,
+                    "height": 25,
+                    "text": "Hệ thống LMS (System Controller)"
+                  }
+                },
+                {
+                  "_type": "UMLSwimlaneView",
+                  "_id": "VIEW_PART_UC02_EXTERNAL",
+                  "_parent": {
+                    "$ref": "DIAG_UC02_RESERVE"
+                  },
+                  "model": {
+                    "$ref": "PART_UC02_EXTERNAL"
+                  },
+                  "left": 760,
+                  "top": 20,
+                  "width": 380,
+                  "height": 1350,
+                  "isVertical": true,
+                  "nameLabel": {
+                    "_type": "LabelView",
+                    "_id": "LBL_PART_UC02_EXTERNAL",
+                    "_parent": {
+                      "$ref": "VIEW_PART_UC02_EXTERNAL"
+                    },
+                    "left": 760,
+                    "top": 25,
+                    "width": 380,
+                    "height": 25,
+                    "text": "Cơ sở dữ liệu Thư viện (External DB/System)"
+                  }
+                },
+                {
+                  "_type": "UMLControlNodeView",
+                  "_id": "VIEW_NODE2_UMLI_01067",
+                  "_parent": {
+                    "$ref": "DIAG_UC02_RESERVE"
+                  },
+                  "model": {
+                    "$ref": "NODE2_UMLI_01067"
+                  },
+                  "left": 198,
+                  "top": 60,
+                  "width": 25,
+                  "height": 25
+                },
+                {
+                  "_type": "UMLActionView",
+                  "_id": "VIEW_NODE2_UMLA_01068",
+                  "_parent": {
+                    "$ref": "DIAG_UC02_RESERVE"
+                  },
+                  "model": {
+                    "$ref": "NODE2_UMLA_01068"
+                  },
+                  "left": 115,
+                  "top": 110,
+                  "width": 190,
+                  "height": 45,
+                  "nameCompartment": {
+                    "_type": "UMLNameCompartmentView",
+                    "_id": "NC_NODE2_UMLA_01068",
+                    "_parent": {
+                      "$ref": "VIEW_NODE2_UMLA_01068"
+                    },
+                    "model": {
+                      "$ref": "NODE2_UMLA_01068"
+                    },
+                    "left": 115,
+                    "top": 110,
+                    "width": 190,
+                    "height": 45,
+                    "nameLabel": {
+                      "_type": "LabelView",
+                      "_id": "NL_NODE2_UMLA_01068",
+                      "_parent": {
+                        "$ref": "NC_NODE2_UMLA_01068"
+                      },
+                      "left": 115,
+                      "top": 120,
+                      "width": 190,
+                      "height": 20,
+                      "text": "Gửi yêu cầu đặt trước tài liệu"
+                    }
+                  }
+                },
+                {
+                  "_type": "UMLActionView",
+                  "_id": "VIEW_NODE2_UMLA_01069",
+                  "_parent": {
+                    "$ref": "DIAG_UC02_RESERVE"
+                  },
+                  "model": {
+                    "$ref": "NODE2_UMLA_01069"
+                  },
+                  "left": 460,
+                  "top": 110,
+                  "width": 220,
+                  "height": 45,
+                  "nameCompartment": {
+                    "_type": "UMLNameCompartmentView",
+                    "_id": "NC_NODE2_UMLA_01069",
+                    "_parent": {
+                      "$ref": "VIEW_NODE2_UMLA_01069"
+                    },
+                    "model": {
+                      "$ref": "NODE2_UMLA_01069"
+                    },
+                    "left": 460,
+                    "top": 110,
+                    "width": 220,
+                    "height": 45,
+                    "nameLabel": {
+                      "_type": "LabelView",
+                      "_id": "NL_NODE2_UMLA_01069",
+                      "_parent": {
+                        "$ref": "NC_NODE2_UMLA_01069"
+                      },
+                      "left": 460,
+                      "top": 120,
+                      "width": 220,
+                      "height": 20,
+                      "text": "Gửi yêu cầu kiểm tra số lượng đặt trước"
+                    }
+                  }
+                },
+                {
+                  "_type": "UMLActionView",
+                  "_id": "VIEW_NODE2_UMLA_01070",
+                  "_parent": {
+                    "$ref": "DIAG_UC02_RESERVE"
+                  },
+                  "model": {
+                    "$ref": "NODE2_UMLA_01070"
+                  },
+                  "left": 840,
+                  "top": 110,
+                  "width": 220,
+                  "height": 45,
+                  "nameCompartment": {
+                    "_type": "UMLNameCompartmentView",
+                    "_id": "NC_NODE2_UMLA_01070",
+                    "_parent": {
+                      "$ref": "VIEW_NODE2_UMLA_01070"
+                    },
+                    "model": {
+                      "$ref": "NODE2_UMLA_01070"
+                    },
+                    "left": 840,
+                    "top": 110,
+                    "width": 220,
+                    "height": 45,
+                    "nameLabel": {
+                      "_type": "LabelView",
+                      "_id": "NL_NODE2_UMLA_01070",
+                      "_parent": {
+                        "$ref": "NC_NODE2_UMLA_01070"
+                      },
+                      "left": 840,
+                      "top": 120,
+                      "width": 220,
+                      "height": 20,
+                      "text": "Đếm số sách đang đặt trước của độc giả"
+                    }
+                  }
+                },
+                {
+                  "_type": "UMLControlNodeView",
+                  "_id": "VIEW_NODE2_UMLD_01071",
+                  "_parent": {
+                    "$ref": "DIAG_UC02_RESERVE"
+                  },
+                  "model": {
+                    "$ref": "NODE2_UMLD_01071"
+                  },
+                  "left": 550,
+                  "top": 190,
+                  "width": 40,
+                  "height": 40
+                },
+                {
+                  "_type": "UMLActionView",
+                  "_id": "VIEW_NODE2_UMLA_01072",
+                  "_parent": {
+                    "$ref": "DIAG_UC02_RESERVE"
+                  },
+                  "model": {
+                    "$ref": "NODE2_UMLA_01072"
+                  },
+                  "left": 460,
+                  "top": 260,
+                  "width": 220,
+                  "height": 45,
+                  "nameCompartment": {
+                    "_type": "UMLNameCompartmentView",
+                    "_id": "NC_NODE2_UMLA_01072",
+                    "_parent": {
+                      "$ref": "VIEW_NODE2_UMLA_01072"
+                    },
+                    "model": {
+                      "$ref": "NODE2_UMLA_01072"
+                    },
+                    "left": 460,
+                    "top": 260,
+                    "width": 220,
+                    "height": 45,
+                    "nameLabel": {
+                      "_type": "LabelView",
+                      "_id": "NL_NODE2_UMLA_01072",
+                      "_parent": {
+                        "$ref": "NC_NODE2_UMLA_01072"
+                      },
+                      "left": 460,
+                      "top": 270,
+                      "width": 220,
+                      "height": 20,
+                      "text": "Hiển thị cảnh báo vượt hạn mức đặt trước"
+                    }
+                  }
+                },
+                {
+                  "_type": "UMLActionView",
+                  "_id": "VIEW_NODE2_UMLA_01073",
+                  "_parent": {
+                    "$ref": "DIAG_UC02_RESERVE"
+                  },
+                  "model": {
+                    "$ref": "NODE2_UMLA_01073"
+                  },
+                  "left": 115,
+                  "top": 260,
+                  "width": 190,
+                  "height": 45,
+                  "nameCompartment": {
+                    "_type": "UMLNameCompartmentView",
+                    "_id": "NC_NODE2_UMLA_01073",
+                    "_parent": {
+                      "$ref": "VIEW_NODE2_UMLA_01073"
+                    },
+                    "model": {
+                      "$ref": "NODE2_UMLA_01073"
+                    },
+                    "left": 115,
+                    "top": 260,
+                    "width": 190,
+                    "height": 45,
+                    "nameLabel": {
+                      "_type": "LabelView",
+                      "_id": "NL_NODE2_UMLA_01073",
+                      "_parent": {
+                        "$ref": "NC_NODE2_UMLA_01073"
+                      },
+                      "left": 115,
+                      "top": 270,
+                      "width": 190,
+                      "height": 20,
+                      "text": "Xem thông báo từ chối đặt trước"
+                    }
+                  }
+                },
+                {
+                  "_type": "UMLControlNodeView",
+                  "_id": "VIEW_NODE2_UMLA_01074",
+                  "_parent": {
+                    "$ref": "DIAG_UC02_RESERVE"
+                  },
+                  "model": {
+                    "$ref": "NODE2_UMLA_01074"
+                  },
+                  "left": 197,
+                  "top": 335,
+                  "width": 26,
+                  "height": 26
+                },
+                {
+                  "_type": "UMLActionView",
+                  "_id": "VIEW_NODE2_UMLA_01075",
+                  "_parent": {
+                    "$ref": "DIAG_UC02_RESERVE"
+                  },
+                  "model": {
+                    "$ref": "NODE2_UMLA_01075"
+                  },
+                  "left": 455,
+                  "top": 380,
+                  "width": 230,
+                  "height": 45,
+                  "nameCompartment": {
+                    "_type": "UMLNameCompartmentView",
+                    "_id": "NC_NODE2_UMLA_01075",
+                    "_parent": {
+                      "$ref": "VIEW_NODE2_UMLA_01075"
+                    },
+                    "model": {
+                      "$ref": "NODE2_UMLA_01075"
+                    },
+                    "left": 455,
+                    "top": 380,
+                    "width": 230,
+                    "height": 45,
+                    "nameLabel": {
+                      "_type": "LabelView",
+                      "_id": "NL_NODE2_UMLA_01075",
+                      "_parent": {
+                        "$ref": "NC_NODE2_UMLA_01075"
+                      },
+                      "left": 455,
+                      "top": 390,
+                      "width": 230,
+                      "height": 20,
+                      "text": "Gửi yêu cầu kiểm tra trạng thái các bản sao"
+                    }
+                  }
+                },
+                {
+                  "_type": "UMLActionView",
+                  "_id": "VIEW_NODE2_UMLA_01076",
+                  "_parent": {
+                    "$ref": "DIAG_UC02_RESERVE"
+                  },
+                  "model": {
+                    "$ref": "NODE2_UMLA_01076"
+                  },
+                  "left": 840,
+                  "top": 380,
+                  "width": 220,
+                  "height": 45,
+                  "nameCompartment": {
+                    "_type": "UMLNameCompartmentView",
+                    "_id": "NC_NODE2_UMLA_01076",
+                    "_parent": {
+                      "$ref": "VIEW_NODE2_UMLA_01076"
+                    },
+                    "model": {
+                      "$ref": "NODE2_UMLA_01076"
+                    },
+                    "left": 840,
+                    "top": 380,
+                    "width": 220,
+                    "height": 45,
+                    "nameLabel": {
+                      "_type": "LabelView",
+                      "_id": "NL_NODE2_UMLA_01076",
+                      "_parent": {
+                        "$ref": "NC_NODE2_UMLA_01076"
+                      },
+                      "left": 840,
+                      "top": 390,
+                      "width": 220,
+                      "height": 20,
+                      "text": "Tra cứu trạng thái các bản sao trên kệ"
+                    }
+                  }
+                },
+                {
+                  "_type": "UMLControlNodeView",
+                  "_id": "VIEW_NODE2_UMLD_01077",
+                  "_parent": {
+                    "$ref": "DIAG_UC02_RESERVE"
+                  },
+                  "model": {
+                    "$ref": "NODE2_UMLD_01077"
+                  },
+                  "left": 550,
+                  "top": 455,
+                  "width": 40,
+                  "height": 40
+                },
+                {
+                  "_type": "UMLActionView",
+                  "_id": "VIEW_NODE2_UMLA_01078",
+                  "_parent": {
+                    "$ref": "DIAG_UC02_RESERVE"
+                  },
+                  "model": {
+                    "$ref": "NODE2_UMLA_01078"
+                  },
+                  "left": 455,
+                  "top": 525,
+                  "width": 230,
+                  "height": 45,
+                  "nameCompartment": {
+                    "_type": "UMLNameCompartmentView",
+                    "_id": "NC_NODE2_UMLA_01078",
+                    "_parent": {
+                      "$ref": "VIEW_NODE2_UMLA_01078"
+                    },
+                    "model": {
+                      "$ref": "NODE2_UMLA_01078"
+                    },
+                    "left": 455,
+                    "top": 525,
+                    "width": 230,
+                    "height": 45,
+                    "nameLabel": {
+                      "_type": "LabelView",
+                      "_id": "NL_NODE2_UMLA_01078",
+                      "_parent": {
+                        "$ref": "NC_NODE2_UMLA_01078"
+                      },
+                      "left": 455,
+                      "top": 535,
+                      "width": 230,
+                      "height": 20,
+                      "text": "Hiển thị vị trí kệ & hướng dẫn mượn trực tiếp"
+                    }
+                  }
+                },
+                {
+                  "_type": "UMLActionView",
+                  "_id": "VIEW_NODE2_UMLA_01079",
+                  "_parent": {
+                    "$ref": "DIAG_UC02_RESERVE"
+                  },
+                  "model": {
+                    "$ref": "NODE2_UMLA_01079"
+                  },
+                  "left": 105,
+                  "top": 525,
+                  "width": 210,
+                  "height": 45,
+                  "nameCompartment": {
+                    "_type": "UMLNameCompartmentView",
+                    "_id": "NC_NODE2_UMLA_01079",
+                    "_parent": {
+                      "$ref": "VIEW_NODE2_UMLA_01079"
+                    },
+                    "model": {
+                      "$ref": "NODE2_UMLA_01079"
+                    },
+                    "left": 105,
+                    "top": 525,
+                    "width": 210,
+                    "height": 45,
+                    "nameLabel": {
+                      "_type": "LabelView",
+                      "_id": "NL_NODE2_UMLA_01079",
+                      "_parent": {
+                        "$ref": "NC_NODE2_UMLA_01079"
+                      },
+                      "left": 105,
+                      "top": 535,
+                      "width": 210,
+                      "height": 20,
+                      "text": "Ghi nhận vị trí sách và đến quầy mượn"
+                    }
+                  }
+                },
+                {
+                  "_type": "UMLControlNodeView",
+                  "_id": "VIEW_NODE2_UMLA_01080",
+                  "_parent": {
+                    "$ref": "DIAG_UC02_RESERVE"
+                  },
+                  "model": {
+                    "$ref": "NODE2_UMLA_01080"
+                  },
+                  "left": 197,
+                  "top": 600,
+                  "width": 26,
+                  "height": 26
+                },
+                {
+                  "_type": "UMLActionView",
+                  "_id": "VIEW_NODE2_UMLA_01081",
+                  "_parent": {
+                    "$ref": "DIAG_UC02_RESERVE"
+                  },
+                  "model": {
+                    "$ref": "NODE2_UMLA_01081"
+                  },
+                  "left": 465,
+                  "top": 650,
+                  "width": 210,
+                  "height": 45,
+                  "nameCompartment": {
+                    "_type": "UMLNameCompartmentView",
+                    "_id": "NC_NODE2_UMLA_01081",
+                    "_parent": {
+                      "$ref": "VIEW_NODE2_UMLA_01081"
+                    },
+                    "model": {
+                      "$ref": "NODE2_UMLA_01081"
+                    },
+                    "left": 465,
+                    "top": 650,
+                    "width": 210,
+                    "height": 45,
+                    "nameLabel": {
+                      "_type": "LabelView",
+                      "_id": "NL_NODE2_UMLA_01081",
+                      "_parent": {
+                        "$ref": "NC_NODE2_UMLA_01081"
+                      },
+                      "left": 465,
+                      "top": 660,
+                      "width": 210,
+                      "height": 20,
+                      "text": "Hiển thị hộp thoại xác nhận đặt trước"
+                    }
+                  }
+                },
+                {
+                  "_type": "UMLActionView",
+                  "_id": "VIEW_NODE2_UMLA_01082",
+                  "_parent": {
+                    "$ref": "DIAG_UC02_RESERVE"
+                  },
+                  "model": {
+                    "$ref": "NODE2_UMLA_01082"
+                  },
+                  "left": 100,
+                  "top": 650,
+                  "width": 220,
+                  "height": 45,
+                  "nameCompartment": {
+                    "_type": "UMLNameCompartmentView",
+                    "_id": "NC_NODE2_UMLA_01082",
+                    "_parent": {
+                      "$ref": "VIEW_NODE2_UMLA_01082"
+                    },
+                    "model": {
+                      "$ref": "NODE2_UMLA_01082"
+                    },
+                    "left": 100,
+                    "top": 650,
+                    "width": 220,
+                    "height": 45,
+                    "nameLabel": {
+                      "_type": "LabelView",
+                      "_id": "NL_NODE2_UMLA_01082",
+                      "_parent": {
+                        "$ref": "NC_NODE2_UMLA_01082"
+                      },
+                      "left": 100,
+                      "top": 660,
+                      "width": 220,
+                      "height": 20,
+                      "text": "Xem thông tin & xác nhận đặt giữ tài liệu"
+                    }
+                  }
+                },
+                {
+                  "_type": "UMLControlNodeView",
+                  "_id": "VIEW_NODE2_UMLD_01083",
+                  "_parent": {
+                    "$ref": "DIAG_UC02_RESERVE"
+                  },
+                  "model": {
+                    "$ref": "NODE2_UMLD_01083"
+                  },
+                  "left": 190,
+                  "top": 730,
+                  "width": 40,
+                  "height": 40
+                },
+                {
+                  "_type": "UMLActionView",
+                  "_id": "VIEW_NODE2_UMLA_01084",
+                  "_parent": {
+                    "$ref": "DIAG_UC02_RESERVE"
+                  },
+                  "model": {
+                    "$ref": "NODE2_UMLA_01084"
+                  },
+                  "left": 465,
+                  "top": 800,
+                  "width": 210,
+                  "height": 45,
+                  "nameCompartment": {
+                    "_type": "UMLNameCompartmentView",
+                    "_id": "NC_NODE2_UMLA_01084",
+                    "_parent": {
+                      "$ref": "VIEW_NODE2_UMLA_01084"
+                    },
+                    "model": {
+                      "$ref": "NODE2_UMLA_01084"
+                    },
+                    "left": 465,
+                    "top": 800,
+                    "width": 210,
+                    "height": 45,
+                    "nameLabel": {
+                      "_type": "LabelView",
+                      "_id": "NL_NODE2_UMLA_01084",
+                      "_parent": {
+                        "$ref": "NC_NODE2_UMLA_01084"
+                      },
+                      "left": 465,
+                      "top": 810,
+                      "width": 210,
+                      "height": 20,
+                      "text": "Hủy bỏ giao dịch & giải phóng phiên"
+                    }
+                  }
+                },
+                {
+                  "_type": "UMLControlNodeView",
+                  "_id": "VIEW_NODE2_UMLA_01085",
+                  "_parent": {
+                    "$ref": "DIAG_UC02_RESERVE"
+                  },
+                  "model": {
+                    "$ref": "NODE2_UMLA_01085"
+                  },
+                  "left": 557,
+                  "top": 875,
+                  "width": 26,
+                  "height": 26
+                },
+                {
+                  "_type": "UMLControlNodeView",
+                  "_id": "VIEW_NODE2_UMLF_01086",
+                  "_parent": {
+                    "$ref": "DIAG_UC02_RESERVE"
+                  },
+                  "model": {
+                    "$ref": "NODE2_UMLF_01086"
+                  },
+                  "left": 765,
+                  "top": 940,
+                  "width": 370,
+                  "height": 8
+                },
+                {
+                  "_type": "UMLActionView",
+                  "_id": "VIEW_NODE2_UMLA_01087",
+                  "_parent": {
+                    "$ref": "DIAG_UC02_RESERVE"
+                  },
+                  "model": {
+                    "$ref": "NODE2_UMLA_01087"
+                  },
+                  "left": 775,
+                  "top": 980,
+                  "width": 165,
+                  "height": 45,
+                  "nameCompartment": {
+                    "_type": "UMLNameCompartmentView",
+                    "_id": "NC_NODE2_UMLA_01087",
+                    "_parent": {
+                      "$ref": "VIEW_NODE2_UMLA_01087"
+                    },
+                    "model": {
+                      "$ref": "NODE2_UMLA_01087"
+                    },
+                    "left": 775,
+                    "top": 980,
+                    "width": 165,
+                    "height": 45,
+                    "nameLabel": {
+                      "_type": "LabelView",
+                      "_id": "NL_NODE2_UMLA_01087",
+                      "_parent": {
+                        "$ref": "NC_NODE2_UMLA_01087"
+                      },
+                      "left": 775,
+                      "top": 990,
+                      "width": 165,
+                      "height": 20,
+                      "text": "Thêm độc giả vào danh sách chờ của tài liệu"
+                    }
+                  }
+                },
+                {
+                  "_type": "UMLActionView",
+                  "_id": "VIEW_NODE2_UMLA_01088",
+                  "_parent": {
+                    "$ref": "DIAG_UC02_RESERVE"
+                  },
+                  "model": {
+                    "$ref": "NODE2_UMLA_01088"
+                  },
+                  "left": 955,
+                  "top": 980,
+                  "width": 165,
+                  "height": 45,
+                  "nameCompartment": {
+                    "_type": "UMLNameCompartmentView",
+                    "_id": "NC_NODE2_UMLA_01088",
+                    "_parent": {
+                      "$ref": "VIEW_NODE2_UMLA_01088"
+                    },
+                    "model": {
+                      "$ref": "NODE2_UMLA_01088"
+                    },
+                    "left": 955,
+                    "top": 980,
+                    "width": 165,
+                    "height": 45,
+                    "nameLabel": {
+                      "_type": "LabelView",
+                      "_id": "NL_NODE2_UMLA_01088",
+                      "_parent": {
+                        "$ref": "NC_NODE2_UMLA_01088"
+                      },
+                      "left": 955,
+                      "top": 990,
+                      "width": 165,
+                      "height": 20,
+                      "text": "Khởi tạo mã đặt trước & hàng đợi thông báo"
+                    }
+                  }
+                },
+                {
+                  "_type": "UMLControlNodeView",
+                  "_id": "VIEW_NODE2_UMLJ_01089",
+                  "_parent": {
+                    "$ref": "DIAG_UC02_RESERVE"
+                  },
+                  "model": {
+                    "$ref": "NODE2_UMLJ_01089"
+                  },
+                  "left": 765,
+                  "top": 1055,
+                  "width": 370,
+                  "height": 8
+                },
+                {
+                  "_type": "UMLActionView",
+                  "_id": "VIEW_NODE2_UMLA_01090",
+                  "_parent": {
+                    "$ref": "DIAG_UC02_RESERVE"
+                  },
+                  "model": {
+                    "$ref": "NODE2_UMLA_01090"
+                  },
+                  "left": 460,
+                  "top": 1095,
+                  "width": 220,
+                  "height": 45,
+                  "nameCompartment": {
+                    "_type": "UMLNameCompartmentView",
+                    "_id": "NC_NODE2_UMLA_01090",
+                    "_parent": {
+                      "$ref": "VIEW_NODE2_UMLA_01090"
+                    },
+                    "model": {
+                      "$ref": "NODE2_UMLA_01090"
+                    },
+                    "left": 460,
+                    "top": 1095,
+                    "width": 220,
+                    "height": 45,
+                    "nameLabel": {
+                      "_type": "LabelView",
+                      "_id": "NL_NODE2_UMLA_01090",
+                      "_parent": {
+                        "$ref": "NC_NODE2_UMLA_01090"
+                      },
+                      "left": 460,
+                      "top": 1105,
+                      "width": 220,
+                      "height": 20,
+                      "text": "Gửi email xác nhận đặt trước thành công"
+                    }
+                  }
+                },
+                {
+                  "_type": "UMLActionView",
+                  "_id": "VIEW_NODE2_UMLA_01091",
+                  "_parent": {
+                    "$ref": "DIAG_UC02_RESERVE"
+                  },
+                  "model": {
+                    "$ref": "NODE2_UMLA_01091"
+                  },
+                  "left": 100,
+                  "top": 1095,
+                  "width": 220,
+                  "height": 45,
+                  "nameCompartment": {
+                    "_type": "UMLNameCompartmentView",
+                    "_id": "NC_NODE2_UMLA_01091",
+                    "_parent": {
+                      "$ref": "VIEW_NODE2_UMLA_01091"
+                    },
+                    "model": {
+                      "$ref": "NODE2_UMLA_01091"
+                    },
+                    "left": 100,
+                    "top": 1095,
+                    "width": 220,
+                    "height": 45,
+                    "nameLabel": {
+                      "_type": "LabelView",
+                      "_id": "NL_NODE2_UMLA_01091",
+                      "_parent": {
+                        "$ref": "NC_NODE2_UMLA_01091"
+                      },
+                      "left": 100,
+                      "top": 1105,
+                      "width": 220,
+                      "height": 20,
+                      "text": "Nhận thông báo xác nhận và số thứ tự chờ"
+                    }
+                  }
+                },
+                {
+                  "_type": "UMLControlNodeView",
+                  "_id": "VIEW_NODE2_UMLA_01092",
+                  "_parent": {
+                    "$ref": "DIAG_UC02_RESERVE"
+                  },
+                  "model": {
+                    "$ref": "NODE2_UMLA_01092"
+                  },
+                  "left": 197,
+                  "top": 1170,
+                  "width": 26,
+                  "height": 26
+                },
+                {
+                  "_type": "UMLControlFlowView",
+                  "_id": "VIEW_FLOW2_01093",
+                  "_parent": {
+                    "$ref": "DIAG_UC02_RESERVE"
+                  },
+                  "model": {
+                    "$ref": "FLOW2_01093"
+                  },
+                  "source": {
+                    "$ref": "VIEW_NODE2_UMLI_01067"
+                  },
+                  "target": {
+                    "$ref": "VIEW_NODE2_UMLA_01068"
+                  },
+                  "tail": {
+                    "$ref": "VIEW_NODE2_UMLI_01067"
+                  },
+                  "head": {
+                    "$ref": "VIEW_NODE2_UMLA_01068"
+                  },
+                  "lineStyle": 1,
+                  "nameLabel": {
+                    "_type": "EdgeLabelView",
+                    "_id": "LBL_FLOW2_01093",
+                    "_parent": {
+                      "$ref": "VIEW_FLOW2_01093"
+                    },
+                    "model": {
+                      "$ref": "FLOW2_01093"
+                    },
+                    "visible": false,
+                    "text": ""
+                  }
+                },
+                {
+                  "_type": "UMLControlFlowView",
+                  "_id": "VIEW_FLOW2_01094",
+                  "_parent": {
+                    "$ref": "DIAG_UC02_RESERVE"
+                  },
+                  "model": {
+                    "$ref": "FLOW2_01094"
+                  },
+                  "source": {
+                    "$ref": "VIEW_NODE2_UMLA_01068"
+                  },
+                  "target": {
+                    "$ref": "VIEW_NODE2_UMLA_01069"
+                  },
+                  "tail": {
+                    "$ref": "VIEW_NODE2_UMLA_01068"
+                  },
+                  "head": {
+                    "$ref": "VIEW_NODE2_UMLA_01069"
+                  },
+                  "lineStyle": 1,
+                  "nameLabel": {
+                    "_type": "EdgeLabelView",
+                    "_id": "LBL_FLOW2_01094",
+                    "_parent": {
+                      "$ref": "VIEW_FLOW2_01094"
+                    },
+                    "model": {
+                      "$ref": "FLOW2_01094"
+                    },
+                    "visible": false,
+                    "text": ""
+                  }
+                },
+                {
+                  "_type": "UMLControlFlowView",
+                  "_id": "VIEW_FLOW2_01095",
+                  "_parent": {
+                    "$ref": "DIAG_UC02_RESERVE"
+                  },
+                  "model": {
+                    "$ref": "FLOW2_01095"
+                  },
+                  "source": {
+                    "$ref": "VIEW_NODE2_UMLA_01069"
+                  },
+                  "target": {
+                    "$ref": "VIEW_NODE2_UMLA_01070"
+                  },
+                  "tail": {
+                    "$ref": "VIEW_NODE2_UMLA_01069"
+                  },
+                  "head": {
+                    "$ref": "VIEW_NODE2_UMLA_01070"
+                  },
+                  "lineStyle": 1,
+                  "nameLabel": {
+                    "_type": "EdgeLabelView",
+                    "_id": "LBL_FLOW2_01095",
+                    "_parent": {
+                      "$ref": "VIEW_FLOW2_01095"
+                    },
+                    "model": {
+                      "$ref": "FLOW2_01095"
+                    },
+                    "visible": false,
+                    "text": ""
+                  }
+                },
+                {
+                  "_type": "UMLControlFlowView",
+                  "_id": "VIEW_FLOW2_01096",
+                  "_parent": {
+                    "$ref": "DIAG_UC02_RESERVE"
+                  },
+                  "model": {
+                    "$ref": "FLOW2_01096"
+                  },
+                  "source": {
+                    "$ref": "VIEW_NODE2_UMLA_01070"
+                  },
+                  "target": {
+                    "$ref": "VIEW_NODE2_UMLD_01071"
+                  },
+                  "tail": {
+                    "$ref": "VIEW_NODE2_UMLA_01070"
+                  },
+                  "head": {
+                    "$ref": "VIEW_NODE2_UMLD_01071"
+                  },
+                  "lineStyle": 1,
+                  "nameLabel": {
+                    "_type": "EdgeLabelView",
+                    "_id": "LBL_FLOW2_01096",
+                    "_parent": {
+                      "$ref": "VIEW_FLOW2_01096"
+                    },
+                    "model": {
+                      "$ref": "FLOW2_01096"
+                    },
+                    "visible": false,
+                    "text": ""
+                  }
+                },
+                {
+                  "_type": "UMLControlFlowView",
+                  "_id": "VIEW_FLOW2_01097",
+                  "_parent": {
+                    "$ref": "DIAG_UC02_RESERVE"
+                  },
+                  "model": {
+                    "$ref": "FLOW2_01097"
+                  },
+                  "source": {
+                    "$ref": "VIEW_NODE2_UMLD_01071"
+                  },
+                  "target": {
+                    "$ref": "VIEW_NODE2_UMLA_01072"
+                  },
+                  "tail": {
+                    "$ref": "VIEW_NODE2_UMLD_01071"
+                  },
+                  "head": {
+                    "$ref": "VIEW_NODE2_UMLA_01072"
+                  },
+                  "lineStyle": 1,
+                  "nameLabel": {
+                    "_type": "EdgeLabelView",
+                    "_id": "LBL_FLOW2_01097",
+                    "_parent": {
+                      "$ref": "VIEW_FLOW2_01097"
+                    },
+                    "model": {
+                      "$ref": "FLOW2_01097"
+                    },
+                    "visible": true,
+                    "text": "[Đã đặt >= 3 cuốn]"
+                  }
+                },
+                {
+                  "_type": "UMLControlFlowView",
+                  "_id": "VIEW_FLOW2_01098",
+                  "_parent": {
+                    "$ref": "DIAG_UC02_RESERVE"
+                  },
+                  "model": {
+                    "$ref": "FLOW2_01098"
+                  },
+                  "source": {
+                    "$ref": "VIEW_NODE2_UMLA_01072"
+                  },
+                  "target": {
+                    "$ref": "VIEW_NODE2_UMLA_01073"
+                  },
+                  "tail": {
+                    "$ref": "VIEW_NODE2_UMLA_01072"
+                  },
+                  "head": {
+                    "$ref": "VIEW_NODE2_UMLA_01073"
+                  },
+                  "lineStyle": 1,
+                  "nameLabel": {
+                    "_type": "EdgeLabelView",
+                    "_id": "LBL_FLOW2_01098",
+                    "_parent": {
+                      "$ref": "VIEW_FLOW2_01098"
+                    },
+                    "model": {
+                      "$ref": "FLOW2_01098"
+                    },
+                    "visible": false,
+                    "text": ""
+                  }
+                },
+                {
+                  "_type": "UMLControlFlowView",
+                  "_id": "VIEW_FLOW2_01099",
+                  "_parent": {
+                    "$ref": "DIAG_UC02_RESERVE"
+                  },
+                  "model": {
+                    "$ref": "FLOW2_01099"
+                  },
+                  "source": {
+                    "$ref": "VIEW_NODE2_UMLA_01073"
+                  },
+                  "target": {
+                    "$ref": "VIEW_NODE2_UMLA_01074"
+                  },
+                  "tail": {
+                    "$ref": "VIEW_NODE2_UMLA_01073"
+                  },
+                  "head": {
+                    "$ref": "VIEW_NODE2_UMLA_01074"
+                  },
+                  "lineStyle": 1,
+                  "nameLabel": {
+                    "_type": "EdgeLabelView",
+                    "_id": "LBL_FLOW2_01099",
+                    "_parent": {
+                      "$ref": "VIEW_FLOW2_01099"
+                    },
+                    "model": {
+                      "$ref": "FLOW2_01099"
+                    },
+                    "visible": false,
+                    "text": ""
+                  }
+                },
+                {
+                  "_type": "UMLControlFlowView",
+                  "_id": "VIEW_FLOW2_01100",
+                  "_parent": {
+                    "$ref": "DIAG_UC02_RESERVE"
+                  },
+                  "model": {
+                    "$ref": "FLOW2_01100"
+                  },
+                  "source": {
+                    "$ref": "VIEW_NODE2_UMLD_01071"
+                  },
+                  "target": {
+                    "$ref": "VIEW_NODE2_UMLA_01075"
+                  },
+                  "tail": {
+                    "$ref": "VIEW_NODE2_UMLD_01071"
+                  },
+                  "head": {
+                    "$ref": "VIEW_NODE2_UMLA_01075"
+                  },
+                  "lineStyle": 1,
+                  "nameLabel": {
+                    "_type": "EdgeLabelView",
+                    "_id": "LBL_FLOW2_01100",
+                    "_parent": {
+                      "$ref": "VIEW_FLOW2_01100"
+                    },
+                    "model": {
+                      "$ref": "FLOW2_01100"
+                    },
+                    "visible": true,
+                    "text": "[Đã đặt < 3 cuốn]"
+                  }
+                },
+                {
+                  "_type": "UMLControlFlowView",
+                  "_id": "VIEW_FLOW2_01101",
+                  "_parent": {
+                    "$ref": "DIAG_UC02_RESERVE"
+                  },
+                  "model": {
+                    "$ref": "FLOW2_01101"
+                  },
+                  "source": {
+                    "$ref": "VIEW_NODE2_UMLA_01075"
+                  },
+                  "target": {
+                    "$ref": "VIEW_NODE2_UMLA_01076"
+                  },
+                  "tail": {
+                    "$ref": "VIEW_NODE2_UMLA_01075"
+                  },
+                  "head": {
+                    "$ref": "VIEW_NODE2_UMLA_01076"
+                  },
+                  "lineStyle": 1,
+                  "nameLabel": {
+                    "_type": "EdgeLabelView",
+                    "_id": "LBL_FLOW2_01101",
+                    "_parent": {
+                      "$ref": "VIEW_FLOW2_01101"
+                    },
+                    "model": {
+                      "$ref": "FLOW2_01101"
+                    },
+                    "visible": false,
+                    "text": ""
+                  }
+                },
+                {
+                  "_type": "UMLControlFlowView",
+                  "_id": "VIEW_FLOW2_01102",
+                  "_parent": {
+                    "$ref": "DIAG_UC02_RESERVE"
+                  },
+                  "model": {
+                    "$ref": "FLOW2_01102"
+                  },
+                  "source": {
+                    "$ref": "VIEW_NODE2_UMLA_01076"
+                  },
+                  "target": {
+                    "$ref": "VIEW_NODE2_UMLD_01077"
+                  },
+                  "tail": {
+                    "$ref": "VIEW_NODE2_UMLA_01076"
+                  },
+                  "head": {
+                    "$ref": "VIEW_NODE2_UMLD_01077"
+                  },
+                  "lineStyle": 1,
+                  "nameLabel": {
+                    "_type": "EdgeLabelView",
+                    "_id": "LBL_FLOW2_01102",
+                    "_parent": {
+                      "$ref": "VIEW_FLOW2_01102"
+                    },
+                    "model": {
+                      "$ref": "FLOW2_01102"
+                    },
+                    "visible": false,
+                    "text": ""
+                  }
+                },
+                {
+                  "_type": "UMLControlFlowView",
+                  "_id": "VIEW_FLOW2_01103",
+                  "_parent": {
+                    "$ref": "DIAG_UC02_RESERVE"
+                  },
+                  "model": {
+                    "$ref": "FLOW2_01103"
+                  },
+                  "source": {
+                    "$ref": "VIEW_NODE2_UMLD_01077"
+                  },
+                  "target": {
+                    "$ref": "VIEW_NODE2_UMLA_01078"
+                  },
+                  "tail": {
+                    "$ref": "VIEW_NODE2_UMLD_01077"
+                  },
+                  "head": {
+                    "$ref": "VIEW_NODE2_UMLA_01078"
+                  },
+                  "lineStyle": 1,
+                  "nameLabel": {
+                    "_type": "EdgeLabelView",
+                    "_id": "LBL_FLOW2_01103",
+                    "_parent": {
+                      "$ref": "VIEW_FLOW2_01103"
+                    },
+                    "model": {
+                      "$ref": "FLOW2_01103"
+                    },
+                    "visible": true,
+                    "text": "[Còn bản sao trên kệ]"
+                  }
+                },
+                {
+                  "_type": "UMLControlFlowView",
+                  "_id": "VIEW_FLOW2_01104",
+                  "_parent": {
+                    "$ref": "DIAG_UC02_RESERVE"
+                  },
+                  "model": {
+                    "$ref": "FLOW2_01104"
+                  },
+                  "source": {
+                    "$ref": "VIEW_NODE2_UMLA_01078"
+                  },
+                  "target": {
+                    "$ref": "VIEW_NODE2_UMLA_01079"
+                  },
+                  "tail": {
+                    "$ref": "VIEW_NODE2_UMLA_01078"
+                  },
+                  "head": {
+                    "$ref": "VIEW_NODE2_UMLA_01079"
+                  },
+                  "lineStyle": 1,
+                  "nameLabel": {
+                    "_type": "EdgeLabelView",
+                    "_id": "LBL_FLOW2_01104",
+                    "_parent": {
+                      "$ref": "VIEW_FLOW2_01104"
+                    },
+                    "model": {
+                      "$ref": "FLOW2_01104"
+                    },
+                    "visible": false,
+                    "text": ""
+                  }
+                },
+                {
+                  "_type": "UMLControlFlowView",
+                  "_id": "VIEW_FLOW2_01105",
+                  "_parent": {
+                    "$ref": "DIAG_UC02_RESERVE"
+                  },
+                  "model": {
+                    "$ref": "FLOW2_01105"
+                  },
+                  "source": {
+                    "$ref": "VIEW_NODE2_UMLA_01079"
+                  },
+                  "target": {
+                    "$ref": "VIEW_NODE2_UMLA_01080"
+                  },
+                  "tail": {
+                    "$ref": "VIEW_NODE2_UMLA_01079"
+                  },
+                  "head": {
+                    "$ref": "VIEW_NODE2_UMLA_01080"
+                  },
+                  "lineStyle": 1,
+                  "nameLabel": {
+                    "_type": "EdgeLabelView",
+                    "_id": "LBL_FLOW2_01105",
+                    "_parent": {
+                      "$ref": "VIEW_FLOW2_01105"
+                    },
+                    "model": {
+                      "$ref": "FLOW2_01105"
+                    },
+                    "visible": false,
+                    "text": ""
+                  }
+                },
+                {
+                  "_type": "UMLControlFlowView",
+                  "_id": "VIEW_FLOW2_01106",
+                  "_parent": {
+                    "$ref": "DIAG_UC02_RESERVE"
+                  },
+                  "model": {
+                    "$ref": "FLOW2_01106"
+                  },
+                  "source": {
+                    "$ref": "VIEW_NODE2_UMLD_01077"
+                  },
+                  "target": {
+                    "$ref": "VIEW_NODE2_UMLA_01081"
+                  },
+                  "tail": {
+                    "$ref": "VIEW_NODE2_UMLD_01077"
+                  },
+                  "head": {
+                    "$ref": "VIEW_NODE2_UMLA_01081"
+                  },
+                  "lineStyle": 1,
+                  "nameLabel": {
+                    "_type": "EdgeLabelView",
+                    "_id": "LBL_FLOW2_01106",
+                    "_parent": {
+                      "$ref": "VIEW_FLOW2_01106"
+                    },
+                    "model": {
+                      "$ref": "FLOW2_01106"
+                    },
+                    "visible": true,
+                    "text": "[Tất cả sách đang được mượn]"
+                  }
+                },
+                {
+                  "_type": "UMLControlFlowView",
+                  "_id": "VIEW_FLOW2_01107",
+                  "_parent": {
+                    "$ref": "DIAG_UC02_RESERVE"
+                  },
+                  "model": {
+                    "$ref": "FLOW2_01107"
+                  },
+                  "source": {
+                    "$ref": "VIEW_NODE2_UMLA_01081"
+                  },
+                  "target": {
+                    "$ref": "VIEW_NODE2_UMLA_01082"
+                  },
+                  "tail": {
+                    "$ref": "VIEW_NODE2_UMLA_01081"
+                  },
+                  "head": {
+                    "$ref": "VIEW_NODE2_UMLA_01082"
+                  },
+                  "lineStyle": 1,
+                  "nameLabel": {
+                    "_type": "EdgeLabelView",
+                    "_id": "LBL_FLOW2_01107",
+                    "_parent": {
+                      "$ref": "VIEW_FLOW2_01107"
+                    },
+                    "model": {
+                      "$ref": "FLOW2_01107"
+                    },
+                    "visible": false,
+                    "text": ""
+                  }
+                },
+                {
+                  "_type": "UMLControlFlowView",
+                  "_id": "VIEW_FLOW2_01108",
+                  "_parent": {
+                    "$ref": "DIAG_UC02_RESERVE"
+                  },
+                  "model": {
+                    "$ref": "FLOW2_01108"
+                  },
+                  "source": {
+                    "$ref": "VIEW_NODE2_UMLA_01082"
+                  },
+                  "target": {
+                    "$ref": "VIEW_NODE2_UMLD_01083"
+                  },
+                  "tail": {
+                    "$ref": "VIEW_NODE2_UMLA_01082"
+                  },
+                  "head": {
+                    "$ref": "VIEW_NODE2_UMLD_01083"
+                  },
+                  "lineStyle": 1,
+                  "nameLabel": {
+                    "_type": "EdgeLabelView",
+                    "_id": "LBL_FLOW2_01108",
+                    "_parent": {
+                      "$ref": "VIEW_FLOW2_01108"
+                    },
+                    "model": {
+                      "$ref": "FLOW2_01108"
+                    },
+                    "visible": false,
+                    "text": ""
+                  }
+                },
+                {
+                  "_type": "UMLControlFlowView",
+                  "_id": "VIEW_FLOW2_01109",
+                  "_parent": {
+                    "$ref": "DIAG_UC02_RESERVE"
+                  },
+                  "model": {
+                    "$ref": "FLOW2_01109"
+                  },
+                  "source": {
+                    "$ref": "VIEW_NODE2_UMLD_01083"
+                  },
+                  "target": {
+                    "$ref": "VIEW_NODE2_UMLA_01084"
+                  },
+                  "tail": {
+                    "$ref": "VIEW_NODE2_UMLD_01083"
+                  },
+                  "head": {
+                    "$ref": "VIEW_NODE2_UMLA_01084"
+                  },
+                  "lineStyle": 1,
+                  "nameLabel": {
+                    "_type": "EdgeLabelView",
+                    "_id": "LBL_FLOW2_01109",
+                    "_parent": {
+                      "$ref": "VIEW_FLOW2_01109"
+                    },
+                    "model": {
+                      "$ref": "FLOW2_01109"
+                    },
+                    "visible": true,
+                    "text": "[Hủy bỏ]"
+                  }
+                },
+                {
+                  "_type": "UMLControlFlowView",
+                  "_id": "VIEW_FLOW2_01110",
+                  "_parent": {
+                    "$ref": "DIAG_UC02_RESERVE"
+                  },
+                  "model": {
+                    "$ref": "FLOW2_01110"
+                  },
+                  "source": {
+                    "$ref": "VIEW_NODE2_UMLA_01084"
+                  },
+                  "target": {
+                    "$ref": "VIEW_NODE2_UMLA_01085"
+                  },
+                  "tail": {
+                    "$ref": "VIEW_NODE2_UMLA_01084"
+                  },
+                  "head": {
+                    "$ref": "VIEW_NODE2_UMLA_01085"
+                  },
+                  "lineStyle": 1,
+                  "nameLabel": {
+                    "_type": "EdgeLabelView",
+                    "_id": "LBL_FLOW2_01110",
+                    "_parent": {
+                      "$ref": "VIEW_FLOW2_01110"
+                    },
+                    "model": {
+                      "$ref": "FLOW2_01110"
+                    },
+                    "visible": false,
+                    "text": ""
+                  }
+                },
+                {
+                  "_type": "UMLControlFlowView",
+                  "_id": "VIEW_FLOW2_01111",
+                  "_parent": {
+                    "$ref": "DIAG_UC02_RESERVE"
+                  },
+                  "model": {
+                    "$ref": "FLOW2_01111"
+                  },
+                  "source": {
+                    "$ref": "VIEW_NODE2_UMLD_01083"
+                  },
+                  "target": {
+                    "$ref": "VIEW_NODE2_UMLF_01086"
+                  },
+                  "tail": {
+                    "$ref": "VIEW_NODE2_UMLD_01083"
+                  },
+                  "head": {
+                    "$ref": "VIEW_NODE2_UMLF_01086"
+                  },
+                  "lineStyle": 1,
+                  "nameLabel": {
+                    "_type": "EdgeLabelView",
+                    "_id": "LBL_FLOW2_01111",
+                    "_parent": {
+                      "$ref": "VIEW_FLOW2_01111"
+                    },
+                    "model": {
+                      "$ref": "FLOW2_01111"
+                    },
+                    "visible": true,
+                    "text": "[Đồng ý đặt trước]"
+                  }
+                },
+                {
+                  "_type": "UMLControlFlowView",
+                  "_id": "VIEW_FLOW2_01112",
+                  "_parent": {
+                    "$ref": "DIAG_UC02_RESERVE"
+                  },
+                  "model": {
+                    "$ref": "FLOW2_01112"
+                  },
+                  "source": {
+                    "$ref": "VIEW_NODE2_UMLF_01086"
+                  },
+                  "target": {
+                    "$ref": "VIEW_NODE2_UMLA_01087"
+                  },
+                  "tail": {
+                    "$ref": "VIEW_NODE2_UMLF_01086"
+                  },
+                  "head": {
+                    "$ref": "VIEW_NODE2_UMLA_01087"
+                  },
+                  "lineStyle": 1,
+                  "nameLabel": {
+                    "_type": "EdgeLabelView",
+                    "_id": "LBL_FLOW2_01112",
+                    "_parent": {
+                      "$ref": "VIEW_FLOW2_01112"
+                    },
+                    "model": {
+                      "$ref": "FLOW2_01112"
+                    },
+                    "visible": false,
+                    "text": ""
+                  }
+                },
+                {
+                  "_type": "UMLControlFlowView",
+                  "_id": "VIEW_FLOW2_01113",
+                  "_parent": {
+                    "$ref": "DIAG_UC02_RESERVE"
+                  },
+                  "model": {
+                    "$ref": "FLOW2_01113"
+                  },
+                  "source": {
+                    "$ref": "VIEW_NODE2_UMLF_01086"
+                  },
+                  "target": {
+                    "$ref": "VIEW_NODE2_UMLA_01088"
+                  },
+                  "tail": {
+                    "$ref": "VIEW_NODE2_UMLF_01086"
+                  },
+                  "head": {
+                    "$ref": "VIEW_NODE2_UMLA_01088"
+                  },
+                  "lineStyle": 1,
+                  "nameLabel": {
+                    "_type": "EdgeLabelView",
+                    "_id": "LBL_FLOW2_01113",
+                    "_parent": {
+                      "$ref": "VIEW_FLOW2_01113"
+                    },
+                    "model": {
+                      "$ref": "FLOW2_01113"
+                    },
+                    "visible": false,
+                    "text": ""
+                  }
+                },
+                {
+                  "_type": "UMLControlFlowView",
+                  "_id": "VIEW_FLOW2_01114",
+                  "_parent": {
+                    "$ref": "DIAG_UC02_RESERVE"
+                  },
+                  "model": {
+                    "$ref": "FLOW2_01114"
+                  },
+                  "source": {
+                    "$ref": "VIEW_NODE2_UMLA_01087"
+                  },
+                  "target": {
+                    "$ref": "VIEW_NODE2_UMLJ_01089"
+                  },
+                  "tail": {
+                    "$ref": "VIEW_NODE2_UMLA_01087"
+                  },
+                  "head": {
+                    "$ref": "VIEW_NODE2_UMLJ_01089"
+                  },
+                  "lineStyle": 1,
+                  "nameLabel": {
+                    "_type": "EdgeLabelView",
+                    "_id": "LBL_FLOW2_01114",
+                    "_parent": {
+                      "$ref": "VIEW_FLOW2_01114"
+                    },
+                    "model": {
+                      "$ref": "FLOW2_01114"
+                    },
+                    "visible": false,
+                    "text": ""
+                  }
+                },
+                {
+                  "_type": "UMLControlFlowView",
+                  "_id": "VIEW_FLOW2_01115",
+                  "_parent": {
+                    "$ref": "DIAG_UC02_RESERVE"
+                  },
+                  "model": {
+                    "$ref": "FLOW2_01115"
+                  },
+                  "source": {
+                    "$ref": "VIEW_NODE2_UMLA_01088"
+                  },
+                  "target": {
+                    "$ref": "VIEW_NODE2_UMLJ_01089"
+                  },
+                  "tail": {
+                    "$ref": "VIEW_NODE2_UMLA_01088"
+                  },
+                  "head": {
+                    "$ref": "VIEW_NODE2_UMLJ_01089"
+                  },
+                  "lineStyle": 1,
+                  "nameLabel": {
+                    "_type": "EdgeLabelView",
+                    "_id": "LBL_FLOW2_01115",
+                    "_parent": {
+                      "$ref": "VIEW_FLOW2_01115"
+                    },
+                    "model": {
+                      "$ref": "FLOW2_01115"
+                    },
+                    "visible": false,
+                    "text": ""
+                  }
+                },
+                {
+                  "_type": "UMLControlFlowView",
+                  "_id": "VIEW_FLOW2_01116",
+                  "_parent": {
+                    "$ref": "DIAG_UC02_RESERVE"
+                  },
+                  "model": {
+                    "$ref": "FLOW2_01116"
+                  },
+                  "source": {
+                    "$ref": "VIEW_NODE2_UMLJ_01089"
+                  },
+                  "target": {
+                    "$ref": "VIEW_NODE2_UMLA_01090"
+                  },
+                  "tail": {
+                    "$ref": "VIEW_NODE2_UMLJ_01089"
+                  },
+                  "head": {
+                    "$ref": "VIEW_NODE2_UMLA_01090"
+                  },
+                  "lineStyle": 1,
+                  "nameLabel": {
+                    "_type": "EdgeLabelView",
+                    "_id": "LBL_FLOW2_01116",
+                    "_parent": {
+                      "$ref": "VIEW_FLOW2_01116"
+                    },
+                    "model": {
+                      "$ref": "FLOW2_01116"
+                    },
+                    "visible": false,
+                    "text": ""
+                  }
+                },
+                {
+                  "_type": "UMLControlFlowView",
+                  "_id": "VIEW_FLOW2_01117",
+                  "_parent": {
+                    "$ref": "DIAG_UC02_RESERVE"
+                  },
+                  "model": {
+                    "$ref": "FLOW2_01117"
+                  },
+                  "source": {
+                    "$ref": "VIEW_NODE2_UMLA_01090"
+                  },
+                  "target": {
+                    "$ref": "VIEW_NODE2_UMLA_01091"
+                  },
+                  "tail": {
+                    "$ref": "VIEW_NODE2_UMLA_01090"
+                  },
+                  "head": {
+                    "$ref": "VIEW_NODE2_UMLA_01091"
+                  },
+                  "lineStyle": 1,
+                  "nameLabel": {
+                    "_type": "EdgeLabelView",
+                    "_id": "LBL_FLOW2_01117",
+                    "_parent": {
+                      "$ref": "VIEW_FLOW2_01117"
+                    },
+                    "model": {
+                      "$ref": "FLOW2_01117"
+                    },
+                    "visible": false,
+                    "text": ""
+                  }
+                },
+                {
+                  "_type": "UMLControlFlowView",
+                  "_id": "VIEW_FLOW2_01118",
+                  "_parent": {
+                    "$ref": "DIAG_UC02_RESERVE"
+                  },
+                  "model": {
+                    "$ref": "FLOW2_01118"
+                  },
+                  "source": {
+                    "$ref": "VIEW_NODE2_UMLA_01091"
+                  },
+                  "target": {
+                    "$ref": "VIEW_NODE2_UMLA_01092"
+                  },
+                  "tail": {
+                    "$ref": "VIEW_NODE2_UMLA_01091"
+                  },
+                  "head": {
+                    "$ref": "VIEW_NODE2_UMLA_01092"
+                  },
+                  "lineStyle": 1,
+                  "nameLabel": {
+                    "_type": "EdgeLabelView",
+                    "_id": "LBL_FLOW2_01118",
+                    "_parent": {
+                      "$ref": "VIEW_FLOW2_01118"
+                    },
+                    "model": {
+                      "$ref": "FLOW2_01118"
+                    },
+                    "visible": false,
+                    "text": ""
+                  }
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

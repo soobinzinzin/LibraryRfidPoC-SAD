@@ -1,0 +1,339 @@
+@{
+    ViewData["Title"] = "Trả sách - Kiosk RFID";
+}
+
+<!-- Giao diện Kiosk trả sách tích hợp RFID (UC02) -->
+<div class="card shadow-sm mt-3">
+    <div class="card-header bg-success text-white d-flex justify-content-between align-items-center">
+        <h4 class="mb-0">Màn hình Kiosk - Trả sách</h4>
+        <span class="badge bg-light text-success">Tự phục vụ bằng RFID</span>
+    </div>
+    <div class="card-body">
+        <!-- Thông báo cảnh báo / lỗi hệ thống -->
+        <div id="alertArea"></div>
+
+        <div class="mb-3">
+            <label for="rfidInput" class="form-label fw-bold">Nhập danh sách mã RFID (mỗi dòng một mã):</label>
+            <textarea id="rfidInput" class="form-control font-monospace" rows="4" placeholder="RFID-004"></textarea>
+            <div class="form-text text-muted">
+                Gợi ý mã RFID mẫu: <code>RFID-004</code> (trễ hạn), <code>RFID-005</code> (đúng hạn), <code>RFID-001</code> (chưa mượn).
+            </div>
+        </div>
+
+        <!-- Nút Quét nhận diện -->
+        <div class="mb-3">
+            <button id="btnScan" type="button" class="btn btn-primary px-4">
+                <i class="bi bi-upc-scan"></i> Quét
+            </button>
+        </div>
+
+        <!-- Bảng danh sách tài liệu cần trả -->
+        <h5 class="mt-4 fw-bold">Danh sách tài liệu cần trả</h5>
+        <div class="table-responsive">
+            <table class="table table-bordered table-hover align-middle">
+                <thead class="table-light">
+                    <tr>
+                        <th style="width: 60px;" class="text-center">STT</th>
+                        <th style="width: 150px;">Mã RFID</th>
+                        <th>Tên tài liệu</th>
+                        <th style="width: 180px;">Người mượn</th>
+                        <th style="width: 130px;" class="text-center">Hạn trả</th>
+                        <th style="width: 250px;">Trạng thái</th>
+                    </tr>
+                </thead>
+                <tbody id="documentTableBody">
+                    <tr>
+                        <td colspan="6" class="text-center text-muted py-4">Chưa có dữ liệu quét. Vui lòng đặt tài liệu lên khay và nhấn nút "Quét".</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+
+        <!-- Vùng hiển thị tổng tiền phạt -->
+        <div id="totalFineArea" class="mt-2 text-end fw-bold" style="display:none;">
+            Tổng tiền phạt: <span id="totalFineText" class="text-danger fs-5">0 đ</span>
+        </div>
+
+        <!-- Nút Xác nhận trả -->
+        <div class="mt-3 d-flex gap-2">
+            <button id="btnConfirmReturn" type="button" class="btn btn-success px-4" disabled>
+                <i class="bi bi-check-circle"></i> Xác nhận trả
+            </button>
+            <button id="btnReset" type="button" class="btn btn-outline-secondary px-3" style="display:none;">
+                Làm mới
+            </button>
+        </div>
+
+        <!-- Vùng hiển thị biên nhận sau khi trả thành công -->
+        <div id="receiptArea" class="mt-4" style="display:none;"></div>
+    </div>
+</div>
+
+@section Scripts {
+    <script>
+        const rfidInput = document.getElementById("rfidInput");
+        const btnScan = document.getElementById("btnScan");
+        const btnConfirmReturn = document.getElementById("btnConfirmReturn");
+        const btnReset = document.getElementById("btnReset");
+        const alertArea = document.getElementById("alertArea");
+        const documentTableBody = document.getElementById("documentTableBody");
+        const totalFineArea = document.getElementById("totalFineArea");
+        const totalFineText = document.getElementById("totalFineText");
+        const receiptArea = document.getElementById("receiptArea");
+
+        let latestScanData = null;
+
+        // Định dạng tiền tệ với dấu chấm phân cách hàng nghìn (VD: 30.000)
+        function formatCurrency(amount) {
+            return Number(amount || 0).toLocaleString('vi-VN');
+        }
+
+        // Sửa nội dung ô RFID thì phải quét lại (vô hiệu hóa nút Xác nhận trả)
+        rfidInput.addEventListener("input", function () {
+            btnConfirmReturn.disabled = true;
+        });
+
+        // Xử lý sự kiện nhấn nút Quét
+        btnScan.addEventListener("click", async function () {
+            alertArea.innerHTML = "";
+            receiptArea.style.display = "none";
+            receiptArea.innerHTML = "";
+            totalFineArea.style.display = "none";
+            btnConfirmReturn.disabled = true;
+
+            const rfidText = rfidInput.value.trim();
+            if (!rfidText) {
+                alertArea.innerHTML = '<div class="alert alert-warning">Vui lòng nhập ít nhất một mã RFID để quét trả sách!</div>';
+                rfidInput.focus();
+                return;
+            }
+
+            const rawRfids = rfidText.split(/\r?\n/).map(s => s.trim()).filter(s => s.length > 0);
+            if (rawRfids.length === 0) {
+                alertArea.innerHTML = '<div class="alert alert-warning">Danh sách mã RFID không hợp lệ!</div>';
+                return;
+            }
+
+            btnScan.disabled = true;
+            btnScan.innerHTML = '<span class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span> Đang quét...';
+
+            try {
+                const response = await fetch('/Kiosk/ScanReturn', {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({
+                        rfids: rawRfids
+                    })
+                });
+
+                if (!response.ok) {
+                    throw new Error("Lỗi máy chủ (" + response.status + ")");
+                }
+
+                const data = await response.json();
+                latestScanData = data;
+
+                // Đổ bảng dữ liệu
+                documentTableBody.innerHTML = "";
+                if (!data.items || data.items.length === 0) {
+                    documentTableBody.innerHTML = '<tr><td colspan="6" class="text-center text-muted py-3">Không nhận diện được tài liệu nào.</td></tr>';
+                } else {
+                    data.items.forEach((item, index) => {
+                        const tr = document.createElement("tr");
+
+                        // Cột STT
+                        const tdIndex = document.createElement("td");
+                        tdIndex.className = "text-center";
+                        tdIndex.textContent = index + 1;
+                        tr.appendChild(tdIndex);
+
+                        // Cột Mã RFID
+                        const tdRfid = document.createElement("td");
+                        tdRfid.innerHTML = '<span class="badge bg-secondary font-monospace">' + item.rfid + '</span>';
+                        tr.appendChild(tdRfid);
+
+                        // Cột Tên tài liệu
+                        const tdTitle = document.createElement("td");
+                        tdTitle.textContent = item.title || "—";
+                        tr.appendChild(tdTitle);
+
+                        // Cột Người mượn
+                        const tdBorrower = document.createElement("td");
+                        tdBorrower.textContent = item.borrower || "—";
+                        tr.appendChild(tdBorrower);
+
+                        // Cột Hạn trả
+                        const tdDueDate = document.createElement("td");
+                        tdDueDate.className = "text-center";
+                        tdDueDate.textContent = item.dueDate || "—";
+                        tr.appendChild(tdDueDate);
+
+                        // Cột Trạng thái
+                        const tdStatus = document.createElement("td");
+                        if (!item.valid) {
+                            tdStatus.innerHTML = '<span class="badge bg-danger">' + (item.reason || "Không hợp lệ") + '</span>';
+                        } else if (item.daysOverdue > 0) {
+                            tdStatus.innerHTML = '<span class="badge bg-warning text-dark">Trễ ' + item.daysOverdue + ' ngày - phạt ' + formatCurrency(item.fineAmount) + ' đ</span>';
+                        } else {
+                            tdStatus.innerHTML = '<span class="badge bg-success">Đúng hạn</span>';
+                        }
+                        tr.appendChild(tdStatus);
+
+                        documentTableBody.appendChild(tr);
+                    });
+
+                    // Hiển thị tổng tiền phạt
+                    totalFineText.textContent = formatCurrency(data.totalFine) + " đ";
+                    totalFineArea.style.display = "block";
+                }
+
+                // Bật nút Xác nhận trả nếu có ít nhất 1 cuốn hợp lệ
+                btnConfirmReturn.disabled = !data.canConfirm;
+
+            } catch (err) {
+                alertArea.innerHTML = '<div class="alert alert-danger">Lỗi kết nối khi quét tài liệu: ' + err.message + '</div>';
+            } finally {
+                btnScan.disabled = false;
+                btnScan.innerHTML = '<i class="bi bi-upc-scan"></i> Quét';
+            }
+        });
+
+        // Xử lý sự kiện nhấn nút Xác nhận trả
+        btnConfirmReturn.addEventListener("click", async function () {
+            if (!latestScanData || !latestScanData.canConfirm) {
+                return;
+            }
+
+            const rfidText = rfidInput.value.trim();
+            const rawRfids = rfidText.split(/\r?\n/).map(s => s.trim()).filter(s => s.length > 0);
+
+            btnConfirmReturn.disabled = true;
+            btnConfirmReturn.innerHTML = '<span class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span> Đang xử lý...';
+
+            try {
+                const response = await fetch('/Kiosk/ConfirmReturn', {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({
+                        rfids: rawRfids
+                    })
+                });
+
+                if (!response.ok) {
+                    throw new Error("Lỗi máy chủ (" + response.status + ")");
+                }
+
+                const data = await response.json();
+
+                if (data.success) {
+                    let alertHtml = '<div class="alert alert-success shadow-sm"><strong>Trả sách thành công!</strong> ' + data.message + '</div>';
+
+                    // Nếu totalFine > 0 thì hiện thêm alert vàng
+                    if (data.totalFine > 0) {
+                        alertHtml += '<div class="alert alert-warning shadow-sm"><strong>Lưu ý:</strong> Bạn có khoản phạt chưa thanh toán. Vui lòng thanh toán trên Web Portal để tiếp tục mượn sách.</div>';
+                    }
+
+                    // Nếu có sách newStatus = "Reserved" thì hiện alert xanh dương
+                    const hasReserved = data.returns && data.returns.some(r => r.newStatus === "Reserved");
+                    if (hasReserved) {
+                        alertHtml += '<div class="alert alert-info shadow-sm"><strong>Thông báo điều phối:</strong> Tài liệu có độc giả khác đặt trước. Vui lòng đặt vào ngăn giữ riêng.</div>';
+                    }
+
+                    alertArea.innerHTML = alertHtml;
+
+                    // Hiển thị biên nhận chi tiết
+                    let receiptHtml = `
+                        <div class="card border-success shadow-sm">
+                            <div class="card-header bg-success text-white d-flex justify-content-between align-items-center">
+                                <h5 class="mb-0"><i class="bi bi-receipt"></i> BIÊN NHẬN TRẢ SÁCH TẠI KIOSK</h5>
+                                <span class="badge bg-light text-success">Đã kích hoạt còi bảo mật</span>
+                            </div>
+                            <div class="card-body">
+                                <p class="mb-3 text-muted">Hệ thống đã cập nhật phiếu mượn và kích hoạt lại tính năng an ninh RFID cho các tài liệu:</p>
+                                <div class="table-responsive">
+                                    <table class="table table-bordered align-middle">
+                                        <thead class="table-light">
+                                            <tr>
+                                                <th style="width: 130px;">Mã phiếu</th>
+                                                <th style="width: 140px;">Mã RFID</th>
+                                                <th>Tên tài liệu</th>
+                                                <th style="width: 120px;" class="text-center">Số ngày trễ</th>
+                                                <th style="width: 140px;" class="text-end">Tiền phạt</th>
+                                                <th style="width: 150px;" class="text-center">Trạng thái mới</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>`;
+
+                    data.returns.forEach(item => {
+                        const statusBadge = item.newStatus === "Reserved"
+                            ? '<span class="badge bg-warning text-dark">Reserved (Đặt trước)</span>'
+                            : '<span class="badge bg-success">Available (Khả dụng)</span>';
+
+                        receiptHtml += `
+                            <tr>
+                                <td><span class="badge bg-primary font-monospace">${item.loanID}</span></td>
+                                <td><span class="badge bg-secondary font-monospace">${item.rfid}</span></td>
+                                <td class="fw-bold">${item.title}</td>
+                                <td class="text-center">${item.daysOverdue > 0 ? item.daysOverdue + ' ngày' : '0'}</td>
+                                <td class="text-end fw-bold text-danger">${formatCurrency(item.fineAmount)} đ</td>
+                                <td class="text-center">${statusBadge}</td>
+                            </tr>`;
+                    });
+
+                    receiptHtml += `
+                                        </tbody>
+                                        <tfoot class="table-light">
+                                            <tr>
+                                                <td colspan="4" class="text-end fw-bold">Tổng tiền phạt phát sinh:</td>
+                                                <td class="text-end fw-bold text-danger fs-6">${formatCurrency(data.totalFine)} đ</td>
+                                                <td></td>
+                                            </tr>
+                                        </tfoot>
+                                    </table>
+                                </div>
+                                <div class="mt-3 d-flex gap-2">
+                                    <button class="btn btn-outline-primary" onclick="window.print()">
+                                        <i class="bi bi-printer"></i> In biên nhận
+                                    </button>
+                                    <button class="btn btn-secondary" onclick="resetKiosk()">
+                                        Lượt trả mới
+                                    </button>
+                                </div>
+                            </div>
+                        </div>`;
+
+                    receiptArea.innerHTML = receiptHtml;
+                    receiptArea.style.display = "block";
+                    btnReset.style.display = "inline-block";
+                    btnConfirmReturn.disabled = true;
+
+                } else {
+                    alertArea.innerHTML = '<div class="alert alert-danger shadow-sm"><strong>Giao dịch không thành công:</strong> ' + data.message + '</div>';
+                    btnConfirmReturn.disabled = false;
+                }
+
+            } catch (err) {
+                alertArea.innerHTML = '<div class="alert alert-danger">Lỗi khi xác nhận trả sách: ' + err.message + '</div>';
+                btnConfirmReturn.disabled = false;
+            } finally {
+                btnConfirmReturn.innerHTML = '<i class="bi bi-check-circle"></i> Xác nhận trả';
+            }
+        });
+
+        // Hàm làm mới trạng thái Kiosk cho lượt trả tiếp theo
+        function resetKiosk() {
+            rfidInput.value = "";
+            alertArea.innerHTML = "";
+            receiptArea.innerHTML = "";
+            receiptArea.style.display = "none";
+            totalFineArea.style.display = "none";
+            documentTableBody.innerHTML = '<tr><td colspan="6" class="text-center text-muted py-4">Chưa có dữ liệu quét. Vui lòng đặt tài liệu lên khay và nhấn nút "Quét".</td></tr>';
+            btnConfirmReturn.disabled = true;
+            btnReset.style.display = "none";
+            latestScanData = null;
+            rfidInput.focus();
+        }
+
+        btnReset.addEventListener("click", resetKiosk);
+    </script>
+}
