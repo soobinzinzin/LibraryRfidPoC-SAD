@@ -3,10 +3,10 @@
 }
 
 <!-- Giao diện Kiosk trả sách tích hợp RFID (UC02) -->
-<div class="card shadow-sm mt-3">
+<div class="card shadow-sm mt-3 kiosk-theme-return">
     <div class="card-header bg-success text-white d-flex justify-content-between align-items-center">
-        <h4 class="mb-0">Màn hình Kiosk - Trả sách</h4>
-        <span class="badge bg-light text-success">Tự phục vụ bằng RFID</span>
+        <h4 class="mb-0">Màn hình Thủ thư - Trả sách</h4>
+        <span class="badge bg-light text-success">Quầy thủ thư - RFID</span>
     </div>
     <div class="card-body">
         <!-- Thông báo cảnh báo / lỗi hệ thống -->
@@ -14,6 +14,7 @@
 
         <div class="mb-3">
             <label for="rfidInput" class="form-label fw-bold">Nhập danh sách mã RFID (mỗi dòng một mã):</label>
+            <div class="small text-muted mb-1">Thủ thư quét mã sách do độc giả đưa tại quầy.</div>
             <textarea id="rfidInput" class="form-control font-monospace" rows="4" placeholder="RFID-004"></textarea>
             <div class="form-text text-muted">
                 Gợi ý mã RFID mẫu: <code>RFID-004</code> (trễ hạn), <code>RFID-005</code> (đúng hạn), <code>RFID-001</code> (chưa mượn).
@@ -59,7 +60,7 @@
             <button id="btnConfirmReturn" type="button" class="btn btn-success px-4" disabled>
                 <i class="bi bi-check-circle"></i> Xác nhận trả
             </button>
-            <button id="btnReset" type="button" class="btn btn-outline-secondary px-3" style="display:none;">
+            <button id="btnReset" type="button" class="btn btn-outline-secondary px-3">
                 Làm mới
             </button>
         </div>
@@ -90,6 +91,9 @@
 
         // Sửa nội dung ô RFID thì phải quét lại (vô hiệu hóa nút Xác nhận trả)
         rfidInput.addEventListener("input", function () {
+            btnConfirmReturn.disabled = true;
+        });
+        rfidInput.addEventListener("change", function () {
             btnConfirmReturn.disabled = true;
         });
 
@@ -154,18 +158,18 @@
 
                         // Cột Tên tài liệu
                         const tdTitle = document.createElement("td");
-                        tdTitle.textContent = item.title || "—";
+                        tdTitle.textContent = item.title || "-";
                         tr.appendChild(tdTitle);
 
                         // Cột Người mượn
                         const tdBorrower = document.createElement("td");
-                        tdBorrower.textContent = item.borrower || "—";
+                        tdBorrower.textContent = item.borrower || "-";
                         tr.appendChild(tdBorrower);
 
                         // Cột Hạn trả
                         const tdDueDate = document.createElement("td");
                         tdDueDate.className = "text-center";
-                        tdDueDate.textContent = item.dueDate || "—";
+                        tdDueDate.textContent = item.dueDate || "-";
                         tr.appendChild(tdDueDate);
 
                         // Cột Trạng thái
@@ -295,7 +299,7 @@
                                     <button class="btn btn-outline-primary" onclick="window.print()">
                                         <i class="bi bi-printer"></i> In biên nhận
                                     </button>
-                                    <button class="btn btn-secondary" onclick="resetKiosk()">
+                                    <button class="btn btn-secondary" onclick="newReturnSession()">
                                         Lượt trả mới
                                     </button>
                                 </div>
@@ -304,8 +308,12 @@
 
                     receiptArea.innerHTML = receiptHtml;
                     receiptArea.style.display = "block";
-                    btnReset.style.display = "inline-block";
                     btnConfirmReturn.disabled = true;
+
+                    // Sau khi ConfirmReturn thành công: xóa nội dung textarea mã RFID, đặt lại "Tổng tiền phạt" về 0 đ, giữ nguyên khối biên nhận và alert vừa hiện
+                    rfidInput.value = "";
+                    totalFineText.textContent = "0 đ";
+                    totalFineArea.style.display = "none";
 
                 } else {
                     alertArea.innerHTML = '<div class="alert alert-danger shadow-sm"><strong>Giao dịch không thành công:</strong> ' + data.message + '</div>';
@@ -320,20 +328,30 @@
             }
         });
 
-        // Hàm làm mới trạng thái Kiosk cho lượt trả tiếp theo
-        function resetKiosk() {
-            rfidInput.value = "";
-            alertArea.innerHTML = "";
+        // Nút "Lượt trả mới" (trong biên nhận): xóa toàn bộ biên nhận và alert, xóa textarea, xóa bảng quét, đặt lại "Tổng tiền phạt" về 0 đ, vô hiệu hóa nút "Xác nhận trả"
+        function newReturnSession() {
             receiptArea.innerHTML = "";
             receiptArea.style.display = "none";
-            totalFineArea.style.display = "none";
+            alertArea.innerHTML = "";
+            rfidInput.value = "";
             documentTableBody.innerHTML = '<tr><td colspan="6" class="text-center text-muted py-4">Chưa có dữ liệu quét. Vui lòng đặt tài liệu lên khay và nhấn nút "Quét".</td></tr>';
+            totalFineText.textContent = "0 đ";
+            totalFineArea.style.display = "none";
             btnConfirmReturn.disabled = true;
-            btnReset.style.display = "none";
             latestScanData = null;
             rfidInput.focus();
         }
 
-        btnReset.addEventListener("click", resetKiosk);
+        // Nút "Làm mới" (khi chưa xác nhận): xóa textarea, bảng quét, alert và vô hiệu hóa nút "Xác nhận trả". Không gọi server.
+        btnReset.addEventListener("click", function () {
+            rfidInput.value = "";
+            alertArea.innerHTML = "";
+            documentTableBody.innerHTML = '<tr><td colspan="6" class="text-center text-muted py-4">Chưa có dữ liệu quét. Vui lòng đặt tài liệu lên khay và nhấn nút "Quét".</td></tr>';
+            totalFineText.textContent = "0 đ";
+            totalFineArea.style.display = "none";
+            btnConfirmReturn.disabled = true;
+            latestScanData = null;
+            rfidInput.focus();
+        });
     </script>
 }

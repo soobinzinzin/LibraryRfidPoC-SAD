@@ -3,7 +3,7 @@
 }
 
 <!-- Giao diện Kiosk mượn sách tích hợp RFID (UC01) -->
-<div class="card shadow-sm mt-3">
+<div class="card shadow-sm mt-3 kiosk-theme-borrow">
     <div class="card-header bg-primary text-white d-flex justify-content-between align-items-center">
         <h4 class="mb-0">Màn hình Kiosk - Mượn sách</h4>
         <span class="badge bg-light text-primary">Thời hạn mượn: @ViewBag.LoanDays ngày</span>
@@ -80,7 +80,7 @@
             <button id="btnConfirmBorrow" type="button" class="btn btn-success px-4" disabled>
                 <i class="bi bi-check-circle"></i> Xác nhận mượn
             </button>
-            <button id="btnReset" type="button" class="btn btn-outline-secondary px-3" style="display:none;">
+            <button id="btnReset" type="button" class="btn btn-outline-secondary px-3">
                 Làm mới
             </button>
         </div>
@@ -106,6 +106,20 @@
         const receiptArea = document.getElementById("receiptArea");
 
         let latestScanData = null;
+
+        // Khi người dùng sửa nội dung ô nhập, lập tức vô hiệu hóa nút xác nhận để bắt buộc quét lại
+        rfidInput.addEventListener("input", function () {
+            btnConfirmBorrow.disabled = true;
+        });
+        rfidInput.addEventListener("change", function () {
+            btnConfirmBorrow.disabled = true;
+        });
+        readerInput.addEventListener("input", function () {
+            btnConfirmBorrow.disabled = true;
+        });
+        readerInput.addEventListener("change", function () {
+            btnConfirmBorrow.disabled = true;
+        });
 
         // Xử lý sự kiện nhấn nút Quét
         btnScan.addEventListener("click", async function () {
@@ -192,12 +206,12 @@
 
                         // Cột Tên tài liệu
                         const tdTitle = document.createElement("td");
-                        tdTitle.textContent = item.title || "—";
+                        tdTitle.textContent = item.title || "-";
                         tr.appendChild(tdTitle);
 
                         // Cột Tác giả
                         const tdAuthor = document.createElement("td");
-                        tdAuthor.textContent = item.author || "—";
+                        tdAuthor.textContent = item.author || "-";
                         tr.appendChild(tdAuthor);
 
                         // Cột Trạng thái (badge xám Chưa thể mượn khi readerOk = false, badge xanh Hợp lệ, badge đỏ kèm lý do)
@@ -304,7 +318,7 @@
                                     <button class="btn btn-outline-primary" onclick="window.print()">
                                         <i class="bi bi-printer"></i> In biên nhận
                                     </button>
-                                    <button class="btn btn-secondary" onclick="resetKiosk()">
+                                    <button class="btn btn-secondary" onclick="newBorrowSession()">
                                         Lượt mượn mới
                                     </button>
                                 </div>
@@ -313,7 +327,6 @@
 
                     receiptArea.innerHTML = receiptHtml;
                     receiptArea.style.display = "block";
-                    btnReset.style.display = "inline-block";
 
                     // Vô hiệu hóa nút mượn sau khi đã mượn thành công
                     btnConfirmBorrow.disabled = true;
@@ -331,20 +344,57 @@
             }
         });
 
-        // Hàm làm mới trạng thái Kiosk cho lượt mượn tiếp theo
-        function resetKiosk() {
-            rfidInput.value = "";
-            alertArea.innerHTML = "";
+        // Nút "Lượt mượn mới" (trong biên nhận sau khi mượn thành công):
+        // Xóa biên nhận và alert, xóa bảng quét, xóa textarea RFID, vô hiệu hóa nút "Xác nhận mượn".
+        // Giữ nguyên ô mã thẻ độc giả và thanh "Đang mượn X / hạn mức Y" (lấy số mới từ server bằng cách gọi /Kiosk/Scan với mã thẻ hiện tại và rfids: [], KHÔNG tự cộng/trừ ở client).
+        async function newBorrowSession() {
             receiptArea.innerHTML = "";
             receiptArea.style.display = "none";
-            readerInfoCard.classList.add("d-none");
+            alertArea.innerHTML = "";
             documentTableBody.innerHTML = '<tr><td colspan="5" class="text-center text-muted py-4">Chưa có dữ liệu quét. Vui lòng nhập mã RFID và nhấn nút "Quét".</td></tr>';
+            rfidInput.value = "";
             btnConfirmBorrow.disabled = true;
-            btnReset.style.display = "none";
-            latestScanData = null;
-            readerInput.focus();
+
+            const readerId = readerInput.value.trim();
+            if (readerId) {
+                try {
+                    const response = await fetch('/Kiosk/Scan', {
+                        method: 'POST',
+                        headers: { 'Content-Type': 'application/json' },
+                        body: JSON.stringify({
+                            readerId: readerId,
+                            rfids: []
+                        })
+                    });
+                    if (response.ok) {
+                        const data = await response.json();
+                        latestScanData = data;
+                        if (data.readerName) {
+                            readerNameDisplay.textContent = data.readerName;
+                            readerIdDisplay.textContent = "(" + readerId + ")";
+                            borrowStatusDisplay.textContent = "Đang mượn " + data.currentBorrowing + " / hạn mức " + data.borrowLimit;
+                            readerInfoCard.classList.remove("d-none");
+                        }
+                    }
+                } catch (err) {
+                    console.error("Lỗi cập nhật thông tin thẻ:", err);
+                }
+            }
+            rfidInput.focus();
         }
 
-        btnReset.addEventListener("click", resetKiosk);
+        // Nút "Làm mới" (khi chưa xác nhận):
+        // Xóa textarea, bảng quét, alert và vô hiệu hóa nút "Xác nhận mượn".
+        // Giữ nguyên ô mã thẻ và thanh mượn nếu đã quét thẻ. Không gọi server.
+        btnReset.addEventListener("click", function () {
+            rfidInput.value = "";
+            alertArea.innerHTML = "";
+            documentTableBody.innerHTML = '<tr><td colspan="5" class="text-center text-muted py-4">Chưa có dữ liệu quét. Vui lòng nhập mã RFID và nhấn nút "Quét".</td></tr>';
+            btnConfirmBorrow.disabled = true;
+            if (latestScanData) {
+                latestScanData.canConfirm = false;
+            }
+            rfidInput.focus();
+        });
     </script>
 }
